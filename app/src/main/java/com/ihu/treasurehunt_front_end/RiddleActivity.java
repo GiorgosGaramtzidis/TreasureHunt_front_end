@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class RiddleActivity extends AppCompatActivity {
     Button btnCheck,btnContinue;
     Intent intentMain,intentGame;
     TreasureHuntGame treasureHuntGame;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +28,13 @@ public class RiddleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_riddle);
 
         treasureHuntGame = MainActivity.getTreasureHuntGame();
-
+        progressBar=(ProgressBar)findViewById(R.id.progressBar);
         btnContinue = (Button) findViewById(R.id.btnContinue);
         btnCheck = (Button) findViewById(R.id.btnCheck);
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer= (EditText) findViewById(R.id.textAnswer);
 
+        progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
         textQuestion.setText(treasureHuntGame
                 .getQuestions()
                 .get(treasureHuntGame.getPositionOfQuestion())
@@ -50,13 +53,12 @@ public class RiddleActivity extends AppCompatActivity {
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(textAnswer.getText()
-                        .toString()
-                        .equals(treasureHuntGame
-                                .getQuestions()
-                                .get(treasureHuntGame.getPositionOfQuestion())
-                                .getAnswer()))
+                if(textAnswer.getText().toString().equals(treasureHuntGame.getQuestions().get(treasureHuntGame.getPositionOfQuestion()).getAnswer()))
+                {
+                    treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+ 100/treasureHuntGame.getQuestions().size());
+                    progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                     btnContinue.setVisibility(View.VISIBLE);
+                }
                 else
                 {
                     Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
