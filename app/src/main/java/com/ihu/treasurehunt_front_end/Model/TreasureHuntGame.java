@@ -7,9 +7,9 @@ public class TreasureHuntGame
     private List<RiddleQuest> questions;
     private int positionOfQuestion;
 
+
     public TreasureHuntGame(List<RiddleQuest> questions) {
         this.questions = questions;
-        positionOfQuestion=0;
     }
 
     public List<RiddleQuest> getQuestions() {
@@ -31,4 +31,6 @@ public class TreasureHuntGame
     {
         this.positionOfQuestion++;
     }
+
+
 }
