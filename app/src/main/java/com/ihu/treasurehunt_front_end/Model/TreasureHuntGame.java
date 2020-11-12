@@ -9,9 +9,9 @@ public class TreasureHuntGame
     private int questionProgressCounter;
     private int points;
 
+
     public TreasureHuntGame(List<RiddleQuest> questions) {
         this.questions = questions;
-        positionOfQuestion=0;
     }
 
     public List<RiddleQuest> getQuestions() {

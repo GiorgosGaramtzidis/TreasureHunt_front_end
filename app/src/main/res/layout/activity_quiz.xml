@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/newcolor"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Welcome to Quiz quest"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:id="@+id/TextScreen"
+        />
+    <LinearLayout
+        android:background="@drawable/button3"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:layout_width="290dp"
+        android:layout_height="150dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="Find The Question "
+            android:textColor="@color/mycolor"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:lineSpacingExtra="6dp"
+            android:id="@+id/TextQuestion"
+
+            />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText"
+        android:padding="10dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:textColor="#010337"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:background="@drawable/button1"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:textSize="25dp"
+        />
+
+    <TextView
+        android:id="@+id/TextTitle"
+        android:textSize="24sp"
+        android:layout_marginTop="70dp"
+        android:text="Make your choice"
+        android:textColor="#FFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp" />
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:id="@+id/layoutParent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+
+</LinearLayout>
