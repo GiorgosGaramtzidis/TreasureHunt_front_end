@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnPlayGame = (Button) findViewById(R.id.btnPlayGame);
 
-        Intent gameActivityIntent = new Intent(this,RiddleActivity.class);
+        Intent mapActivityIntent = new Intent(this,MapsActivity.class);
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         RequestQuestionList requestQuestionList = new RequestQuestionList();
         List<RiddleQuest> riddleQuests =requestQuestionList
@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         btnPlayGame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                treasureHuntGame= new TreasureHuntGame(riddleQuests);
-                startActivity(gameActivityIntent);
-
+                //treasureHuntGame= new TreasureHuntGame(riddleQuests);
+                //startActivity(gameActivityIntent);
+                startActivity(mapActivityIntent);
             }
         });
     }
