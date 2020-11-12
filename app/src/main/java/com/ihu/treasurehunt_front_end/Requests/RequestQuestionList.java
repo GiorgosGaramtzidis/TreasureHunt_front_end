@@ -22,7 +22,7 @@ public class RequestQuestionList
 {
     public List<RiddleQuest> requestQuestions(RequestQueue requestQueue)
     {
-        String URL="http://192.168.56.1:6039/Questions/find";
+        String URL="http://192.168.1.7:6039/Questions/find";
 
         List<RiddleQuest> list = new ArrayList<>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
