@@ -22,7 +22,7 @@ public class RequestQuizList
 {
     public List<QuizQuest> requestQuestions(RequestQueue requestQueue)
     {
-        String URL="http://192.168.56.1:6039/Quiz/all";
+        String URL="http://192.168.1.2:6039/Quiz/all";
         List<QuizQuest> list = new ArrayList<>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,

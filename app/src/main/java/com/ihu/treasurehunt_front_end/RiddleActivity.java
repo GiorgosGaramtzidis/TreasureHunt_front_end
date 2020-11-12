@@ -18,7 +18,7 @@ public class RiddleActivity extends AppCompatActivity {
 
     TextView textQuestion;
     EditText textAnswer;
-    Button btnCheck,btnContinue;
+    TextView btnCheck,btnContinue;
     Intent intentMain,intentGame,intentResult;
     TreasureHuntGame treasureHuntGame;
     ProgressBar progressBar;
@@ -30,8 +30,8 @@ public class RiddleActivity extends AppCompatActivity {
 
         treasureHuntGame = MainActivity.getTreasureHuntGame();
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
-        btnContinue = (Button) findViewById(R.id.btnContinue);
-        btnCheck = (Button) findViewById(R.id.btnCheck);
+        btnContinue = (TextView) findViewById(R.id.btnContinue);
+        btnCheck = (TextView) findViewById(R.id.btnCheck);
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer= (EditText) findViewById(R.id.textAnswer);
 
@@ -80,7 +80,6 @@ public class RiddleActivity extends AppCompatActivity {
                     startActivity(intentResult);
                 }
             }
-
         });
     }
 }
