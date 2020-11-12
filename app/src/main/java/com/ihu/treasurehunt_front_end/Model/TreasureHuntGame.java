@@ -7,6 +7,7 @@ public class TreasureHuntGame
     private List<RiddleQuest> questions;
     private int positionOfQuestion;
     private int questionProgressCounter;
+    private int points;
 
     public TreasureHuntGame(List<RiddleQuest> questions) {
         this.questions = questions;
@@ -39,5 +40,13 @@ public class TreasureHuntGame
     public void increasePosition()
     {
         this.positionOfQuestion++;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
