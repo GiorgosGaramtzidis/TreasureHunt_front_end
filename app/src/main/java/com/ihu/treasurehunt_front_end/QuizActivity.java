@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ihu.treasurehunt_front_end.Model.QuizQuest;
+import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
 
 import java.util.Random;
 
@@ -21,8 +22,9 @@ public class QuizActivity extends AppCompatActivity {
     private int presCounter =0;
     private int maxPresCounter;
     private String[] keys ;
+    private TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
     TextView textQuestion;
-    QuizQuest quizQuest = MainActivity.getList().get(0);
+    QuizQuest quizQuest = new QuizQuest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,9 @@ public class QuizActivity extends AppCompatActivity {
         textQuestion = (TextView) findViewById(R.id.TextQuestion);
 
 
+
+
+        quizQuest = treasureHuntGame.getQuizQuests().get(0);
 
         maxPresCounter = quizQuest.getAnswer().length();
         textQuestion.setText( quizQuest.getQuiz());

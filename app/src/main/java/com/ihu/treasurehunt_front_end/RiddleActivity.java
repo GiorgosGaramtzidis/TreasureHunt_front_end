@@ -19,6 +19,7 @@ public class RiddleActivity extends AppCompatActivity {
     TextView textQuestion;
     EditText textAnswer;
     TextView btnCheck,btnContinue;
+    TextView btnBack;
     Intent intentMain,intentGame,intentResult;
     TreasureHuntGame treasureHuntGame;
     ProgressBar progressBar;
@@ -34,6 +35,7 @@ public class RiddleActivity extends AppCompatActivity {
         btnCheck = (TextView) findViewById(R.id.btnCheck);
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer= (EditText) findViewById(R.id.textAnswer);
+        btnBack = (TextView) findViewById(R.id.btnback);
 
         progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
         textQuestion.setText(treasureHuntGame
@@ -46,6 +48,13 @@ public class RiddleActivity extends AppCompatActivity {
         intentGame = new Intent(this,RiddleActivity.class);
         intentResult = new Intent(this,ResultActivity.class);
         playGame();
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 

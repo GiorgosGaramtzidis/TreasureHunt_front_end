@@ -23,6 +23,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     private RadioButton rb2;
     private RadioButton rb3;
     private Button buttonConfirmed;
+    private TextView btnBack;
     MultipleChoiceQuest multipleChoiceQuest;
     TreasureHuntGame treasureHuntGame;
     Intent intentMain,intentGame;
@@ -31,6 +32,8 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_choice);
+
+        btnBack = (TextView) findViewById(R.id.btnback);
 
         treasureHuntGame = MainActivity.getTreasureHuntGame();
         textViewQuestion = findViewById(R.id.text_view_question);
@@ -61,5 +64,15 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         });
 
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
     }
+
+
 }
