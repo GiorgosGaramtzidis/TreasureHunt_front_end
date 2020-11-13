@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnPlayGame;
+    private TextView btnPlayGame;
     protected static TreasureHuntGame treasureHuntGame;
     private  static List<QuizQuest> list;
 
@@ -27,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnPlayGame = (Button) findViewById(R.id.btnPlayGame);
+        btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
 
-        Intent mapActivityIntent = new Intent(this,MapsActivity.class);
+        //Intent mapActivityIntent = new Intent(this,MapsActivity.class);
+        Intent gameActivityIntent = new Intent(this,RiddleActivity.class);
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         RequestQuestionList requestQuestionList = new RequestQuestionList();
         List<RiddleQuest> riddleQuests =requestQuestionList
@@ -46,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
         btnPlayGame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //treasureHuntGame= new TreasureHuntGame(riddleQuests);
-                //startActivity(gameActivityIntent);
-                startActivity(mapActivityIntent);
+                treasureHuntGame= new TreasureHuntGame(riddleQuests);
+                startActivity(gameActivityIntent);
+                //startActivity(mapActivityIntent);
             }
         });
     }
