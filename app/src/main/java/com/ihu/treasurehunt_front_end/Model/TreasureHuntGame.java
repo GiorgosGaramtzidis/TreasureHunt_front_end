@@ -2,14 +2,34 @@ package com.ihu.treasurehunt_front_end.Model;
 
 import java.util.List;
 
-public class TreasureHuntGame
-{
+public class TreasureHuntGame {
     private List<RiddleQuest> questions;
+    private List<LocationsMap> locationsMaps;
+    private List<QuizQuest> quizQuests;
     private int positionOfQuestion;
     private int questionProgressCounter;
     private List<MultipleChoiceQuest> mquestions;
     private int points;
 
+
+    public TreasureHuntGame(List<RiddleQuest> questions, List<LocationsMap> locationsMaps, List<MultipleChoiceQuest> multipleChoiceQuests,List<QuizQuest> quizQuestList) {
+        this.questions = questions;
+        this.locationsMaps = locationsMaps;
+        this.mquestions = multipleChoiceQuests;
+        this.quizQuests = quizQuestList;
+    }
+
+    public List<QuizQuest> getQuizQuests() {
+        return quizQuests;
+    }
+
+    public void setQuizQuests(List<QuizQuest> quizQuests) {
+        this.quizQuests = quizQuests;
+    }
+
+    public void setLocationsMaps(List<LocationsMap> locationsMaps) {
+        this.locationsMaps = locationsMaps;
+    }
 
     public void setMquestions(List<MultipleChoiceQuest> mquestions) {
         this.mquestions = mquestions;
@@ -19,9 +39,8 @@ public class TreasureHuntGame
         return mquestions;
     }
 
-    public TreasureHuntGame(List<RiddleQuest> questions,List<MultipleChoiceQuest> multipleChoice) {
-        this.questions = questions;
-        this.mquestions= multipleChoice;
+    public List<LocationsMap> getLocationsMaps() {
+        return locationsMaps;
     }
 
     public List<RiddleQuest> getQuestions() {
@@ -47,8 +66,8 @@ public class TreasureHuntGame
     public void setPositionOfQuestion(int positionOfQuestion) {
         this.positionOfQuestion = positionOfQuestion;
     }
-    public void increasePosition()
-    {
+
+    public void increasePosition() {
         this.positionOfQuestion++;
     }
 
@@ -60,3 +79,4 @@ public class TreasureHuntGame
         this.points = points;
     }
 }
+

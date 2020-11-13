@@ -22,16 +22,6 @@
         android:textSize="25dp"
         android:textColor="@color/black"/>
 
-    <Button
-        android:id="@+id/button_start_Multiple"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Multiple Choice Trial"
-        android:layout_below="@id/btnPlayGame"
-        android:layout_centerHorizontal="true"
-        />
-
 
     <TextView
         android:layout_width="wrap_content"

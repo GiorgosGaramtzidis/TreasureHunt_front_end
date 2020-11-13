@@ -8,6 +8,10 @@ public class QuizQuest
     private int points;
     private String[] chars;
 
+    public QuizQuest(){
+        super();
+    }
+
     public QuizQuest(int id, String quiz, String answer, int points, String[] chars) {
         this.id = id;
         this.quiz = quiz;
