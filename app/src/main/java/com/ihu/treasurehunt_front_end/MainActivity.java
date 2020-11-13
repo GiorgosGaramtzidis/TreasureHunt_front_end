@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.ihu.treasurehunt_front_end.Model.MultipleChoiceQuest;
 import com.ihu.treasurehunt_front_end.Model.QuizQuest;
 import com.ihu.treasurehunt_front_end.Model.RiddleQuest;
 import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
+import com.ihu.treasurehunt_front_end.Requests.RequestMultipleChoiceQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RequestQuestionList;
 import com.ihu.treasurehunt_front_end.Requests.RequestQuizList;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private TextView btnPlayGame;
+    private Button button_start_Multiple;
     protected static TreasureHuntGame treasureHuntGame;
     private  static List<QuizQuest> list;
 
@@ -37,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         List<RiddleQuest> riddleQuests =requestQuestionList
                 .requestQuestions(requestQueue);
 
+        button_start_Multiple = (Button) findViewById(R.id.button_start_Multiple) ;
+        Intent gameMultiple = new Intent(this,MultipleChoiceActivity.class);
+        RequestQueue requestMultiple = Volley.newRequestQueue(MainActivity.this);
+        RequestMultipleChoiceQuestion requestMultipleChoiceQuestion = new RequestMultipleChoiceQuestion();
+        List<MultipleChoiceQuest> MultipleChoice = requestMultipleChoiceQuestion.requestMultipleQuestions(requestMultiple);
 
 
         //for the quiz game (should be remove later)
@@ -48,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         btnPlayGame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                treasureHuntGame= new TreasureHuntGame(riddleQuests);
-                startActivity(gameActivityIntent);
+                treasureHuntGame= new TreasureHuntGame(riddleQuests,MultipleChoice);
+                startActivity(gameMultiple);
                 //startActivity(mapActivityIntent);
             }
         });
