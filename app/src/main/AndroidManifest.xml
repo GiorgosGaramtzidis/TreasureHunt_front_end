@@ -33,6 +33,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity android:name=".QuizActivity"/>
         <activity android:name=".ResultActivity" />
         <activity android:name=".RiddleActivity" />
         <activity android:name=".MainActivity">

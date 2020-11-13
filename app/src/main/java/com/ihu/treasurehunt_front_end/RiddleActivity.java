@@ -18,9 +18,8 @@ public class RiddleActivity extends AppCompatActivity {
 
     TextView textQuestion;
     EditText textAnswer;
-    TextView btnCheck,btnContinue;
-    TextView btnBack;
-    Intent intentMain,intentGame,intentResult;
+    TextView btnCheck;
+    Intent intentResult;
     TreasureHuntGame treasureHuntGame;
     ProgressBar progressBar;
 
@@ -31,30 +30,21 @@ public class RiddleActivity extends AppCompatActivity {
 
         treasureHuntGame = MainActivity.getTreasureHuntGame();
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
-        btnContinue = (TextView) findViewById(R.id.btnContinue);
         btnCheck = (TextView) findViewById(R.id.btnCheck);
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer= (EditText) findViewById(R.id.textAnswer);
-        btnBack = (TextView) findViewById(R.id.btnback);
+
 
         progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
         textQuestion.setText(treasureHuntGame
-                .getQuestions()
-                .get(treasureHuntGame.getPositionOfQuestion())
-                .getQuestion());
+                .getQuestions().get(0).getQuestion());
 
 
-        intentMain = new Intent(this,MainActivity.class);
-        intentGame = new Intent(this,RiddleActivity.class);
+
         intentResult = new Intent(this,ResultActivity.class);
         playGame();
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
 
     }
 
@@ -65,30 +55,19 @@ public class RiddleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(textAnswer.getText().toString().equals(treasureHuntGame.getQuestions().get(treasureHuntGame.getPositionOfQuestion()).getAnswer()))
                 {
+                    Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
+                    finish();
                     treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+ 100/treasureHuntGame.getQuestions().size());
                     progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                     treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getQuestions().get(treasureHuntGame.getPositionOfQuestion()).getPoints());
-                    btnContinue.setVisibility(View.VISIBLE);
+
                 }
                 else{
                     Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
-                    startActivity(intentResult);
+                    finish();
                 }
             }
         });
-        btnContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                treasureHuntGame.increasePosition();
-                finish();
-                startActivity(intentGame);
 
-                if(treasureHuntGame.getPositionOfQuestion()>=treasureHuntGame.getQuestions().size())
-                {
-                    Toast.makeText(RiddleActivity.this, "You find the treasure", Toast.LENGTH_SHORT).show();
-                    startActivity(intentResult);
-                }
-            }
-        });
     }
 }
