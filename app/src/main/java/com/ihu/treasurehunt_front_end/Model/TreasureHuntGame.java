@@ -7,11 +7,21 @@ public class TreasureHuntGame
     private List<RiddleQuest> questions;
     private int positionOfQuestion;
     private int questionProgressCounter;
+    private List<MultipleChoiceQuest> mquestions;
     private int points;
 
 
-    public TreasureHuntGame(List<RiddleQuest> questions) {
+    public void setMquestions(List<MultipleChoiceQuest> mquestions) {
+        this.mquestions = mquestions;
+    }
+
+    public List<MultipleChoiceQuest> getMquestions() {
+        return mquestions;
+    }
+
+    public TreasureHuntGame(List<RiddleQuest> questions,List<MultipleChoiceQuest> multipleChoice) {
         this.questions = questions;
+        this.mquestions= multipleChoice;
     }
 
     public List<RiddleQuest> getQuestions() {
