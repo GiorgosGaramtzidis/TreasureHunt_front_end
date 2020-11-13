@@ -20,7 +20,7 @@ import java.util.List;
 public class RequestLocationsMap {
     public List<LocationsMap> requestLocationsMap(RequestQueue requestQueue)
     {
-        String URL="http://192.168.1.2:6039/Locations/find";
+        String URL="http://192.168.56.1:6039/Locations/find";
 
         List<LocationsMap> list = new ArrayList<>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(

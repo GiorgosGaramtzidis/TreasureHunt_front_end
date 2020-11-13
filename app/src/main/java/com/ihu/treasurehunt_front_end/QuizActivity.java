@@ -20,6 +20,7 @@ import java.util.Random;
 public class QuizActivity extends AppCompatActivity {
 
     private int presCounter =0;
+    private int keyCounter = 0;
     private int maxPresCounter;
     private String[] keys ;
     private TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
@@ -32,10 +33,7 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         textQuestion = (TextView) findViewById(R.id.TextQuestion);
 
-
-
-
-        quizQuest = treasureHuntGame.getQuizQuests().get(0);
+        quizQuest = treasureHuntGame.getQuizQuests().get(1);
 
         maxPresCounter = quizQuest.getAnswer().length();
         textQuestion.setText( quizQuest.getQuiz());
@@ -43,9 +41,15 @@ public class QuizActivity extends AppCompatActivity {
 
         for(String key : keys)
         {
-            addView(((LinearLayout) findViewById(R.id.layoutParent))
-                    , key
-                    ,((EditText) findViewById(R.id.editText)));
+            if(keyCounter < 5)
+                addView(((LinearLayout) findViewById(R.id.layoutParent))
+                        , key
+                        , ((EditText) findViewById(R.id.editText)));
+            else
+                addView(((LinearLayout) findViewById(R.id.layoutParent2))
+                        , key
+                        , ((EditText) findViewById(R.id.editText)));
+            keyCounter++;
         }
 
     }
@@ -76,7 +80,7 @@ public class QuizActivity extends AppCompatActivity {
         textView.setLayoutParams(layoutParams);
         textView.setBackground(this.getResources()
                 .getDrawable(R.drawable.button2));
-        textView.setTextColor(this.getResources().getColor(R.color.mycolor  ));
+        textView.setTextColor(this.getResources().getColor(R.color.mycolor));
         textView.setGravity(Gravity.CENTER);
         textView.setText(text);
         textView.setClickable(true);
@@ -113,16 +117,12 @@ public class QuizActivity extends AppCompatActivity {
 
         if(editText.getText().toString().equals(quizQuest.getAnswer()))
         {
-                //ToDo..Do something when win
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
                 Toast.makeText(this, "You Win", Toast.LENGTH_SHORT).show();
-                editText.setText("");
+                finish();
         } else{
+            //Todo.. Do something when loose
                 Toast.makeText(this, "You lost", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
-                editText.setText("");
+                 finish();
         }
 
     }
