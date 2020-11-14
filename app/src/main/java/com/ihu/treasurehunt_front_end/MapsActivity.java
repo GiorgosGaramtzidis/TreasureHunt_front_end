@@ -3,12 +3,16 @@ package com.ihu.treasurehunt_front_end;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -45,19 +49,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMapType(2);
+        //mMap.setPadding(400, 100, 100, 0);
+
 
         TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
 
 
         for (int i=0;i<treasureHuntGame.getLocationsMaps().size();i++){
             LatLng start = new LatLng(treasureHuntGame.getLocationsMaps().get(i).getV(),treasureHuntGame.getLocationsMaps().get(i).getV1());
-            mMap.addMarker(new MarkerOptions().position(start).title(treasureHuntGame.getLocationsMaps().get(i).getTitle()));
+            MarkerOptions markerOptions = new MarkerOptions().position(start).title(treasureHuntGame.getLocationsMaps().get(i).getTitle());
+            Marker marker = mMap.addMarker(markerOptions);
+            if (treasureHuntGame.getLocationsMaps().get(i).getId() == 1){
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                continue;
+            }
+            switch (treasureHuntGame.getLocationsMaps().get(i).getColor()){
+                case "BLUE":
+                    marker .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    break;
+                case "MAGENTA":
+                    marker .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                    break;
+                case "VIOLET":
+                    marker .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                    break;
+            }
+
 
         }
 
 
         LatLng latLng = new LatLng(41.076797,23.553648);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
 
 
