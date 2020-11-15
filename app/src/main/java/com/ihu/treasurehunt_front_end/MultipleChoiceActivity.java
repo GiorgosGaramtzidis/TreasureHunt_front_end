@@ -3,7 +3,6 @@ package com.ihu.treasurehunt_front_end;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,6 +54,11 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (rb3.isChecked()) {
+                    treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+
+                            100/(treasureHuntGame.getQuestions().size()+
+                                    treasureHuntGame.getMquestions().size()+
+                                    treasureHuntGame.getQuizQuests().size()));
+                    MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                     finish();
                     Toast.makeText(MultipleChoiceActivity.this, "CORRECT ANSWER", Toast.LENGTH_SHORT).show();
                 } else {

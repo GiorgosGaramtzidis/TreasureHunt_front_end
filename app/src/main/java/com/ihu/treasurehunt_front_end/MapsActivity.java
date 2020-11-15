@@ -3,15 +3,13 @@ package com.ihu.treasurehunt_front_end;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -22,19 +20,23 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    public static ProgressBar progressBar;
     private GoogleMap mMap;
     private static List<MarkerOptions> markerOptionsList;
     private static List<LatLng> latLngList;
     private static List<Marker> markerList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        progressBar =(ProgressBar)findViewById(R.id.progressBar);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     /**
@@ -54,7 +56,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
-
 
         for (int i=0;i<treasureHuntGame.getLocationsMaps().size();i++){
             LatLng start = new LatLng(treasureHuntGame.getLocationsMaps().get(i).getV(),treasureHuntGame.getLocationsMaps().get(i).getV1());
@@ -86,7 +87,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
+            public boolean onMarkerClick(Marker marker)
+            {
                 switch (marker.getTitle()){
                     case "bibliothiki":
                         Intent intent = new Intent(MapsActivity.this,QuizActivity.class);
