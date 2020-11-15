@@ -57,6 +57,7 @@ public class RiddleActivity extends AppCompatActivity {
                                     treasureHuntGame.getQuizQuests().size()));
                     MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                     treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getQuestions().get(treasureHuntGame.getPositionOfQuestion()).getPoints());
+                    MapsActivity.textView.setText("Score : " + treasureHuntGame.getPoints());
                     finish();
 
 

@@ -121,8 +121,10 @@ public class QuizActivity extends AppCompatActivity {
                             treasureHuntGame.getMquestions().size()+
                             treasureHuntGame.getQuizQuests().size()));
                 MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
-                Toast.makeText(this, "You Win", Toast.LENGTH_SHORT).show();
-                finish();
+            Toast.makeText(this, "You Win", Toast.LENGTH_SHORT).show();
+            treasureHuntGame.setPoints(treasureHuntGame.getPoints()+quizQuest.getPoints());
+            MapsActivity.textView.setText("Score : " + treasureHuntGame.getPoints());
+            finish();
         } else{
             //Todo.. Do something when loose
                 Toast.makeText(this, "You lost", Toast.LENGTH_SHORT).show();
