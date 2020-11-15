@@ -5,13 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ihu.treasurehunt_front_end.Model.RiddleQuest;
 import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
 
 public class RiddleActivity extends AppCompatActivity {
@@ -21,7 +18,7 @@ public class RiddleActivity extends AppCompatActivity {
     TextView btnCheck;
     Intent intentResult;
     TreasureHuntGame treasureHuntGame;
-    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +26,11 @@ public class RiddleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_riddle);
 
         treasureHuntGame = MainActivity.getTreasureHuntGame();
-        progressBar=(ProgressBar)findViewById(R.id.progressBar);
         btnCheck = (TextView) findViewById(R.id.btnCheck);
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer= (EditText) findViewById(R.id.textAnswer);
 
 
-        progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
         textQuestion.setText(treasureHuntGame
                 .getQuestions().get(0).getQuestion());
 
@@ -56,10 +51,14 @@ public class RiddleActivity extends AppCompatActivity {
                 if(textAnswer.getText().toString().equals(treasureHuntGame.getQuestions().get(treasureHuntGame.getPositionOfQuestion()).getAnswer()))
                 {
                     Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
-                    finish();
-                    treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+ 100/treasureHuntGame.getQuestions().size());
-                    progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
+                    treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+
+                            100/(treasureHuntGame.getQuestions().size()+
+                                    treasureHuntGame.getMquestions().size()+
+                                    treasureHuntGame.getQuizQuests().size()));
+                    MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                     treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getQuestions().get(treasureHuntGame.getPositionOfQuestion()).getPoints());
+                    finish();
+
 
                 }
                 else{

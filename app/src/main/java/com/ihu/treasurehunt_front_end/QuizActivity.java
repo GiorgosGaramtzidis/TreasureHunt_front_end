@@ -3,7 +3,6 @@ package com.ihu.treasurehunt_front_end;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -117,6 +116,11 @@ public class QuizActivity extends AppCompatActivity {
 
         if(editText.getText().toString().equals(quizQuest.getAnswer()))
         {
+            treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+
+                    100/(treasureHuntGame.getQuestions().size()+
+                            treasureHuntGame.getMquestions().size()+
+                            treasureHuntGame.getQuizQuests().size()));
+                MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                 Toast.makeText(this, "You Win", Toast.LENGTH_SHORT).show();
                 finish();
         } else{
