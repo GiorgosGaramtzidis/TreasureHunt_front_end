@@ -60,6 +60,8 @@ public class MultipleChoiceActivity extends AppCompatActivity {
                                     treasureHuntGame.getQuizQuests().size()));
                     MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                     finish();
+                    treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getMquestions().get(0).getPoints());
+                    MapsActivity.textView.setText("Score : " + treasureHuntGame.getPoints());
                     Toast.makeText(MultipleChoiceActivity.this, "CORRECT ANSWER", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MultipleChoiceActivity.this, "WRONG ANSWER", Toast.LENGTH_SHORT).show();
