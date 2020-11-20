@@ -3,48 +3,36 @@ package com.ihu.treasurehunt_front_end.Model;
 import java.util.List;
 
 public class TreasureHuntGame {
-    private List<RiddleQuest> questions;
-    private List<LocationsMap> locationsMaps;
-    private List<QuizQuest> quizQuests;
+    private List<Question> questionList;
+    private List<MapLocation> mapLocationList;
+    private List<QuizQuestion> quizQuestionList;
     private int positionOfQuestion;
     private int questionProgressCounter;
-    private List<MultipleChoiceQuest> mquestions;
+    private List<MultipleQuestion> multipleQuestionList;
     private int points;
 
 
-    public TreasureHuntGame(List<RiddleQuest> questions, List<LocationsMap> locationsMaps, List<MultipleChoiceQuest> multipleChoiceQuests,List<QuizQuest> quizQuestList) {
-        this.questions = questions;
-        this.locationsMaps = locationsMaps;
-        this.mquestions = multipleChoiceQuests;
-        this.quizQuests = quizQuestList;
+    public TreasureHuntGame(List<Question> questionList, List<MapLocation> mapLocationList, List<MultipleQuestion> multipleQuestionList, List<QuizQuestion> quizQuestionList) {
+        this.questionList = questionList;
+        this.mapLocationList = mapLocationList;
+        this.multipleQuestionList = multipleQuestionList;
+        this.quizQuestionList = quizQuestionList;
     }
 
-    public List<QuizQuest> getQuizQuests() {
-        return quizQuests;
+    public List<QuizQuestion> getQuizQuestionList() {
+        return quizQuestionList;
     }
 
-    public void setQuizQuests(List<QuizQuest> quizQuests) {
-        this.quizQuests = quizQuests;
+    public List<MultipleQuestion> getMquestions() {
+        return multipleQuestionList;
     }
 
-    public void setLocationsMaps(List<LocationsMap> locationsMaps) {
-        this.locationsMaps = locationsMaps;
+    public List<MapLocation> getMapLocationList() {
+        return mapLocationList;
     }
 
-    public void setMquestions(List<MultipleChoiceQuest> mquestions) {
-        this.mquestions = mquestions;
-    }
-
-    public List<MultipleChoiceQuest> getMquestions() {
-        return mquestions;
-    }
-
-    public List<LocationsMap> getLocationsMaps() {
-        return locationsMaps;
-    }
-
-    public List<RiddleQuest> getQuestions() {
-        return questions;
+    public List<Question> getQuestionList() {
+        return questionList;
     }
 
     public int getQuestionProgressCounter() {
@@ -55,20 +43,9 @@ public class TreasureHuntGame {
         this.questionProgressCounter = questionProgressCounter;
     }
 
-    public void setQuestions(List<RiddleQuest> questions) {
-        this.questions = questions;
-    }
 
     public int getPositionOfQuestion() {
         return positionOfQuestion;
-    }
-
-    public void setPositionOfQuestion(int positionOfQuestion) {
-        this.positionOfQuestion = positionOfQuestion;
-    }
-
-    public void increasePosition() {
-        this.positionOfQuestion++;
     }
 
     public int getPoints() {

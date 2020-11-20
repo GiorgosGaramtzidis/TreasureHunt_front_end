@@ -9,15 +9,12 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.ihu.treasurehunt_front_end.Model.MultipleChoiceQuest;
-import com.ihu.treasurehunt_front_end.Model.QuizQuest;
-import com.ihu.treasurehunt_front_end.Model.RiddleQuest;
 import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
-import com.ihu.treasurehunt_front_end.Requests.RequestMultipleChoiceQuestion;
-import com.ihu.treasurehunt_front_end.Requests.RequestQuestionList;
-import com.ihu.treasurehunt_front_end.Requests.RequestQuizList;
-import com.ihu.treasurehunt_front_end.Model.LocationsMap;
-import com.ihu.treasurehunt_front_end.Requests.RequestLocationsMap;
+import com.ihu.treasurehunt_front_end.Requests.MapLocationList;
+import com.ihu.treasurehunt_front_end.Requests.MultipleQuestionList;
+import com.ihu.treasurehunt_front_end.Requests.QuestionList;
+import com.ihu.treasurehunt_front_end.Requests.QuizList;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 import java.util.List;
 
@@ -25,8 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView btnPlayGame;
     protected static TreasureHuntGame treasureHuntGame;
-    private  static List<QuizQuest> list;
-    //private static List<LocationsMap> locationsMaps;
+
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private QuestionList questionList = new QuestionList();
+    private MultipleQuestionList multipleQuestionList = new MultipleQuestionList();
+    private QuizList quizList = new QuizList();
+    private MapLocationList mapLocationList = new MapLocationList();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,32 +36,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
-
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         Intent mapActivityIntent = new Intent(this,MapsActivity.class);
 
-
-        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        RequestQuestionList requestQuestionList = new RequestQuestionList();
-        List<RiddleQuest> riddleQuests =requestQuestionList
-                .requestQuestions(requestQueue);
-
+       questionList.getQuestions(retroFitCreate.getJsonPlaceHolderAPI());
+       multipleQuestionList.getMultipleQuestions(retroFitCreate.getJsonPlaceHolderAPI());
+       quizList.getQuizQuestion(retroFitCreate.getJsonPlaceHolderAPI());
+       mapLocationList.getMapLocations(retroFitCreate.getJsonPlaceHolderAPI());
 
 
-        //RequestQueue requestMultiple = Volley.newRequestQueue(MainActivity.this);
-        RequestMultipleChoiceQuestion requestMultipleChoiceQuestion = new RequestMultipleChoiceQuestion();
-        List<MultipleChoiceQuest> MultipleChoice = requestMultipleChoiceQuestion.requestMultipleQuestions(requestQueue);
-
-
-        RequestLocationsMap requestLocationsMap = new RequestLocationsMap();
-        List<LocationsMap> locationsMaps = requestLocationsMap.requestLocationsMap(requestQueue);
-
-
-
-
-        RequestQuizList requestQuizList = new RequestQuizList();
-        list = requestQuizList.requestQuestions(requestQueue);
-
-        treasureHuntGame = new TreasureHuntGame(riddleQuests,locationsMaps,MultipleChoice,list);
+        treasureHuntGame = new TreasureHuntGame(questionList.getQuestionsList()
+                ,mapLocationList.getMapLocationList()
+                ,multipleQuestionList.getMultipleQuestionList()
+                ,quizList.getQuizQuestionList());
 
 
         btnPlayGame.setOnClickListener(new View.OnClickListener(){

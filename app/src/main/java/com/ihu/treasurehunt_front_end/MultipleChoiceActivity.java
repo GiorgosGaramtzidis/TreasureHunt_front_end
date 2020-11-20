@@ -11,7 +11,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ihu.treasurehunt_front_end.Model.MultipleChoiceQuest;
 import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
 
 public class MultipleChoiceActivity extends AppCompatActivity {
@@ -23,7 +22,6 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     private RadioButton rb3;
     private Button buttonConfirmed;
     private TextView btnBack;
-    MultipleChoiceQuest multipleChoiceQuest;
     TreasureHuntGame treasureHuntGame;
     Intent intentMain,intentGame;
 
@@ -43,9 +41,9 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         buttonConfirmed = findViewById(R.id.button_confirm_next);
 
         textViewQuestion.setText(treasureHuntGame.getMquestions().get(0).getQuestion());
-        rb1.setText(treasureHuntGame.getMquestions().get(0).getwrongAnswer1());
-        rb2.setText(treasureHuntGame.getMquestions().get(0).getcorrectAnswer());
-        rb3.setText(treasureHuntGame.getMquestions().get(0).getwrongAnswer2());
+        rb1.setText(treasureHuntGame.getMquestions().get(0).getWrongAnswer1());
+        rb2.setText(treasureHuntGame.getMquestions().get(0).getCorrectAnswer());
+        rb3.setText(treasureHuntGame.getMquestions().get(0).getWrongAnswer2());
 
         // intentMain = new Intent(this,MainActivity.class);
         // intentGame = new Intent(this,MultipleChoiceActivity.class);
@@ -55,9 +53,9 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (rb3.isChecked()) {
                     treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+
-                            100/(treasureHuntGame.getQuestions().size()+
+                            100/(treasureHuntGame.getQuestionList().size()+
                                     treasureHuntGame.getMquestions().size()+
-                                    treasureHuntGame.getQuizQuests().size()));
+                                    treasureHuntGame.getQuizQuestionList().size()));
                     MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                     finish();
                     treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getMquestions().get(0).getPoints());

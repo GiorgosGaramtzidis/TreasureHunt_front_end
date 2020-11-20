@@ -32,7 +32,7 @@ public class RiddleActivity extends AppCompatActivity {
 
 
         textQuestion.setText(treasureHuntGame
-                .getQuestions().get(0).getQuestion());
+                .getQuestionList().get(0).getQuestion());
 
 
 
@@ -48,15 +48,15 @@ public class RiddleActivity extends AppCompatActivity {
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(textAnswer.getText().toString().equals(treasureHuntGame.getQuestions().get(treasureHuntGame.getPositionOfQuestion()).getAnswer()))
+                if(textAnswer.getText().toString().equals(treasureHuntGame.getQuestionList().get(treasureHuntGame.getPositionOfQuestion()).getAnswer()))
                 {
                     Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
                     treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+
-                            100/(treasureHuntGame.getQuestions().size()+
+                            100/(treasureHuntGame.getQuestionList().size()+
                                     treasureHuntGame.getMquestions().size()+
-                                    treasureHuntGame.getQuizQuests().size()));
+                                    treasureHuntGame.getQuizQuestionList().size()));
                     MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
-                    treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getQuestions().get(treasureHuntGame.getPositionOfQuestion()).getPoints());
+                    treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getQuestionList().get(treasureHuntGame.getPositionOfQuestion()).getPoints());
                     MapsActivity.textView.setText("Score : " + treasureHuntGame.getPoints());
                     finish();
 

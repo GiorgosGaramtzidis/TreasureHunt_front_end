@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ihu.treasurehunt_front_end.Model.QuizQuest;
 import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
 
 import java.util.Random;
@@ -24,7 +23,8 @@ public class QuizActivity extends AppCompatActivity {
     private String[] keys ;
     private TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
     TextView textQuestion;
-    QuizQuest quizQuest = new QuizQuest();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +32,12 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         textQuestion = (TextView) findViewById(R.id.TextQuestion);
 
-        quizQuest = treasureHuntGame.getQuizQuests().get(1);
 
-        maxPresCounter = quizQuest.getAnswer().length();
-        textQuestion.setText( quizQuest.getQuiz());
-        keys =shuffleArray(quizQuest.getChars());
+
+        maxPresCounter = treasureHuntGame.getQuizQuestionList().get(0).getAnswer().length();
+        textQuestion.setText( treasureHuntGame.getQuizQuestionList().get(0).getQuiz());
+        keys =shuffleArray(treasureHuntGame.getQuizQuestionList().get(0).getCharacters());
+
 
         for(String key : keys)
         {
@@ -114,15 +115,15 @@ public class QuizActivity extends AppCompatActivity {
         presCounter =0;
         EditText editText = findViewById(R.id.editText);
 
-        if(editText.getText().toString().equals(quizQuest.getAnswer()))
+        if(editText.getText().toString().equals(treasureHuntGame.getQuizQuestionList().get(0).getAnswer()))
         {
             treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+
-                    100/(treasureHuntGame.getQuestions().size()+
+                    100/(treasureHuntGame.getQuestionList().size()+
                             treasureHuntGame.getMquestions().size()+
-                            treasureHuntGame.getQuizQuests().size()));
+                            treasureHuntGame.getQuizQuestionList().size()));
                 MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
             Toast.makeText(this, "You Win", Toast.LENGTH_SHORT).show();
-            treasureHuntGame.setPoints(treasureHuntGame.getPoints()+quizQuest.getPoints());
+            treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getQuizQuestionList().get(0).getPoints());
             MapsActivity.textView.setText("Score : " + treasureHuntGame.getPoints());
             finish();
         } else{

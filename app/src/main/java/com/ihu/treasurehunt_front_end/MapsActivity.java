@@ -35,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         progressBar =(ProgressBar)findViewById(R.id.progressBar);
         textView = (TextView)findViewById(R.id.textView2);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -60,15 +61,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
 
-        for (int i=0;i<treasureHuntGame.getLocationsMaps().size();i++){
-            LatLng start = new LatLng(treasureHuntGame.getLocationsMaps().get(i).getV(),treasureHuntGame.getLocationsMaps().get(i).getV1());
-            MarkerOptions markerOptions = new MarkerOptions().position(start).title(treasureHuntGame.getLocationsMaps().get(i).getTitle());
+        for (int i = 0; i<treasureHuntGame.getMapLocationList().size(); i++){
+            LatLng start = new LatLng(treasureHuntGame.getMapLocationList().get(i).getV(),treasureHuntGame.getMapLocationList().get(i).getV1());
+            MarkerOptions markerOptions = new MarkerOptions().position(start).title(treasureHuntGame.getMapLocationList().get(i).getTitle());
             Marker marker = mMap.addMarker(markerOptions);
-            if (treasureHuntGame.getLocationsMaps().get(i).getId() == 1){
+            if (treasureHuntGame.getMapLocationList().get(i).getId() == 1){
                 marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 continue;
             }
-            switch (treasureHuntGame.getLocationsMaps().get(i).getColor()){
+            switch (treasureHuntGame.getMapLocationList().get(i).getColor()){
                 case "BLUE":
                     marker .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                     break;
@@ -92,6 +93,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(Marker marker)
             {
+                if(MainActivity.getTreasureHuntGame().getPoints()>=20){
+                    Intent resultIntent = new Intent(MapsActivity.this,ResultActivity.class);
+                    startActivity(resultIntent);
+                }
                 switch (marker.getTitle()){
                     case "bibliothiki":
                         Intent intent = new Intent(MapsActivity.this,QuizActivity.class);
