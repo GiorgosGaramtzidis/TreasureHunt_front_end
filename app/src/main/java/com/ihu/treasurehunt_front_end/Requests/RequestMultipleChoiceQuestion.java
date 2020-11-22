@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class RequestMultipleChoiceQuestion {
         public List<MultipleChoiceQuest> requestMultipleQuestions(RequestQueue requestQueue) {
-            String URL = "http://192.168.1.6:6039/MultipleChoiceQuestions/find";
+            String URL = "http://192.168.42.65:6039/MultipleChoiceQuestions/find";
 
             List<MultipleChoiceQuest> list = new ArrayList<>();
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
