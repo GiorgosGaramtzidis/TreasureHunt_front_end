@@ -10,6 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.ihu.treasurehunt_front_end.Model.UsersQuest;
+import com.ihu.treasurehunt_front_end.Requests.RequestGetUsers;
+
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText name;
@@ -17,7 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView signUp;
     private int counter=3;
-
+    public static RequestGetUsers requestGetUsers = new RequestGetUsers();
+    private UsersQuest usersQuest;
 
 
     @Override
@@ -30,6 +38,10 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.loginBtn);
         signUp = (TextView) findViewById(R.id.signUp);
 
+        RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+        List<UsersQuest> users = requestGetUsers.requestGetUsers(requestQueue);
+
+
         Intent intentMain;
         intentMain = new Intent(this,MainActivity.class);
         Intent intentSignUp;
@@ -38,7 +50,13 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate(name.getText().toString(),password.getText().toString());
+                for (UsersQuest usersQuest : users) {
+                    if (usersQuest.name.equals(name.getText().toString())&&usersQuest.password.equals(password.getText().toString()))
+                    {
+                        startActivity(intentMain);
+
+                    }
+                }
             }
         });
 
@@ -47,22 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(intentSignUp);
             }
-        });
-    }
-    private void validate(String userName, String userPassword) {
-        if(userName.equals("Admin")&&userPassword.equals("1234")){
-            Intent intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
-        }
-        else
-        {
-            counter--;
-            Toast.makeText(this, "No of attempts remaining: " +String.valueOf(counter), Toast.LENGTH_SHORT).show();
-            if(counter==0)
-            {
-                login.setEnabled(false);
-            }
-        }
 
+        });
     }
 }

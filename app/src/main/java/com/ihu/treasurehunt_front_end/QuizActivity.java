@@ -127,7 +127,7 @@ public class QuizActivity extends AppCompatActivity {
             finish();
         } else{
             //Todo.. Do something when loose
-                Toast.makeText(this, "You lost", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"You lost",Toast.LENGTH_SHORT).show();
                  finish();
         }
 

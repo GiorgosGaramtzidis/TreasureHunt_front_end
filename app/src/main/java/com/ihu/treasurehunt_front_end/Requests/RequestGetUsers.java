@@ -7,9 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.ihu.treasurehunt_front_end.Model.QuizQuest;
-import com.ihu.treasurehunt_front_end.Model.RiddleQuest;
-
+import com.ihu.treasurehunt_front_end.Model.UsersQuest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,12 +16,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequestQuizList
-{
-    public List<QuizQuest> requestQuestions(RequestQueue requestQueue)
+public class RequestGetUsers {
+    private UsersQuest usersQuest;
+    public List<UsersQuest> requestGetUsers(RequestQueue requestQueue)
     {
-        String URL="http://192.168.1.6:6039/Quiz/all";
-        List<QuizQuest> list = new ArrayList<>();
+        String URL="http://192.168.1.6:6039/Users/all";
+
+        List<UsersQuest> list = new ArrayList<>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 URL,
@@ -34,19 +33,11 @@ public class RequestQuizList
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = (JSONObject) response.get(i);
-                                JSONArray jarray =jsonObject.getJSONArray("characters");
-                                String[] strings = new String[jarray.length()];
-                                for (int j=0;j<jarray.length();j++)
-                                {
-                                    strings[j] = jarray.getString(j);
-                                }
-                                list.add(new QuizQuest(
-                                        jsonObject.getInt("quizId"),
-                                        jsonObject.getString("quiz"),
-                                        jsonObject.getString("answer"),
-                                        jsonObject.getInt("points"),
-                                        strings
-                                ));
+                                list.add(new UsersQuest(
+                                        jsonObject.getInt("userId")
+                                        , jsonObject.getString("name")
+                                        , jsonObject.getInt("score")
+                                        ,jsonObject.getString("password")));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -64,5 +55,4 @@ public class RequestQuizList
         return list;
     }
 }
-
 

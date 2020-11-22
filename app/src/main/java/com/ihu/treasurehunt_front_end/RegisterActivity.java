@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ihu.treasurehunt_front_end.Model.UsersQuest;
+import com.ihu.treasurehunt_front_end.Requests.RequestGetUsers;
 //import com.ihu.treasurehunt_front_end.Requests.RequestGetUsers;
 
 import org.json.JSONException;
@@ -35,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button register;
     private RequestQueue requestQueue;
     //private RequestPostUsers requestPostUsers;
-    //public static RequestGetUsers requestGetUsers = new RequestGetUsers();
+    public static RequestGetUsers requestGetUsers = new RequestGetUsers();
     private List<UsersQuest> users = new ArrayList<>();
 
 
@@ -45,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
-        //users = requestGetUsers.requestGetUsers(requestQueue);
+        users = requestGetUsers.requestGetUsers(requestQueue);
         userName = (EditText)findViewById(R.id.userNameRegister);
         userPassword = (EditText)findViewById(R.id.userPasswordRegister);
         userPasswordVerification = (EditText)findViewById(R.id.userPsswrdVerification);
