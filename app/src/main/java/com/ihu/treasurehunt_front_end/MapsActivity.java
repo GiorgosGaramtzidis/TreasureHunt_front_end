@@ -1,102 +1,107 @@
 package com.ihu.treasurehunt_front_end;
 
-import androidx.fragment.app.FragmentActivity;
-
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
 
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
+{
+
+    private LocationListener locationListener;
+    private LocationManager locationManager;
     public static ProgressBar progressBar;
     public static TextView textView;
     private GoogleMap mMap;
-    private static List<MarkerOptions> markerOptionsList;
-    private static List<LatLng> latLngList;
-    private static List<Marker> markerList;
-
+    Marker motionMarker = null;
+    private double distance;
+    private LatLng latLng;
+    List<Marker> markerList = new ArrayList<Marker>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        progressBar =(ProgressBar)findViewById(R.id.progressBar);
-        textView = (TextView)findViewById(R.id.textView2);
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        textView = (TextView) findViewById(R.id.textView2);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(2);
         //mMap.setPadding(400, 100, 100, 0);
+        final LatLng tei = new LatLng(41.076797, 23.553648);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 17));
+
+        MarkerOnMap();
+
+        locationListener = new LocationListener() {
+
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                try {
+                    latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    if (motionMarker == null) {
+                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1");
+                        motionMarker = mMap.addMarker(options);
+                    } else {
+                        motionMarker.setPosition(latLng);
+                    }
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),16 ));
+
+                    DistanceBetween();
 
 
-        TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
+                } catch (SecurityException e) {
+                    e.printStackTrace();
+                }
 
-        for (int i = 0; i<treasureHuntGame.getMapLocationList().size(); i++){
-            LatLng start = new LatLng(treasureHuntGame.getMapLocationList().get(i).getV(),treasureHuntGame.getMapLocationList().get(i).getV1());
-            MarkerOptions markerOptions = new MarkerOptions().position(start).title(treasureHuntGame.getMapLocationList().get(i).getTitle());
-            Marker marker = mMap.addMarker(markerOptions);
-            if (treasureHuntGame.getMapLocationList().get(i).getId() == 1){
-                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                continue;
+
             }
-            switch (treasureHuntGame.getMapLocationList().get(i).getColor()){
-                case "BLUE":
-                    marker .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                    break;
-                case "MAGENTA":
-                    marker .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                    break;
-                case "VIOLET":
-                    marker .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
-                    break;
-            }
+        };
 
-
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, locationListener);
+        } catch (SecurityException e) {
+            e.printStackTrace();
         }
-
-
-        LatLng latLng = new LatLng(41.076797,23.553648);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
-
-
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker)
             {
-                if(MainActivity.getTreasureHuntGame().getPoints()>=20){
-                    Intent resultIntent = new Intent(MapsActivity.this,ResultActivity.class);
-                    startActivity(resultIntent);
-                }
                 switch (marker.getTitle()){
                     case "bibliothiki":
                         Intent intent = new Intent(MapsActivity.this,QuizActivity.class);
@@ -116,4 +121,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
+
+
+    void MarkerOnMap() {
+        TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
+
+        for (int i = 0; i < treasureHuntGame.getMapLocationList().size(); i++) {
+            LatLng latLng = new LatLng(treasureHuntGame.getMapLocationList().get(i).getV(), treasureHuntGame.getMapLocationList().get(i).getV1());
+            //MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(treasureHuntGame.getMapLocationList().get(i).getTitle());
+            Marker marker = mMap.addMarker(markerOptions);
+            markerList.add(marker);
+            marker.setVisible(false);
+
+        }
+    }
+
+    void DistanceBetween(){
+        for (int i = 0; i < 4; i++) {
+            distance = computeDistanceBetween(latLng, markerList.get(i).getPosition());
+            markerList.get(i).setVisible(distance <= 50);
+
+        }
+    }
+
 }
