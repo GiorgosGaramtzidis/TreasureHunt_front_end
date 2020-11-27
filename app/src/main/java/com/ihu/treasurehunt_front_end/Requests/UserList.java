@@ -31,7 +31,8 @@ public class UserList {
                 for (User user:users){
                     userList.add(new User(user.getUserId()
                                     ,user.getName()
-                                    ,user.getScore()));
+                                    ,user.getScore()
+                                    ,user.getPassword()));
                 }
             }
 
@@ -41,8 +42,8 @@ public class UserList {
         });
     }
 
-    public void createUser(JsonPlaceHolderAPI jsonPlaceHolderAPI){
-        User user = new User(3,"Βαλέρης",0);
+    public void createUser(JsonPlaceHolderAPI jsonPlaceHolderAPI,int id,String name,String password){
+        User user = new User(id,name,0,password);
         Call<User> call = jsonPlaceHolderAPI.createUser(user);
 
         call.enqueue(new Callback<User>() {

@@ -9,24 +9,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
+
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.ihu.treasurehunt_front_end.Model.UsersQuest;
-import com.ihu.treasurehunt_front_end.Requests.RequestGetUsers;
+import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
+import com.ihu.treasurehunt_front_end.Model.User;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
+import com.ihu.treasurehunt_front_end.Requests.UserList;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import com.ihu.treasurehunt_front_end.Requests.RequestGetUsers;
+
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -36,9 +30,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText userPasswordVerification;
     private Button register;
     private RequestQueue requestQueue;
+    private List<User> userList = new ArrayList<>();
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private UserList usersList = new UserList();
 
-    public static RequestGetUsers requestGetUsers = new RequestGetUsers();
-    private List<UsersQuest> users = new ArrayList<>();
 
 
 
@@ -47,7 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
-        users = requestGetUsers.requestGetUsers(requestQueue);
+        TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
+        userList = treasureHuntGame.getUserList();
         userName = (EditText)findViewById(R.id.userNameRegister);
         userPassword = (EditText)findViewById(R.id.userPasswordRegister);
         userPasswordVerification = (EditText)findViewById(R.id.userPsswrdVerification);
@@ -63,14 +59,10 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Confirm password is not correct", Toast.LENGTH_SHORT).show();
                 else
                 {
-
-                    String data = "{" +
-                            "        \"userId\":"+ "\""+(users.get(users.size()-1).userId+1)+"\""+","+
-                            "        \"name\":"+ "\""+userName.getText().toString()+"\""+"," +
-                            "        \"score\": 0," +
-                            "        \"password\": "+"\""+userPassword.getText().toString()+"\""+
-                            "    }";
-                    submit(data);
+                    usersList.createUser(retroFitCreate.getJsonPlaceHolderAPI()
+                                        ,userList.get(userList.size()-1).getUserId()+1
+                                        ,userName.getText().toString()
+                                        ,userPassword.getText().toString());
                     startActivity(intentRegister);
                 }
             }
@@ -80,49 +72,5 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-
-    public void submit(String data)
-    {
-        final String savedata= data;
-        String URL = "http://192.168.1.9:6039/Users/addUsers";
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest  = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject objres = new JSONObject(response);
-                    Toast.makeText(getApplicationContext(), objres.toString(), Toast.LENGTH_LONG).show();
-
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_LONG).show();
-                }
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset = utf-8";
-            }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try{
-                    return savedata==null?null:savedata.getBytes("utf-8");
-                }
-                catch (UnsupportedEncodingException uee){
-                    return null;
-                }
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
-
-
 
 }

@@ -13,10 +13,14 @@ public class User {
     @SerializedName("score")
     private int score;
 
-    public User(int userId, String name, int score) {
+    @SerializedName("password")
+    private String password;
+
+    public User(int userId, String name, int score, String password) {
         this.userId = userId;
         this.name = name;
         this.score = score;
+        this.password = password;
     }
 
     public int getUserId() {
@@ -29,5 +33,9 @@ public class User {
 
     public int getScore() {
         return score;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
