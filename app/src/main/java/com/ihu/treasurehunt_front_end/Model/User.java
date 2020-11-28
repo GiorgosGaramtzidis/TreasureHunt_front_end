@@ -38,4 +38,9 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public void appendToScore(int score)
+    {
+        this.score+=score;
+    }
 }

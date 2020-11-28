@@ -1,4 +1,4 @@
-package com.ihu.treasurehunt_front_end;
+package com.ihu.treasurehunt_front_end.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
 import com.ihu.treasurehunt_front_end.Model.User;
+import com.ihu.treasurehunt_front_end.R;
 
 
 import java.util.ArrayList;
@@ -22,21 +23,21 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private TextView signUp;
-    private int counter=3;
+    //private int counter=3;
     private List<User> userList = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
+        //ToDo...
+        //TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
         name = (EditText)findViewById(R.id.userName);
         password = (EditText)findViewById(R.id.userPassword);
         login = (Button) findViewById(R.id.loginBtn);
         signUp = (TextView) findViewById(R.id.signUp);
-        userList=treasureHuntGame.getUserList();
+        //ToDo..
+        //userList=treasureHuntGame.getUserList();
 
 
 

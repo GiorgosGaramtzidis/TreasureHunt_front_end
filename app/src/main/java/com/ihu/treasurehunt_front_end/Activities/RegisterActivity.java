@@ -1,4 +1,4 @@
-package com.ihu.treasurehunt_front_end;
+package com.ihu.treasurehunt_front_end.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +14,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
 import com.ihu.treasurehunt_front_end.Model.User;
+import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 import com.ihu.treasurehunt_front_end.Requests.UserList;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -29,12 +28,11 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText userPassword;
     private EditText userPasswordVerification;
     private Button register;
+    //App Container
     private RequestQueue requestQueue;
     private List<User> userList = new ArrayList<>();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
     private UserList usersList = new UserList();
-
-
 
 
     @Override
@@ -52,28 +50,20 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intentRegister;
         intentRegister = new Intent(this,LoginActivity.class);
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!userPassword.getText().toString().equals(userPasswordVerification.getText().toString()))
-                    Toast.makeText(RegisterActivity.this, "Confirm password is not correct", Toast.LENGTH_SHORT).show();
-                else
-                {
-                    usersList.createUser(retroFitCreate.getJsonPlaceHolderAPI()
-                                        ,userList.get(userList.size()-1).getUserId()+1
-                                        ,userName.getText().toString()
-                                        ,userPassword.getText().toString());
-                    updateUsers();
-                    treasureHuntGame.setUserList(usersList.getUserList());
-                    startActivity(intentRegister);
-                }
+        register.setOnClickListener(v -> {
+            if (!userPassword.getText().toString().equals(userPasswordVerification.getText().toString()))
+                Toast.makeText(RegisterActivity.this, "Confirm password is not correct", Toast.LENGTH_SHORT).show();
+            else
+            {
+                usersList.createUser(retroFitCreate.getJsonPlaceHolderAPI()
+                                    ,userList.get(userList.size()-1).getUserId()+1
+                                    ,userName.getText().toString()
+                                    ,userPassword.getText().toString());
+                updateUsers();
+                treasureHuntGame.setUserList(usersList.getUserList());
+                startActivity(intentRegister);
             }
         });
-
-
-
-
-
 
     }
     void updateUsers(){

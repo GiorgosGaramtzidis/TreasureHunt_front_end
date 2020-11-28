@@ -41,7 +41,6 @@ public class TreasureHuntGame {
         this.questionProgressCounter = questionProgressCounter;
     }
 
-
     public int getPositionOfQuestion() {
         return positionOfQuestion;
     }

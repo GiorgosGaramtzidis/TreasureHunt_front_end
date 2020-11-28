@@ -15,6 +15,7 @@ public class Question {
     @SerializedName("points")
     private int points;
 
+
     public Question(int id, String question, String answer, int points) {
         this.id = id;
         this.question = question;

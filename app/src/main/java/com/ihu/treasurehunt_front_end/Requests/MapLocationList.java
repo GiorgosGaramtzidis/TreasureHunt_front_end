@@ -35,7 +35,9 @@ public class MapLocationList {
                             ,mapLocation.getV()
                             ,mapLocation.getV1()
                             ,mapLocation.getTitle()
-                            ,mapLocation.getColor()));
+                            ,mapLocation.getColor()
+                            ,mapLocation.getQuestion()
+                    ));
                 }
             }
 
