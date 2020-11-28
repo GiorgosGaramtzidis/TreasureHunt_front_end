@@ -49,9 +49,7 @@ public class RiddleActivity extends AppCompatActivity {
                 {
                     Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
                     treasureHuntGame.setQuestionProgressCounter(treasureHuntGame.getQuestionProgressCounter()+
-                            100/(treasureHuntGame.getQuestionList().size()+
-                                    treasureHuntGame.getMquestions().size()+
-                                    treasureHuntGame.getQuizQuestionList().size()));
+                            100/(treasureHuntGame.getQuestionList().size()));
                     MapsActivity.progressBar.setProgress(treasureHuntGame.getQuestionProgressCounter());
                     treasureHuntGame.setPoints(treasureHuntGame.getPoints()+treasureHuntGame.getQuestionList().get(treasureHuntGame.getPositionOfQuestion()).getPoints());
                     MapsActivity.textView.setText("Score : " + treasureHuntGame.getPoints());

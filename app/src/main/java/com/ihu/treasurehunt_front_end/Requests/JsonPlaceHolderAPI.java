@@ -17,12 +17,6 @@ public interface JsonPlaceHolderAPI {
     @GET("Questions/find")
     Call<List<Question>> getQuestions();
 
-    @GET("MultipleChoiceQuestions/find")
-    Call<List<MultipleQuestion>> getMultipleQuestions();
-
-    @GET("Quiz/all")
-    Call<List<QuizQuestion>> getQuizQuestions();
-
     @GET("Locations/find")
     Call<List<MapLocation>> getMapLocations();
 
