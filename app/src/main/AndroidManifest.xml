@@ -17,10 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TreasureHunt_front_end"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.RegisterActivity"></activity>
-        <activity android:name=".Activities.LoginActivity">
-
-        </activity>
 
 
         <!--

@@ -21,7 +21,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.ihu.treasurehunt_front_end.Model.TreasureHuntGame;
 import com.ihu.treasurehunt_front_end.R;
 
 import java.util.ArrayList;
@@ -59,7 +58,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(2);
-        //mMap.setPadding(400, 100, 100, 0);
         final LatLng tei = new LatLng(41.076797, 23.553648);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 17));
 
@@ -93,25 +91,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (SecurityException e) {
             e.printStackTrace();
         }
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker)
-            {
-                switch (marker.getTitle()){
-                    case "bibliothiki":
-                        Intent intent = new Intent(MapsActivity.this,RiddleActivity.class);
-                        startActivity(intent);
-                        break;
-                    case "Grammatia":
-                        Intent intent1 = new Intent(MapsActivity.this,RiddleActivity.class);
-                        startActivity(intent1);
-                        break;
-                    case "Kafeteria":
-                        Intent intent2 = new Intent(MapsActivity.this,RiddleActivity.class);
-                        startActivity(intent2);
-                }
-                return false;
-            }
+
+        mMap.setOnMarkerClickListener(marker -> {
+                    startActivity(new Intent (MapsActivity.this,RiddleActivity.class));
+            return false;
         });
 
 
@@ -119,12 +102,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     void MarkerOnMap() {
-        TreasureHuntGame treasureHuntGame = MainActivity.getTreasureHuntGame();
-
-        for (int i = 0; i < treasureHuntGame.getMapLocationList().size(); i++) {
-            LatLng latLng = new LatLng(treasureHuntGame.getMapLocationList().get(i).getV(), treasureHuntGame.getMapLocationList().get(i).getV1());
-            //MarkerOptions markerOptions = new MarkerOptions().position(latLng);
-            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(treasureHuntGame.getMapLocationList().get(i).getTitle());
+        for (int i = 0; i < MainActivity.appContainer.mapLocationList.getMapLocationList().size(); i++) {
+            LatLng latLng = new LatLng(MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV()
+                                        ,MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV1());
+            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(MainActivity.appContainer.mapLocationList
+                                                                                                            .getMapLocationList()
+                                                                                                            .get(i)
+                                                                                                            .getTitle());
             Marker marker = mMap.addMarker(markerOptions);
             markerList.add(marker);
             marker.setVisible(false);
@@ -133,7 +117,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     void DistanceBetween(){
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < markerList.size(); i++) {
             distance = computeDistanceBetween(latLng, markerList.get(i).getPosition());
             markerList.get(i).setVisible(distance <= 50);
 
