@@ -34,9 +34,6 @@ public class RiddleActivity extends AppCompatActivity {
         textQuestion.setText(treasureHuntGame
                 .getQuestionList().get(0).getQuestion());
 
-
-
-        intentResult = new Intent(this,ResultActivity.class);
         playGame();
 
 

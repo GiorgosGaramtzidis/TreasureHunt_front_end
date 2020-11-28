@@ -63,6 +63,8 @@ public class RegisterActivity extends AppCompatActivity {
                                         ,userList.get(userList.size()-1).getUserId()+1
                                         ,userName.getText().toString()
                                         ,userPassword.getText().toString());
+                    updateUsers();
+                    treasureHuntGame.setUserList(usersList.getUserList());
                     startActivity(intentRegister);
                 }
             }
@@ -71,6 +73,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+
+
+    }
+    void updateUsers(){
+        usersList.getUsers(retroFitCreate.getJsonPlaceHolderAPI());
     }
 
 }

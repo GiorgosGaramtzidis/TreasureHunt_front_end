@@ -5,32 +5,24 @@ import java.util.List;
 public class TreasureHuntGame {
     private List<Question> questionList;
     private List<MapLocation> mapLocationList;
-    private List<QuizQuestion> quizQuestionList;
     private List<User> userList;
     private int positionOfQuestion;
     private int questionProgressCounter;
-    private List<MultipleQuestion> multipleQuestionList;
     private int points;
 
 
-    public TreasureHuntGame(List<User> userList,List<Question> questionList, List<MapLocation> mapLocationList, List<MultipleQuestion> multipleQuestionList, List<QuizQuestion> quizQuestionList) {
+    public TreasureHuntGame(List<User> userList,List<Question> questionList, List<MapLocation> mapLocationList) {
         this.userList = userList;
         this.questionList = questionList;
         this.mapLocationList = mapLocationList;
-        this.multipleQuestionList = multipleQuestionList;
-        this.quizQuestionList = quizQuestionList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     public List<User> getUserList() {
         return userList;
-    }
-
-    public List<QuizQuestion> getQuizQuestionList() {
-        return quizQuestionList;
-    }
-
-    public List<MultipleQuestion> getMquestions() {
-        return multipleQuestionList;
     }
 
     public List<MapLocation> getMapLocationList() {

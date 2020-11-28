@@ -1,9 +1,7 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
-import com.ihu.treasurehunt_front_end.Model.MultipleQuestion;
 import com.ihu.treasurehunt_front_end.Model.Question;
-import com.ihu.treasurehunt_front_end.Model.QuizQuestion;
 import com.ihu.treasurehunt_front_end.Model.User;
 
 import java.util.List;

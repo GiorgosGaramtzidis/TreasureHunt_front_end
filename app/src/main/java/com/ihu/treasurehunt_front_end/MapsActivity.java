@@ -104,7 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 switch (marker.getTitle()){
                     case "bibliothiki":
-                        Intent intent = new Intent(MapsActivity.this,QuizActivity.class);
+                        Intent intent = new Intent(MapsActivity.this,RiddleActivity.class);
                         startActivity(intent);
                         break;
                     case "Grammatia":
@@ -112,7 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         startActivity(intent1);
                         break;
                     case "Kafeteria":
-                        Intent intent2 = new Intent(MapsActivity.this,MultipleChoiceActivity.class);
+                        Intent intent2 = new Intent(MapsActivity.this,RiddleActivity.class);
                         startActivity(intent2);
                 }
                 return false;
