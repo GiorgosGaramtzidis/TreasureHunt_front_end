@@ -18,7 +18,7 @@ public class MapLocation {
     @SerializedName("color")
     private String color;
 
-    @SerializedName("Question")
+    @SerializedName("question")
     private Question question;
 
 
