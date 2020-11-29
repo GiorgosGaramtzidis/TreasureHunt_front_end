@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TreasureHunt_front_end</string>
     <string name="title_activity_maps">Map</string>
+    <string name="congratulations_you_won">Congratulations you WON!</string>
+    <string name="test">test</string>
+    <string name="you_found_the_treasure">You found the Treasure</string>
+    <string name="congratulations">Congratulations</string>
 </resources>

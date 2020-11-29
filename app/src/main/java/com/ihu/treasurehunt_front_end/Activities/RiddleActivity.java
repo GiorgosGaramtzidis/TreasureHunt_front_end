@@ -40,7 +40,7 @@ public class RiddleActivity extends AppCompatActivity {
            }
 
             if(MainActivity.game.endOfGame())
-                startActivity(new Intent(RiddleActivity.this,MainActivity.class));
+                startActivity(new Intent(RiddleActivity.this,GameWinActivity.class));
             finish();
         });
 
