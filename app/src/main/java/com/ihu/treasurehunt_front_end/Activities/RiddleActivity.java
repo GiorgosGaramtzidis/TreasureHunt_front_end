@@ -27,17 +27,20 @@ public class RiddleActivity extends AppCompatActivity {
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer= (EditText) findViewById(R.id.textAnswer);
 
-        textQuestion.setText(MainActivity.game.getQuestion().getQuestion());
+        textQuestion.setText(MainActivity.game.getMapLocation().getQuestion().getQuestion());
 
         btnCheck.setOnClickListener(v ->{
            if (MainActivity.game.isQuestionCorrectAnswered(textAnswer.getText().toString())) {
                 Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
                 AppendProgressBar();
-                MainActivity.game.nextQuestion();
-                finish();
-            }
-            else
-                Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
+                MainActivity.game.increaseLocationPosition();
+           }
+            else {
+               Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
+           }
+
+            if(MainActivity.game.endOfGame())
+                startActivity(new Intent(RiddleActivity.this,MainActivity.class));
             finish();
         });
 
@@ -46,7 +49,7 @@ public class RiddleActivity extends AppCompatActivity {
     public void AppendProgressBar()
     {
         AppContainer.progressBar.setProgress(MainActivity.game.getProgress());
-        MainActivity.game.appendScore(MainActivity.game.getQuestion().getPoints());
+        MainActivity.game.appendScore(MainActivity.game.getMapLocation().getQuestion().getPoints());
         MapsActivity.textView.setText("Score : " + MainActivity.game.getScore());
     }
 }

@@ -9,55 +9,45 @@ public class Game
     private int positionOfLocation;
     private int progress;
     private int gameScore;
-    private GameState gameState;
+
 
     public Game(List<MapLocation> mapLocations) {
         this.mapLocations = mapLocations;
         this.positionOfLocation=0;
         this.progress = 0;
         this.gameScore = 0;
-        this.gameState = GameState.PLAYING;
     }
 
-    public Location getQuestion() throws IndexOutOfBoundsException
+    public Boolean endOfGame(){
+        return mapLocations.size() == positionOfLocation;
+    }
+
+    public MapLocation getMapLocation()
     {
-        if (positionOfLocation < mapLocations.size())
-            return  mapLocations.get(positionOfLocation).getQuestion();
-        throw new IndexOutOfBoundsException();
-
+        return  mapLocations.get(positionOfLocation);
     }
 
-    public int nextLocation(){
+    public int getPositionOfLocation(){
         return positionOfLocation;
     }
 
-    public Boolean isStateWIN(){
-        return this.gameState==GameState.WIN;
-    }
 
-    public void hasNext(){
 
-    }
-
-    public void nextQuestion()
+    public void increaseLocationPosition()
     {
-        if(positionOfLocation < mapLocations.size()) {
-            this.positionOfLocation++;
-            return;
-        }
-        gameState=GameState.WIN;
+        this.positionOfLocation++;
     }
 
     public Boolean isQuestionCorrectAnswered(String string)
     {
-        if(string.equals(this.getQuestion().getAnswer()))
-        {
-            this.setQuestionProgress(this.getProgress()+
+        if(string.equals(this.getMapLocation().getQuestion().getAnswer()))
+             {
+              this.setQuestionProgress(this.getProgress()+
                     100/this.mapLocations.size());
-            return true;
-        }
-        return false;
+                return true;
+             }
 
+                return false;
     }
     public int getProgress() {
         return progress;

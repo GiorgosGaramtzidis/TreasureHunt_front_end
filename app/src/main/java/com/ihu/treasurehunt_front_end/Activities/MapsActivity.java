@@ -33,7 +33,7 @@ import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
-
+    private MapMarkerOptions mapMarkerOptions = new MapMarkerOptions();
     private Button hintButton;
     private LocationListener locationListener;
     private LocationManager locationManager;
@@ -43,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double distance;
     private LatLng latLng;
     List<Marker> markerList = new ArrayList<Marker>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +59,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 
-        if(MainActivity.game.isStateWIN())
-            startActivity(new Intent(this,MainActivity.class));
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -74,17 +73,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onLocationChanged(@NonNull Location location) {
+
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     if (motionMarker == null) {
-                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1");
+                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1").icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_person_pin_circle_24));
                         motionMarker = mMap.addMarker(options);
                     } else {
                         motionMarker.setPosition(latLng);
                     }
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),16 ));
 
-                    DistanceBetween(MainActivity.game.nextLocation());
+                    DistanceBetween(MainActivity.game.getPositionOfLocation());
+
 
                 } catch (SecurityException e) {
                     e.printStackTrace();
@@ -100,7 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setOnMarkerClickListener(marker -> {
-                    startActivity(new Intent (MapsActivity.this,RiddleActivity.class));
+            startActivity(new Intent (MapsActivity.this,RiddleActivity.class));
             return false;
         });
 
@@ -121,23 +122,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     void MarkerOnMap() {
         for (int i = 0; i < MainActivity.appContainer.mapLocationList.getMapLocationList().size(); i++) {
             LatLng latLng = new LatLng(MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV()
-                                        ,MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV1());
+                    ,MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV1());
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(latLng)
                     .title(MainActivity.appContainer.mapLocationList
-                    .getMapLocationList()
-                    .get(i)
-                    .getTitle());
+                            .getMapLocationList()
+                            .get(i)
+                            .getTitle()).icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_check_24));
             Marker marker = mMap.addMarker(markerOptions);
             markerList.add(marker);
             marker.setVisible(false);
-
         }
     }
 
-    void DistanceBetween(Integer markerToMakeVisible){
+    void DistanceBetween(int markerToMakeVisible){
+        if(MainActivity.game.getPositionOfLocation()==0) {
             distance = computeDistanceBetween(latLng, markerList.get(markerToMakeVisible).getPosition());
             markerList.get(markerToMakeVisible).setVisible(distance <= 50);
+        }
+        else {
+            distance = computeDistanceBetween(latLng, markerList.get(markerToMakeVisible).getPosition());
+            markerList.get(markerToMakeVisible-1).setVisible(false);
+            markerList.get(markerToMakeVisible).setVisible(distance <= 50);
+        }
+        }
     }
 
-}
