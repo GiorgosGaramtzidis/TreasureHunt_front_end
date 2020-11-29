@@ -23,14 +23,11 @@ public class RiddleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riddle);
 
-
         btnCheck = (TextView) findViewById(R.id.btnCheck);
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer= (EditText) findViewById(R.id.textAnswer);
 
         textQuestion.setText(MainActivity.game.getQuestion().getQuestion());
-        if(MainActivity.game.isStateWIN())
-            startActivity(new Intent(RiddleActivity.this,MainActivity.class));
 
         btnCheck.setOnClickListener(v ->{
            if (MainActivity.game.isQuestionCorrectAnswered(textAnswer.getText().toString())) {

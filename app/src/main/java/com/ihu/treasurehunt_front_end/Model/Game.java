@@ -77,6 +77,4 @@ public class Game
     public String getLocationDescription(){
         return mapLocations.get(positionOfLocation).getTitle();
     }
-
-
 }

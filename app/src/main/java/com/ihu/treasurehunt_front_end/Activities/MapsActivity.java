@@ -57,6 +57,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+
+        if(MainActivity.game.isStateWIN())
+            startActivity(new Intent(this,MainActivity.class));
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -108,8 +111,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
-
     }
 
     void openDialog(){
@@ -121,10 +122,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (int i = 0; i < MainActivity.appContainer.mapLocationList.getMapLocationList().size(); i++) {
             LatLng latLng = new LatLng(MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV()
                                         ,MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV1());
-            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(MainActivity.appContainer.mapLocationList
-                                                                                                            .getMapLocationList()
-                                                                                                            .get(i)
-                                                                                                            .getTitle());
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(latLng)
+                    .title(MainActivity.appContainer.mapLocationList
+                    .getMapLocationList()
+                    .get(i)
+                    .getTitle());
             Marker marker = mMap.addMarker(markerOptions);
             markerList.add(marker);
             marker.setVisible(false);
