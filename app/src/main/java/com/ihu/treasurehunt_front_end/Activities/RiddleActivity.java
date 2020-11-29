@@ -1,6 +1,7 @@
 package com.ihu.treasurehunt_front_end.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,13 +29,13 @@ public class RiddleActivity extends AppCompatActivity {
         textAnswer= (EditText) findViewById(R.id.textAnswer);
 
         textQuestion.setText(MainActivity.game.getQuestion().getQuestion());
-
+        if(MainActivity.game.isStateWIN())
+            startActivity(new Intent(RiddleActivity.this,MainActivity.class));
 
         btnCheck.setOnClickListener(v ->{
            if (MainActivity.game.isQuestionCorrectAnswered(textAnswer.getText().toString())) {
                 Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
                 AppendProgressBar();
-                MainActivity.game.isStateWIN();
                 MainActivity.game.nextQuestion();
                 finish();
             }

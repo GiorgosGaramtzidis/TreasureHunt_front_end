@@ -41,7 +41,11 @@ public class Game
 
     public void nextQuestion()
     {
-        this.positionOfLocation++;
+        if(positionOfLocation < mapLocations.size()) {
+            this.positionOfLocation++;
+            return;
+        }
+        gameState=GameState.WIN;
     }
 
     public Boolean isQuestionCorrectAnswered(String string)
