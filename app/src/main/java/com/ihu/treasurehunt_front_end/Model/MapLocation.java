@@ -4,25 +4,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class MapLocation {
     @SerializedName("Id")
-    private int Id;
+    private final int Id;
 
     @SerializedName("v")
-    private double v;
+    private final double v;
 
     @SerializedName("v1")
-    private double v1;
+    private final double v1;
 
     @SerializedName("title")
-    private String title;
+    private final String title;
 
     @SerializedName("color")
-    private String color;
+    private final String color;
 
     @SerializedName("question")
-    private Location question;
+    private final Riddle question;
 
 
-    public MapLocation(int id, double v, double v1, String title, String color, Location question) {
+    public MapLocation(int id, double v, double v1, String title, String color, Riddle question) {
         Id = id;
         this.v = v;
         this.v1 = v1;
@@ -53,7 +53,7 @@ public class MapLocation {
         return color;
     }
 
-    public Location getQuestion() {
+    public Riddle getQuestion() {
         return question;
     }
 }

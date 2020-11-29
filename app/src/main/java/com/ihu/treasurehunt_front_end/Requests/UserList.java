@@ -2,6 +2,8 @@ package com.ihu.treasurehunt_front_end.Requests;
 
 import com.ihu.treasurehunt_front_end.Model.User;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ import retrofit2.Response;
 
 public class UserList {
 
-    private List<User> userList = new ArrayList<>();
+    private final List<User> userList = new ArrayList<>();
 
     public List<User> getUserList() {
         return userList;
@@ -21,7 +23,7 @@ public class UserList {
 
         call.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(@NotNull Call<List<User>> call, @NotNull Response<List<User>> response) {
                 if(!response.isSuccessful()){
                     System.out.println("Code: "+ response.code());
                     return;
@@ -37,7 +39,7 @@ public class UserList {
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<User>> call, @NotNull Throwable t) {
                 System.out.println(t.getMessage());            }
         });
     }
@@ -48,7 +50,7 @@ public class UserList {
 
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NotNull Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
                     //MainActivity.textViewResult.setText("Code: "+ response.code());
                     return;
@@ -57,7 +59,7 @@ public class UserList {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<User> call, @NotNull Throwable t) {
                 //MainActivity.textViewResult.setText(t.getMessage());
             }
         });

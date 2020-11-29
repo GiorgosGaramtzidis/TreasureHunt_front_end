@@ -19,11 +19,8 @@ public class HintDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Hint")
                 .setMessage("The quest is close to: " + MainActivity.game.getLocationDescription())
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setPositiveButton("ok", (dialog, which) -> {
 
-                    }
                 });
         return builder.create();
     }
