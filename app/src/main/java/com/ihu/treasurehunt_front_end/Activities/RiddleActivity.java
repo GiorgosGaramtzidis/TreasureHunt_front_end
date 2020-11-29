@@ -31,9 +31,10 @@ public class RiddleActivity extends AppCompatActivity {
 
 
         btnCheck.setOnClickListener(v ->{
-            if (MainActivity.game.isQuestionCorrectAnswered(textAnswer.getText().toString())) {
+           if (MainActivity.game.isQuestionCorrectAnswered(textAnswer.getText().toString())) {
                 Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
                 AppendProgressBar();
+                MainActivity.game.isStateWIN();
                 MainActivity.game.nextQuestion();
                 finish();
             }

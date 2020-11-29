@@ -19,10 +19,10 @@ public class MapLocation {
     private String color;
 
     @SerializedName("question")
-    private Question question;
+    private Location question;
 
 
-    public MapLocation(int id, double v, double v1, String title, String color, Question question) {
+    public MapLocation(int id, double v, double v1, String title, String color, Location question) {
         Id = id;
         this.v = v;
         this.v1 = v1;
@@ -53,7 +53,7 @@ public class MapLocation {
         return color;
     }
 
-    public Question getQuestion() {
+    public Location getQuestion() {
         return question;
     }
 }

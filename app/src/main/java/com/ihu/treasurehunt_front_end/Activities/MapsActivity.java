@@ -7,6 +7,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +34,7 @@ import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
 
+    private Button hintButton;
     private LocationListener locationListener;
     private LocationManager locationManager;
     public static TextView textView;
@@ -46,6 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         MainActivity.appContainer.progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        hintButton = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView2);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -77,7 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),16 ));
 
-                    DistanceBetween();
+                    DistanceBetween(MainActivity.game.nextLocation());
 
                 } catch (SecurityException e) {
                     e.printStackTrace();
@@ -97,9 +101,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return false;
         });
 
+        hintButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+
+
 
     }
 
+    void openDialog(){
+        HintDialog hintDialog = new HintDialog();
+        hintDialog.show(getSupportFragmentManager(),"Hint dialog");
+    }
 
     void MarkerOnMap() {
         for (int i = 0; i < MainActivity.appContainer.mapLocationList.getMapLocationList().size(); i++) {
@@ -116,12 +132,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    void DistanceBetween(){
-        for (int i = 0; i < markerList.size(); i++) {
-            distance = computeDistanceBetween(latLng, markerList.get(i).getPosition());
-            markerList.get(i).setVisible(distance <= 50);
-
-        }
+    void DistanceBetween(Integer markerToMakeVisible){
+            distance = computeDistanceBetween(latLng, markerList.get(markerToMakeVisible).getPosition());
+            markerList.get(markerToMakeVisible).setVisible(distance <= 50);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
-import com.ihu.treasurehunt_front_end.Model.Question;
+import com.ihu.treasurehunt_front_end.Model.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,54 +11,54 @@ import retrofit2.Response;
 
 public class QuestionList {
 
-    List<Question> questionList = new ArrayList<>();
+    List<Location> questionList = new ArrayList<>();
 
-    public List<Question> getQuestionsList() {
+    public List<Location> getQuestionsList() {
         return questionList;
     }
 
     public void createQuestion(JsonPlaceHolderAPI jsonPlaceHolderAPI){
 
-        Question question = new Question(6,"Τι χρώμα έχει το πορτοκάλι","Πορτικαλί",3);
+        Location question = new Location(6,"Τι χρώμα έχει το πορτοκάλι","Πορτικαλί",3);
 
-        Call<Question> call = jsonPlaceHolderAPI.createQuestion(question);
+        Call<Location> call = jsonPlaceHolderAPI.createQuestion(question);
 
-        call.enqueue(new Callback<Question>() {
+        call.enqueue(new Callback<Location>() {
             @Override
-            public void onResponse(Call<Question> call, Response<Question> response) {
+            public void onResponse(Call<Location> call, Response<Location> response) {
                 if(!response.isSuccessful()){
                     System.out.println("Code: "+ response.code());
                     return;
                 }
-                Question questionResponse = response.body();
+                Location questionResponse = response.body();
 
             }
 
             @Override
-            public void onFailure(Call<Question> call, Throwable t) {
+            public void onFailure(Call<Location> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
     }
     public void getQuestions(JsonPlaceHolderAPI jsonPlaceHolderAPI){
-        Call<List<Question>> call = jsonPlaceHolderAPI.getQuestions();
+        Call<List<Location>> call = jsonPlaceHolderAPI.getQuestions();
 
-        call.enqueue(new Callback<List<Question>>() {
+        call.enqueue(new Callback<List<Location>>() {
             @Override
-            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+            public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
                 if(!response.isSuccessful()){
                     System.out.println("Code: "+ response.code());
                     return;
                 }
-                List<Question> questions =response.body();
+                List<Location> questions =response.body();
 
-                for (Question question:questions){
-                    questionList.add(new Question(question.getId(),question.getQuestion(),question.getAnswer(),question.getPoints()));
+                for (Location question:questions){
+                    questionList.add(new Location(question.getId(),question.getQuestion(),question.getAnswer(),question.getPoints()));
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Question>> call, Throwable t) {
+            public void onFailure(Call<List<Location>> call, Throwable t) {
                 System.out.println(t.getMessage());            }
         });
     }

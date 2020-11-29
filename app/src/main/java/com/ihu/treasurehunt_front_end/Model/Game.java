@@ -1,5 +1,6 @@
 package com.ihu.treasurehunt_front_end.Model;
 
+
 import java.util.List;
 
 public class Game
@@ -8,19 +9,33 @@ public class Game
     private int positionOfLocation;
     private int progress;
     private int gameScore;
+    private GameState gameState;
 
     public Game(List<MapLocation> mapLocations) {
         this.mapLocations = mapLocations;
         this.positionOfLocation=0;
         this.progress = 0;
         this.gameScore = 0;
+        this.gameState = GameState.PLAYING;
     }
 
-    public Question getQuestion() throws IndexOutOfBoundsException
+    public Location getQuestion() throws IndexOutOfBoundsException
     {
         if (positionOfLocation < mapLocations.size())
             return  mapLocations.get(positionOfLocation).getQuestion();
         throw new IndexOutOfBoundsException();
+
+    }
+
+    public int nextLocation(){
+        return positionOfLocation;
+    }
+
+    public Boolean isStateWIN(){
+        return this.gameState==GameState.WIN;
+    }
+
+    public void hasNext(){
 
     }
 
@@ -54,6 +69,9 @@ public class Game
     public int getScore()
     {
         return this.gameScore;
+    }
+    public String getLocationDescription(){
+        return mapLocations.get(positionOfLocation).getTitle();
     }
 
 

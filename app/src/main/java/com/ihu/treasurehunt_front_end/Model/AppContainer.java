@@ -16,6 +16,4 @@ public class AppContainer
     @SuppressLint("StaticFieldLeak")
     public static ProgressBar progressBar;
 
-
-
 }

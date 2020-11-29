@@ -2,7 +2,7 @@ package com.ihu.treasurehunt_front_end.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Question {
+public class Location {
     @SerializedName("questionId")
     private int id;
 
@@ -16,7 +16,7 @@ public class Question {
     private int points;
 
 
-    public Question(int id, String question, String answer, int points) {
+    public Location(int id, String question, String answer, int points) {
         this.id = id;
         this.question = question;
         this.answer = answer;
