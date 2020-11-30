@@ -33,6 +33,10 @@ public class GameWinActivity extends AppCompatActivity {
         treasure = findViewById(R.id.txtTreasure);
         slogan = findViewById(R.id.txtSlogan);
 
+        imageView.setAnimation(topAnimation);
+        treasure.setAnimation(botAnimation);
+        slogan.setAnimation(botAnimation);
+
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(GameWinActivity.this,MainActivity.class);
             startActivity(intent);
