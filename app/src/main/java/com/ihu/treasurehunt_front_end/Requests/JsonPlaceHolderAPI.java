@@ -1,10 +1,13 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
+
+
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
-import com.ihu.treasurehunt_front_end.Model.Location;
+import com.ihu.treasurehunt_front_end.Model.Question;
 import com.ihu.treasurehunt_front_end.Model.User;
 
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -15,7 +18,7 @@ import retrofit2.http.POST;
 public interface JsonPlaceHolderAPI {
 
     @GET("Questions/find")
-    Call<List<Location>> getQuestions();
+    Call<List<Question>> getQuestions();
 
     @GET("Locations/find")
     Call<List<MapLocation>> getMapLocations();
@@ -24,7 +27,7 @@ public interface JsonPlaceHolderAPI {
     Call<List<User>> getUsers();
 
     @POST("Questions/addQuestion")
-    Call<Location> createQuestion(@Body Location questions);
+    Call<Question> createQuestion(@Body Question questions);
 
     @POST("Users/addUsers")
     Call<User> createUser(@Body User user);
@@ -36,4 +39,10 @@ public interface JsonPlaceHolderAPI {
             @Field("name") String name,
             @Field("score") int score
     );
+
+
+    @GET("api/Locations/Start")
+    Call<MapLocation> getStartLocation();
+
+
 }

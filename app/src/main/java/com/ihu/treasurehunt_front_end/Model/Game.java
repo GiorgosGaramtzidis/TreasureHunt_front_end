@@ -1,70 +1,79 @@
 package com.ihu.treasurehunt_front_end.Model;
 
 
-import java.util.List;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
+
 
 public class Game
 {
-    private final List<MapLocation> mapLocations;
-    private int positionOfLocation;
     private int progress;
     private int gameScore;
+    private MapLocation location;
 
 
-    public Game(List<MapLocation> mapLocations) {
-        this.mapLocations = mapLocations;
-        this.positionOfLocation=0;
+    public Game(MapLocation mapLocation) {
+        this.location = mapLocation;
         this.progress = 0;
         this.gameScore = 0;
     }
 
-    public Boolean endOfGame(){
-        return mapLocations.size() == positionOfLocation;
-    }
 
-    public MapLocation getMapLocation()
-    {
-        return  mapLocations.get(positionOfLocation);
-    }
-
-    public int getPositionOfLocation(){
-        return positionOfLocation;
-    }
-
-
-
-    public void increaseLocationPosition()
-    {
-        this.positionOfLocation++;
-    }
-
-    public Boolean isQuestionCorrectAnswered(String string)
-    {
-        if(string.equals(this.getMapLocation().getQuestion().getAnswer()))
-             {
-              this.setQuestionProgress(this.getProgress()+
-                    100/this.mapLocations.size());
-                return true;
-             }
-
-                return false;
-    }
     public int getProgress() {
         return progress;
     }
-    public void setQuestionProgress(int progress)
-    {
+
+    public void setProgress(int progress) {
         this.progress = progress;
     }
-    public void appendScore(int points)
-    {
-        this.gameScore += points;
+
+    public int getGameScore() {
+        return gameScore;
     }
-    public int getScore()
-    {
-        return this.gameScore;
+
+    public void setGameScore(int gameScore) {
+        this.gameScore = gameScore;
     }
-    public String getLocationDescription(){
-        return mapLocations.get(positionOfLocation).getTitle();
+
+    public MapLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(MapLocation location) {
+        this.location = location;
+    }
+
+    public LatLng position(){
+        return new LatLng(this.location.getV(),this.location.getV1());
+    }
+
+    public MarkerOptions markerOptions(){
+        return new MarkerOptions().position(this.position()).title(this.location.getTitle());
+    }
+
+    public Marker addFirstLocationToMap(GoogleMap map){
+        Marker marker = map.addMarker(this.markerOptions());
+        marker.setVisible(false);
+
+        return marker;
+    }
+
+    public void DistanceBetween(LatLng latLng,Marker marker){
+        double distance;
+        distance = computeDistanceBetween(latLng,marker.getPosition());
+        marker.setVisible(distance <= 50);
+
+
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "location=" + location +
+                '}';
     }
 }

@@ -3,8 +3,6 @@ package com.ihu.treasurehunt_front_end.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class MapLocation {
-    @SerializedName("Id")
-    private int Id;
 
     @SerializedName("v")
     private double v;
@@ -15,27 +13,22 @@ public class MapLocation {
     @SerializedName("title")
     private String title;
 
-    @SerializedName("color")
-    private String color;
-
-    @SerializedName("question")
-    private Location question;
+    @SerializedName("questions")
+    private Question question;
 
 
-    public MapLocation(int id, double v, double v1, String title, String color, Location question) {
-        Id = id;
+    public MapLocation( double v, double v1, String title,Question question) {
+
         this.v = v;
         this.v1 = v1;
         this.title = title;
-        this.color = color;
+
         this.question = question;
        
 
     }
 
-    public int getId() {
-        return Id;
-    }
+
 
     public double getV() {
         return v;
@@ -49,11 +42,19 @@ public class MapLocation {
         return title;
     }
 
-    public String getColor() {
-        return color;
+
+    public Question getQuestion() {
+        return question;
     }
 
-    public Location getQuestion() {
-        return question;
+
+    @Override
+    public String toString() {
+        return "MapLocation{" +
+                " v=" + v +
+                ", v1=" + v1 +
+                ", title='" + title + '\'' +
+                ", question=" + question +
+                '}';
     }
 }

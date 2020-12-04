@@ -15,6 +15,7 @@ public class MapLocationList {
     List<MapLocation> mapLocationList = new ArrayList<>();
 
     public List<MapLocation> getMapLocationList() {
+
         return mapLocationList;
     }
 
@@ -31,11 +32,10 @@ public class MapLocationList {
                 List<MapLocation> mapLocations =response.body();
 
                 for (MapLocation mapLocation:mapLocations){
-                    mapLocationList.add(new MapLocation(mapLocation.getId()
-                            ,mapLocation.getV()
+                    mapLocationList.add(new MapLocation(
+                            mapLocation.getV()
                             ,mapLocation.getV1()
                             ,mapLocation.getTitle()
-                            ,mapLocation.getColor()
                             ,mapLocation.getQuestion()
                     ));
                 }
