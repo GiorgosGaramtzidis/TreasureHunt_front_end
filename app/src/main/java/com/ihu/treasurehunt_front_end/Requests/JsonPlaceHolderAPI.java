@@ -1,7 +1,6 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
 
-
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
 import com.ihu.treasurehunt_front_end.Model.User;
@@ -14,6 +13,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface JsonPlaceHolderAPI {
 
@@ -43,6 +43,14 @@ public interface JsonPlaceHolderAPI {
 
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
+
+    @PUT("LoseCondition/updateUserLives")
+    Call<Integer> updateUserLives(
+            @Body User user
+    );
+
+    @GET("LoseCondition/getUserLives")
+    Call<Integer> getUserLives(int userLives);
 
 
 }

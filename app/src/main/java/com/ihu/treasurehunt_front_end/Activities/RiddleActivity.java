@@ -9,11 +9,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class RiddleActivity extends AppCompatActivity {
     TextView textQuestion;
     EditText textAnswer;
     TextView btnCheck;
+    //private User user = new User(5,"Efi",0,"4546",3);
+    private LoseCondition loseCondition = new LoseCondition();
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -28,12 +33,16 @@ public class RiddleActivity extends AppCompatActivity {
         textQuestion.setText(MainActivity.game.getLocation().getQuestion().getQuestion());
 
         btnCheck.setOnClickListener(v ->{
-           if (MainActivity.game.getLocation().getQuestion().getAnswer() == (textAnswer.getText().toString())) {
+           if (MainActivity.game.getLocation().getQuestion().getAnswer().equals(textAnswer.getText().toString())) {
                 Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
 
            }
             else {
-               Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
+                loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI());
+               //Intent intent = new Intent(RiddleActivity.this,MainActivity.class);
+               //startActivity(intent);
+              // Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
+               finish();
            }
             finish();
         });

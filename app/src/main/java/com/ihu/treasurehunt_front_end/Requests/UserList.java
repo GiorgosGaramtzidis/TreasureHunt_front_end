@@ -32,7 +32,8 @@ public class UserList {
                     userList.add(new User(user.getUserId()
                                     ,user.getName()
                                     ,user.getScore()
-                                    ,user.getPassword()));
+                                    ,user.getPassword()
+                                    ,user.getUserLives()));
                 }
             }
 
@@ -42,15 +43,14 @@ public class UserList {
         });
     }
 
-    public void createUser(JsonPlaceHolderAPI jsonPlaceHolderAPI,int id,String name,String password){
-        User user = new User(id,name,0,password);
+    public void createUser(JsonPlaceHolderAPI jsonPlaceHolderAPI,String id,String name,String password,int userLives){
+        User user = new User(id,name,0,password,userLives);
         Call<User> call = jsonPlaceHolderAPI.createUser(user);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
-                    //MainActivity.textViewResult.setText("Code: "+ response.code());
                     return;
                 }
                 User userResponse = response.body();
