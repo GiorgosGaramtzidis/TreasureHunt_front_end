@@ -5,4 +5,10 @@
     <string name="test">test</string>
     <string name="you_found_the_treasure">You found the Treasure</string>
     <string name="congratulations">Congratulations</string>
+    <string name="register_here">Register here</string>
+    <string name="registration_rules">Registration rules</string>
+    <string name="registration_rules">Registration rules</string>
+    <string name="username">UserName</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
 </resources>

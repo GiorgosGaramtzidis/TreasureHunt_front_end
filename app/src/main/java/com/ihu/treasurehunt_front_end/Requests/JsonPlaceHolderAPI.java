@@ -29,6 +29,9 @@ public interface JsonPlaceHolderAPI {
     @POST("Users/addUsers")
     Call<User> createUser(@Body User user);
 
+    @POST("Users/registerUser")
+    Call<User> RegisterUser(@Body User user);
+
     @FormUrlEncoded
     @POST("Users/addUsers")
     Call<User> createUser(

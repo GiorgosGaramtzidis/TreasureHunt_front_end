@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 public class User {
 
     @SerializedName("userId")
-    private final int userId;
+    private final String userId;
 
     @SerializedName("name")
-    private final String name;
+    private final String userName;
 
     @SerializedName("score")
     private final int score;
@@ -16,19 +16,19 @@ public class User {
     @SerializedName("password")
     private final String password;
 
-    public User(int userId, String name, int score, String password) {
-        this.userId = userId;
-        this.name = name;
-        this.score = score;
+    public User(String name,String password) {
+        this.userName = name;
+        this.score = 0;
         this.password = password;
+        this.userId ="";
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
     public int getScore() {
@@ -39,11 +39,5 @@ public class User {
         return password;
     }
 
-    /*
-    public void appendToScore(int score)
-    {
-        this.score+=score;
-    }
-    */
 
 }
