@@ -42,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
                     && userRegistrationService.passWordValidator()
                     && userRegistrationService.userNameValidator())
             {
-                User user = new User(user.getUserId(), userNameText.getText().toString(), user.getScore(), passwordText.getText().toString());
+                User user = new User(userNameText.getText().toString(), passwordText.getText().toString());
                 RegisterPost registerPost = new RegisterPost();
                 registerPost.RegisterUserPost(retroFitCreate.getJsonPlaceHolderAPI(),user);
                 String string = registerPost.getString();
@@ -52,7 +52,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             }else
                 Toast.makeText(this, "Invalid inputs", Toast.LENGTH_SHORT).show();
-
         });
         registrationPattern.setOnClickListener(v ->
         {

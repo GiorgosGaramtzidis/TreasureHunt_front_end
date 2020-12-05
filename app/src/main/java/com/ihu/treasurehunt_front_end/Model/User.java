@@ -7,7 +7,7 @@ public class User {
     @SerializedName("userId")
     private final String userId;
 
-    @SerializedName("name")
+    @SerializedName("userName")
     private final String userName;
 
     @SerializedName("score")

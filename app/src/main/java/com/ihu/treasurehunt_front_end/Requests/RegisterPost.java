@@ -34,10 +34,6 @@ public class RegisterPost
     }
 
     public String getString() {
-        while(string.equals(""))
-        {
-            this.getString();
-        }
         return string;
     }
 }

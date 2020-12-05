@@ -145,6 +145,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerList.get(markerToMakeVisible-1).setVisible(false);
             markerList.get(markerToMakeVisible).setVisible(distance <= 50);
         }
-        }
     }
+}
 
