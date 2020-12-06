@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
@@ -17,6 +18,7 @@ public class RiddleActivity extends AppCompatActivity {
     EditText textAnswer;
     TextView btnCheck;
 
+    private AddPointsRequest addPointsRequest = new AddPointsRequest();
     private LoseCondition loseCondition = new LoseCondition();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
@@ -34,6 +36,7 @@ public class RiddleActivity extends AppCompatActivity {
 
         btnCheck.setOnClickListener(v ->{
            if (MainActivity.game.getLocation().getQuestion().getAnswer().equals(textAnswer.getText().toString())) {
+                addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI());
                 Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
 
            }

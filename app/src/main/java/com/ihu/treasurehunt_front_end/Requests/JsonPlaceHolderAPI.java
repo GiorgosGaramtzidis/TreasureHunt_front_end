@@ -48,6 +48,10 @@ public interface JsonPlaceHolderAPI {
     @PATCH("LoseCondition/updateUserLives")
     Call<Integer> updateUserLives(@Query("userName") String userName);
 
+    @PATCH("Users/addScore")
+    Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);
+
+
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);
 
