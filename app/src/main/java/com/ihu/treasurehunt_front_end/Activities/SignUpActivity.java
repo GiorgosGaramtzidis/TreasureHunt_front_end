@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         passwordText = findViewById(R.id.txtPassword);
         passwordText2 = findViewById(R.id.txtPassword2);
         TextView btnRegister = findViewById(R.id.btnRegister);
+        Intent intent = new Intent(this,MainActivity.class);
         TextView registrationPattern = findViewById(R.id.btnRegistrationPattern);
 
         btnRegister.setOnClickListener(v ->{
@@ -45,10 +47,18 @@ public class SignUpActivity extends AppCompatActivity {
                 User user = new User(userNameText.getText().toString(), passwordText.getText().toString());
                 RegisterPost registerPost = new RegisterPost();
                 registerPost.RegisterUserPost(retroFitCreate.getJsonPlaceHolderAPI(),user);
-                String string = registerPost.getString();
-                Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
+                new Handler().postDelayed(() -> {
+                    String string = registerPost.getString();
+                    if (string.equals("Success register"))
+                    {
+                        startActivity(intent);
+
+                    }
+                    else
+                        Toast.makeText(SignUpActivity.this, string, Toast.LENGTH_SHORT).show();
+
+                }, 3 * 1000);
+
 
             }else
                 Toast.makeText(this, "Invalid inputs", Toast.LENGTH_SHORT).show();

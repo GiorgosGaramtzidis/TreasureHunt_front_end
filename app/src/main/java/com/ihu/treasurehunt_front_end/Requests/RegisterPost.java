@@ -18,7 +18,7 @@ public class RegisterPost
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-                if (response.message().equals("User with this username : " + user.getUserName() + " already exists")) {
+                if (response.message().equals("User with this username : "+user.getUserName()+" already exists")) {
                     string = "Invalid name";
                 }
                 else

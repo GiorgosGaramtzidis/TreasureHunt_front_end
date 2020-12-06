@@ -19,12 +19,17 @@ public class UserRegistrationService
 
     public Boolean passWordValidator()
     {
-        String pattern = "^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$";
-        return password.matches(pattern);
+        String passwordPattern = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=.*[@#$%^&+=])"
+                + "(?=\\S+$).{8,20}$";
+        return password.matches(passwordPattern);
     }
     public Boolean userNameValidator()
     {
-        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$";
-        return userName.matches(pattern);
+        String userPattern = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=\\S+$).{8,20}$";
+        return userName.matches(userPattern);
     }
 }
