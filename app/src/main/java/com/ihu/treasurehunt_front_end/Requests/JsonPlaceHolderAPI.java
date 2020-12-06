@@ -47,8 +47,8 @@ public interface JsonPlaceHolderAPI {
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
 
-    @GET("api/Locations/Next")
-    Call<MapLocation> getNextLocation(MapLocation mapLocation);
+    @POST("api/Locations/Next")
+    Call<MapLocation> getNextLocation(@Body MapLocation mapLocation);
 
 
 }

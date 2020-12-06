@@ -47,9 +47,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker motionMarker = null;
     private double distance;
     private LatLng latLng;
-    private Marker marker;
-    private LatLng testmarker;
     private Marker marker1;
+
 
 
     private MapLocationList mapLocationList;
@@ -80,11 +79,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
 
-        mapLocationLists1 = mapLocationList.getMapLocationList();
 
-       marker = MainActivity.game.addFirstLocationToMap(mMap);
 
-       marker1 = MainActivity.game.nextMarker(mMap);
+       marker1 = MainActivity.game.addFirstLocationToMap(mMap);
+
+
 
         locationListener = new LocationListener() {
 
@@ -122,6 +121,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnMarkerClickListener(marker -> {
             startActivity(new Intent(MapsActivity.this,RiddleActivity.class));
+            requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.requestFirstLocation.getLocation());
+            MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
+            marker1 = MainActivity.game.addFirstLocationToMap(mMap);
             return false;
         });
 

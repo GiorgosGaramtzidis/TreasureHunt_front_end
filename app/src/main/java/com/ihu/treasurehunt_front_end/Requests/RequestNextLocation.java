@@ -10,6 +10,7 @@ import retrofit2.Response;
 
 public class RequestNextLocation {
 
+    private MapLocation mapLocationNext;
 
     public MapLocation getMapLocationNext() {
         return mapLocationNext;
@@ -19,7 +20,7 @@ public class RequestNextLocation {
         this.mapLocationNext = mapLocationNext;
     }
 
-    private MapLocation mapLocationNext;
+
 
 
 

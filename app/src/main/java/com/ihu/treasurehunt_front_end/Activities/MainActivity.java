@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     protected static Game game;
-    private RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
+    protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
     private RequestNextLocation requestNextLocation = new RequestNextLocation();
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
-       //requestNextLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
+
 
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
 
