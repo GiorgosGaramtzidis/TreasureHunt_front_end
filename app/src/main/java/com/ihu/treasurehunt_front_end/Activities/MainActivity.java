@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
+import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
+    private RequestNextLocation requestNextLocation = new RequestNextLocation();
+
 
 
     @Override
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
-
+       //requestNextLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
 

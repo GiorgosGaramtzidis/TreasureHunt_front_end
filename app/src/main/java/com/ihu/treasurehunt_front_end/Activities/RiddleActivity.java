@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Marker;
 import com.ihu.treasurehunt_front_end.R;
 
 public class RiddleActivity extends AppCompatActivity {
@@ -28,13 +30,14 @@ public class RiddleActivity extends AppCompatActivity {
         textQuestion.setText(MainActivity.game.getLocation().getQuestion().getQuestion());
 
         btnCheck.setOnClickListener(v ->{
-           if (MainActivity.game.getLocation().getQuestion().getAnswer() == (textAnswer.getText().toString())) {
+           if (MainActivity.game.getLocation().getQuestion().getAnswer().equals(textAnswer.getText().toString())) {
                 Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
 
            }
             else {
                Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
            }
+
             finish();
         });
 

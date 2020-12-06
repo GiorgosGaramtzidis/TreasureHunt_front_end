@@ -1,5 +1,7 @@
 package com.ihu.treasurehunt_front_end.Model;
 
+import android.location.Location;
+
 import com.google.gson.annotations.SerializedName;
 
 public class MapLocation {
@@ -16,18 +18,17 @@ public class MapLocation {
     @SerializedName("questions")
     private Question question;
 
+    @SerializedName("nextLocation")
+    private String nextLocation;
 
-    public MapLocation( double v, double v1, String title,Question question) {
 
+    public MapLocation(double v, double v1, String title, Question question, String nextLocation) {
         this.v = v;
         this.v1 = v1;
         this.title = title;
-
         this.question = question;
-       
-
+        this.nextLocation = nextLocation;
     }
-
 
 
     public double getV() {
@@ -42,19 +43,22 @@ public class MapLocation {
         return title;
     }
 
-
     public Question getQuestion() {
         return question;
     }
 
+    public String getNextLocation() {
+        return nextLocation;
+    }
 
     @Override
     public String toString() {
         return "MapLocation{" +
-                " v=" + v +
+                "v=" + v +
                 ", v1=" + v1 +
                 ", title='" + title + '\'' +
                 ", question=" + question +
+                ", nextLocation=" + nextLocation +
                 '}';
     }
 }

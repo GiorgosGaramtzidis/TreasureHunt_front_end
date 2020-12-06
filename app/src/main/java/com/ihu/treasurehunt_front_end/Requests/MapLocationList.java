@@ -16,7 +16,7 @@ public class MapLocationList {
 
     public List<MapLocation> getMapLocationList() {
 
-        return mapLocationList;
+        return this.mapLocationList;
     }
 
     public void getMapLocations(JsonPlaceHolderAPI jsonPlaceHolderAPI){
@@ -37,8 +37,10 @@ public class MapLocationList {
                             ,mapLocation.getV1()
                             ,mapLocation.getTitle()
                             ,mapLocation.getQuestion()
-                    ));
+                            ,mapLocation.getNextLocation()
+                            ));
                 }
+
             }
 
             @Override

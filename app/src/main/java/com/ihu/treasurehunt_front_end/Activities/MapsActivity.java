@@ -18,10 +18,20 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.JsonPlaceHolderAPI;
+import com.ihu.treasurehunt_front_end.Requests.MapLocationList;
+import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
@@ -38,10 +48,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double distance;
     private LatLng latLng;
     private Marker marker;
+    private LatLng testmarker;
+    private Marker marker1;
 
 
+    private MapLocationList mapLocationList;
+    private List<MapLocation> mapLocationLists1 = new ArrayList<>();
 
-
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private RequestNextLocation requestNextLocation = new RequestNextLocation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +79,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng tei = new LatLng(41.076797, 23.553648);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
-         marker = MainActivity.game.addFirstLocationToMap(mMap);
 
+        mapLocationLists1 = mapLocationList.getMapLocationList();
 
+       marker = MainActivity.game.addFirstLocationToMap(mMap);
+
+       marker1 = MainActivity.game.nextMarker(mMap);
 
         locationListener = new LocationListener() {
 
@@ -75,15 +93,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
                     if (motionMarker == null) {
-                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1").icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_person_pin_circle_24));
+                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                         motionMarker = mMap.addMarker(options);
                     } else {
                         motionMarker.setPosition(latLng);
+
                     }
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),16 ));
 
-                    MainActivity.game.DistanceBetween(latLng,marker);
+                    MainActivity.game.DistanceBetween(latLng,marker1);
+
 
 
                 } catch (SecurityException e) {

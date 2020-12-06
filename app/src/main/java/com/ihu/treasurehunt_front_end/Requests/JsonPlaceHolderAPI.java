@@ -2,11 +2,14 @@ package com.ihu.treasurehunt_front_end.Requests;
 
 
 
+import android.location.Location;
+
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
 import com.ihu.treasurehunt_front_end.Model.User;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -43,6 +46,9 @@ public interface JsonPlaceHolderAPI {
 
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
+
+    @GET("api/Locations/Next")
+    Call<MapLocation> getNextLocation(MapLocation mapLocation);
 
 
 }
