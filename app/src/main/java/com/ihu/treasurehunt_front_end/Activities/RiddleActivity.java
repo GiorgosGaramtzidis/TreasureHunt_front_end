@@ -2,6 +2,7 @@ package com.ihu.treasurehunt_front_end.Activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
+import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
@@ -18,6 +20,7 @@ public class RiddleActivity extends AppCompatActivity {
     EditText textAnswer;
     TextView btnCheck;
 
+    private CheckAnswerRequest checkAnswerRequest = new CheckAnswerRequest();
     private AddPointsRequest addPointsRequest = new AddPointsRequest();
     private LoseCondition loseCondition = new LoseCondition();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
@@ -35,15 +38,19 @@ public class RiddleActivity extends AppCompatActivity {
         textQuestion.setText(MainActivity.game.getLocation().getQuestion().getQuestion());
 
         btnCheck.setOnClickListener(v ->{
-           if (MainActivity.game.getLocation().getQuestion().getAnswer().equals(textAnswer.getText().toString())) {
-                addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI());
-                Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
+            checkAnswerRequest.answerCheck(retroFitCreate.getJsonPlaceHolderAPI(),textAnswer.getText().toString(),MainActivity.game.getLocation().getTitle());
+            new Handler().postDelayed(() -> {
+                if (checkAnswerRequest.isResult()) {
+                    addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI());
+                    Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI());
+                    Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
+                }
 
-           }
-            else {
-                loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI());
-               finish();
-           }
+
+            },1000);
             finish();
         });
 
