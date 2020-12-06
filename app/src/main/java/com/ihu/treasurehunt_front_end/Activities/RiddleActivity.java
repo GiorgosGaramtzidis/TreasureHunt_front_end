@@ -16,7 +16,7 @@ public class RiddleActivity extends AppCompatActivity {
     TextView textQuestion;
     EditText textAnswer;
     TextView btnCheck;
-    //private User user = new User(5,"Efi",0,"4546",3);
+
     private LoseCondition loseCondition = new LoseCondition();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
@@ -39,9 +39,6 @@ public class RiddleActivity extends AppCompatActivity {
            }
             else {
                 loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI());
-               //Intent intent = new Intent(RiddleActivity.this,MainActivity.class);
-               //startActivity(intent);
-              // Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
                finish();
            }
             finish();

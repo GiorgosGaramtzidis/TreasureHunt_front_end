@@ -12,8 +12,9 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface JsonPlaceHolderAPI {
 
@@ -44,10 +45,8 @@ public interface JsonPlaceHolderAPI {
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
 
-    @PUT("LoseCondition/updateUserLives")
-    Call<Integer> updateUserLives(
-            @Body User user
-    );
+    @PATCH("LoseCondition/updateUserLives")
+    Call<Integer> updateUserLives(@Query("userName") String userName);
 
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);

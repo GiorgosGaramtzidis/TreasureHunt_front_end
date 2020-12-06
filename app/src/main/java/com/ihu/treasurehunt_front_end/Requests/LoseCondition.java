@@ -1,19 +1,17 @@
     package com.ihu.treasurehunt_front_end.Requests;
 
-import com.ihu.treasurehunt_front_end.Model.User;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoseCondition {
 
-    private User user = new User("7","Ath",0,"4546",9);
+    private String userName = "Ath";
     private int lives;
 
 
     public void get(JsonPlaceHolderAPI jsonPlaceHolderAPI){
-        Call<Integer> call = jsonPlaceHolderAPI.updateUserLives(user);
+        Call<Integer> call = jsonPlaceHolderAPI.updateUserLives(userName);
 
         call.enqueue(new Callback<Integer>() {
             @Override
@@ -34,12 +32,6 @@ public class LoseCondition {
         });
     }
 
-    public Integer getLives(){
-        return lives;
-    }
-    public User getUser(){
-        return user;
-    }
 
 
 
