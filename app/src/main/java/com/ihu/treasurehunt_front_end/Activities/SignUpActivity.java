@@ -52,12 +52,12 @@ public class SignUpActivity extends AppCompatActivity {
                     if (string.equals("Success register"))
                     {
                         startActivity(intent);
-
+                        Toast.makeText(SignUpActivity.this, string, Toast.LENGTH_SHORT).show();
                     }
                     else
                         Toast.makeText(SignUpActivity.this, string, Toast.LENGTH_SHORT).show();
 
-                }, 3 * 1000);
+                }, 1000);
 
 
             }else
@@ -68,6 +68,5 @@ public class SignUpActivity extends AppCompatActivity {
             RegistrationPatternDialog registrationPatternDialog = new RegistrationPatternDialog();
             registrationPatternDialog.show(getSupportFragmentManager(),"Registration Rules");
         });
-
     }
 }

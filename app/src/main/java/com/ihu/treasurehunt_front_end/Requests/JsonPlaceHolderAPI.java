@@ -1,5 +1,6 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Riddle;
 import com.ihu.treasurehunt_front_end.Model.User;
@@ -11,6 +12,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface JsonPlaceHolderAPI {
 
@@ -31,6 +33,9 @@ public interface JsonPlaceHolderAPI {
 
     @POST("Users/registerUser")
     Call<User> RegisterUser(@Body User user);
+
+    @POST("Users/loginUser")
+    Call<String> LoginUser(@Query("username") String username,@Query("password") String password);
 
     @FormUrlEncoded
     @POST("Users/addUsers")

@@ -10,20 +10,21 @@ import android.widget.TextView;
 import com.ihu.treasurehunt_front_end.Model.AppContainer;
 import com.ihu.treasurehunt_front_end.Model.Game;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.LoginPost;
 
 public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("StaticFieldLeak")
-    protected static AppContainer appContainer;
+    protected static AppContainer appContainer = new AppContainer();
     protected static Game game;
+    private LoginPost loginPost = new LoginPost();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
-
+        loginPost.LoginUserPost(appContainer.retroFitCreate.getJsonPlaceHolderAPI());
         btnPlayGame.setOnClickListener(v -> {
             startActivity(new Intent(this,MapsActivity.class));
             initializeAppContainer();
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
    public void initializeAppContainer()
    {
        appContainer = new AppContainer();
-
        appContainer.mapLocationList.getMapLocations
                (appContainer.retroFitCreate.getJsonPlaceHolderAPI());
        appContainer.userList.getUsers

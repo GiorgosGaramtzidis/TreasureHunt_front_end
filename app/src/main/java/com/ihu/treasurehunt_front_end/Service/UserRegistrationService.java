@@ -29,7 +29,7 @@ public class UserRegistrationService
     {
         String userPattern = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=\\S+$).{8,20}$";
+                + "(?=\\S+$).{5,20}$";
         return userName.matches(userPattern);
     }
 }

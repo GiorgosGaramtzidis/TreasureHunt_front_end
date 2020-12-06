@@ -10,4 +10,5 @@
     <string name="username">UserName</string>
     <string name="password">Password</string>
     <string name="repeat_password">Repeat Password</string>
+    <string name="login_here">Login</string>
 </resources>
