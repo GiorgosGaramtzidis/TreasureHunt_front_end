@@ -30,6 +30,8 @@ public class User {
     {
         this.name = name;
         this.password=password;
+        this.score = 0;
+        this.userLives = 5;
     }
 
     public String getUserId() {

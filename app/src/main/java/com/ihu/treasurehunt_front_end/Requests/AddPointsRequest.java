@@ -10,8 +10,8 @@ public class AddPointsRequest {
     private int succeeded;
 
 
-    public void addScoreToPlayer(JsonPlaceHolderAPI jsonPlaceHolderAPI,String userName) {
-        Call<Integer> call = jsonPlaceHolderAPI.addScore(userName, 50);
+    public void addScoreToPlayer(JsonPlaceHolderAPI jsonPlaceHolderAPI,String userName,int score) {
+        Call<Integer> call = jsonPlaceHolderAPI.addScore(userName, score);
 
         call.enqueue(new Callback<Integer>() {
             @Override

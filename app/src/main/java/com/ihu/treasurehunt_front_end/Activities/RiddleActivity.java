@@ -45,7 +45,8 @@ public class RiddleActivity extends AppCompatActivity {
             checkAnswerRequest.answerCheck(retroFitCreate.getJsonPlaceHolderAPI(),textAnswer.getText().toString(),MainActivity.game.getLocation().getTitle());
             new Handler().postDelayed(() -> {
                 if (checkAnswerRequest.isResult()) {
-                    addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
+                    addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),
+                            MainActivity.game.getLocation().getQuestion().getPoints());
                     requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getLocation().getNextLocation());
 
                     new Handler().postDelayed(() -> {
