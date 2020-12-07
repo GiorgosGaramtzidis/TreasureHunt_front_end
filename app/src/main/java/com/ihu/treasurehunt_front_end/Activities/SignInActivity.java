@@ -20,7 +20,7 @@ public class SignInActivity extends AppCompatActivity {
     private TextView txtLoginUserName;
     private TextView txtLoginPassword;
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
-
+    protected static LoginPost loginPost = new LoginPost();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,9 @@ public class SignInActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MainActivity.class);
         Intent intentToRegister = new Intent(this,SignUpActivity.class);
 
+
         btnLogin.setOnClickListener(v -> {
-            LoginPost loginPost = new LoginPost();
+
             loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI(),txtLoginUserName.getText().toString(),txtLoginPassword.getText().toString());
             new Handler().postDelayed(() -> {
 

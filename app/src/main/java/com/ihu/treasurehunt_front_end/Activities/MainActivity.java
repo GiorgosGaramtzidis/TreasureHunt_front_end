@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnPlayGame.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
+            game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());
             startActivity(new Intent(this,MapsActivity.class));
         });
     }

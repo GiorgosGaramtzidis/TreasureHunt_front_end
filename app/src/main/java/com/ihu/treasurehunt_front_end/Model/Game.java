@@ -15,7 +15,7 @@ public class Game
     private int progress;
     private int gameScore;
     private MapLocation location;
-    private String userLoggedIn = "Konto4";
+    private String userLoggedIn;
 
 
 

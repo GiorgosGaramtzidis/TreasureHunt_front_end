@@ -8,8 +8,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginPost {
+public class    LoginPost {
     private Boolean userState;
+    private String userLoggedIn;
     public void LoginUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI, String username, String password)
     {
 
@@ -20,6 +21,7 @@ public class LoginPost {
             @Override
             public void onResponse(@NotNull Call<Boolean> call, @NotNull Response<Boolean> response) {
                 userState=response.body();
+                userLoggedIn=username;
             }
             @Override
             public void onFailure(@NotNull Call<Boolean> call, @NotNull Throwable t) {
@@ -31,4 +33,7 @@ public class LoginPost {
     public Boolean getUserState() {
         return userState;
     }
+    public String getUserLoggedIn(){
+        return userLoggedIn;}
+
 }
