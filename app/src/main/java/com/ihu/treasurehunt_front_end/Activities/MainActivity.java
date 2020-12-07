@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
-        loginPost.LoginUserPost(appContainer.retroFitCreate.getJsonPlaceHolderAPI());
         btnPlayGame.setOnClickListener(v -> {
             startActivity(new Intent(this,MapsActivity.class));
             initializeAppContainer();

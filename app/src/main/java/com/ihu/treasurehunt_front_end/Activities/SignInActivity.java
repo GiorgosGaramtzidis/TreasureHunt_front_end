@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.JsonPlaceHolderAPI;
 import com.ihu.treasurehunt_front_end.Requests.LoginPost;
@@ -33,10 +32,24 @@ public class SignInActivity extends AppCompatActivity {
         TextView btnLogin = findViewById(R.id.btnLogin);
         Intent intent = new Intent(this,MainActivity.class);
         Intent intentToRegister = new Intent(this,SignUpActivity.class);
-        LoginPost loginPost = new LoginPost();
-        loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI());
 
         btnLogin.setOnClickListener(v -> {
+            LoginPost loginPost = new LoginPost();
+            loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI(),txtLoginUserName.getText().toString(),txtLoginPassword.getText().toString());
+            new Handler().postDelayed(() -> {
+
+                if (loginPost.getUserState())
+                {
+                    startActivity(intent);
+                    Toast.makeText(this, "You logged in", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                    Toast.makeText(this, "Failed to log in", Toast.LENGTH_SHORT).show();
+            }, 2000);
     });
+        btnRegisterIfNotSignedUp.setOnClickListener(v -> {
+            startActivity(intentToRegister);
+        });
     }
 }

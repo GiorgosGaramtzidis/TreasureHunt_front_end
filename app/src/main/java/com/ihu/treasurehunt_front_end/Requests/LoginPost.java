@@ -9,27 +9,26 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginPost {
-    private String string;
-
-    public void LoginUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI)
+    private Boolean userState;
+    public void LoginUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI, String username, String password)
     {
 
-        Call<String> call = jsonPlaceHolderAPI.LoginUser("Konto4","Konto1");
+        Call<Boolean> call = jsonPlaceHolderAPI.LoginUser(username,password);
 
-        call.enqueue(new Callback<String>() {
+        call.enqueue(new Callback<Boolean>() {
+
             @Override
-            public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
-                //string = response.body();
-                System.out.println("============================================================"+response.code());
+            public void onResponse(@NotNull Call<Boolean> call, @NotNull Response<Boolean> response) {
+                userState=response.body();
             }
             @Override
-            public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<Boolean> call, @NotNull Throwable t) {
                 t.printStackTrace();
             }
         });
     }
 
-    public String getString() {
-        return string;
+    public Boolean getUserState() {
+        return userState;
     }
 }

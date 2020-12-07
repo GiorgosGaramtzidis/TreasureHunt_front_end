@@ -20,7 +20,7 @@
         <activity android:name=".Activities.SignUpActivity"/>
         <activity android:name=".Activities.GameWinActivity" />
 
-        <activity android:name=".Activities.SignInActivity"/>
+        <activity android:name=".Activities.MainActivity"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,7 +41,7 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".Activities.RiddleActivity" />
 
-            <activity android:name=".Activities.MainActivity">
+            <activity android:name=".Activities.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
