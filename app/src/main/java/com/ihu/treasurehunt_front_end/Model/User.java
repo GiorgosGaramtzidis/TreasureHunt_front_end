@@ -4,31 +4,35 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    @SerializedName("userId")
-    private final String userId;
+    @SerializedName("id")
+    private String userId;
 
     @SerializedName("userName")
-    private final String userName;
+    private String name;
 
     @SerializedName("score")
-    private final int score;
+    private int score;
 
     @SerializedName("password")
-    private final String password;
+    private String password;
 
-    public User(String name,String password) {
-        this.userName = name;
-        this.score = 0;
+    @SerializedName("userLives")
+    private Integer userLives;
+
+    public User(String userId, String name, int score, String password, Integer userLives) {
+        this.userId = userId;
+        this.name = name;
+        this.score = score;
         this.password = password;
-        this.userId ="";
+        this.userLives = userLives;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
     public int getScore() {
@@ -39,5 +43,12 @@ public class User {
         return password;
     }
 
+    public void appendToScore(int score)
+    {
+        this.score+=score;
+    }
 
+    public Integer getUserLives() {
+        return userLives;
+    }
 }
