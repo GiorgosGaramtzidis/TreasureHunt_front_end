@@ -96,7 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
                     if (motionMarker == null) {
-                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                        MarkerOptions options = new MarkerOptions().position(latLng).title(MainActivity.game.getUserLoggedIn()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                         motionMarker = mMap.addMarker(options);
                     } else {
                         motionMarker.setPosition(latLng);
@@ -122,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setOnMarkerClickListener(marker -> {
-            if (marker.getTitle().equals("Player 1")) {
+            if (marker.getTitle().equals(MainActivity.game.getUserLoggedIn())) {
                 Toast.makeText(MapsActivity.this, "It's You", Toast.LENGTH_SHORT).show();
                 return false;
             }

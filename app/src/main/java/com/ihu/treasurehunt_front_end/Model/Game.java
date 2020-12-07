@@ -15,6 +15,7 @@ public class Game
     private int progress;
     private int gameScore;
     private MapLocation location;
+    private String userLoggedIn = "Konto4";
 
 
 
@@ -24,6 +25,14 @@ public class Game
         this.location = mapLocation;
         this.progress = 0;
         this.gameScore = 0;
+    }
+
+    public String getUserLoggedIn() {
+        return userLoggedIn;
+    }
+
+    public void setUserLoggedIn(String userLoggedIn) {
+        this.userLoggedIn = userLoggedIn;
     }
 
     public int getProgress() {
