@@ -6,11 +6,10 @@ import retrofit2.Response;
 
 public class LoseCondition {
 
-    private String userName = "Ath";
     private int lives;
 
 
-    public void get(JsonPlaceHolderAPI jsonPlaceHolderAPI){
+    public void get(JsonPlaceHolderAPI jsonPlaceHolderAPI,String userName){
         Call<Integer> call = jsonPlaceHolderAPI.updateUserLives(userName);
 
         call.enqueue(new Callback<Integer>() {

@@ -45,7 +45,7 @@ public class RiddleActivity extends AppCompatActivity {
             checkAnswerRequest.answerCheck(retroFitCreate.getJsonPlaceHolderAPI(),textAnswer.getText().toString(),MainActivity.game.getLocation().getTitle());
             new Handler().postDelayed(() -> {
                 if (checkAnswerRequest.isResult()) {
-                    addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI());
+                    addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
                     requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getLocation().getNextLocation());
 
                     new Handler().postDelayed(() -> {
@@ -55,7 +55,7 @@ public class RiddleActivity extends AppCompatActivity {
                     Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI());
+                    loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
                     Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
                 }
 

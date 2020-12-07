@@ -6,11 +6,11 @@ import retrofit2.Response;
 
 public class AddPointsRequest {
 
-    private String userName = "Ath";
+
     private int succeeded;
 
 
-    public void addScoreToPlayer(JsonPlaceHolderAPI jsonPlaceHolderAPI) {
+    public void addScoreToPlayer(JsonPlaceHolderAPI jsonPlaceHolderAPI,String userName) {
         Call<Integer> call = jsonPlaceHolderAPI.addScore(userName, 50);
 
         call.enqueue(new Callback<Integer>() {
