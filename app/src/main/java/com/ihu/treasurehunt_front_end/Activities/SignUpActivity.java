@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         passwordText = findViewById(R.id.txtPassword);
         passwordText2 = findViewById(R.id.txtPassword2);
         TextView btnRegister = findViewById(R.id.btnRegister);
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,SignInActivity.class);
         TextView registrationPattern = findViewById(R.id.btnRegistrationPattern);
 
         btnRegister.setOnClickListener(v ->{
