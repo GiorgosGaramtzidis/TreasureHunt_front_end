@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -38,7 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker motionMarker = null;
     private double distance;
     private LatLng latLng;
-    private Marker marker;
+    protected static Marker marker;
 
 
 
@@ -77,12 +78,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     if (motionMarker == null) {
-                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1").icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_person_pin_circle_24));
+                        MarkerOptions options = new MarkerOptions().position(latLng).title(MainActivity.game.getUserLoggedIn()).icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_person_pin_circle_24));
                         motionMarker = mMap.addMarker(options);
                     } else {
                         motionMarker.setPosition(latLng);
                     }
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),16 ));
+
+                    marker = MainActivity.game.addFirstLocationToMap(mMap);
 
                     MainActivity.game.DistanceBetween(latLng,marker);
 
@@ -101,8 +104,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setOnMarkerClickListener(marker -> {
-            startActivity(new Intent(MapsActivity.this,RiddleActivity.class));
-            return false;
+            if (marker.getTitle().equals(MainActivity.game.getUserLoggedIn())) {
+                Toast.makeText(MapsActivity.this, "It's You", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            else {
+                startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
+
+                return false;
+            }
         });
 
         hintButton.setOnClickListener(new View.OnClickListener() {

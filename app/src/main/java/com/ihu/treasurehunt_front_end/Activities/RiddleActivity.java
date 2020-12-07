@@ -13,6 +13,7 @@ import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
 import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
+import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class RiddleActivity extends AppCompatActivity {
@@ -24,6 +25,9 @@ public class RiddleActivity extends AppCompatActivity {
     private AddPointsRequest addPointsRequest = new AddPointsRequest();
     private LoseCondition loseCondition = new LoseCondition();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
+
+    private RequestNextLocation requestNextLocation = new RequestNextLocation();
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -42,6 +46,12 @@ public class RiddleActivity extends AppCompatActivity {
             new Handler().postDelayed(() -> {
                 if (checkAnswerRequest.isResult()) {
                     addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI());
+                    requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getLocation().getNextLocation());
+
+                    new Handler().postDelayed(() -> {
+                        MapsActivity.marker.setVisible(false);
+                        MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
+                    },1000);
                     Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
                 }
                 else {
