@@ -19,7 +19,7 @@ public class RetroFitCreate {
                 .create();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.2:6039/")
+                .baseUrl("http://192.168.56.1:6039/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(JsonPlaceHolderAPI.class);
