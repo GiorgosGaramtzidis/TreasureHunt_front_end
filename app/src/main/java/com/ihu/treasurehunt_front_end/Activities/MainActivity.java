@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
-
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
 
         btnPlayGame.setOnClickListener(v -> {

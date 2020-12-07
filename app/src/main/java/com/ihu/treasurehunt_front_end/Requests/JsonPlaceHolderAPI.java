@@ -1,21 +1,18 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
 
-
-import android.location.Location;
-
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
 import com.ihu.treasurehunt_front_end.Model.User;
 
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -48,8 +45,18 @@ public interface JsonPlaceHolderAPI {
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
 
-    @POST("api/Locations/Next")
-    Call<MapLocation> getNextLocation(@Query("nextLocation") String nextLocation);
+    @PATCH("LoseCondition/updateUserLives")
+    Call<Integer> updateUserLives(@Query("userName") String userName);
+
+    @PATCH("Users/addScore")
+    Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);
+
+    @GET("AnswerCheck/AnswerCheck")
+    Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("locationTitle") String locationTitle);
+
+
+    @GET("LoseCondition/getUserLives")
+    Call<Integer> getUserLives(int userLives);
 
 
 }

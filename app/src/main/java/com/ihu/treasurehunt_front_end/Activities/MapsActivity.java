@@ -7,10 +7,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -20,20 +19,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.R;
-import com.ihu.treasurehunt_front_end.Requests.JsonPlaceHolderAPI;
-import com.ihu.treasurehunt_front_end.Requests.MapLocationList;
-import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
-import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
@@ -49,21 +38,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker motionMarker = null;
     private double distance;
     private LatLng latLng;
-    private Marker marker1;
+    private Marker marker;
 
 
 
-    private MapLocationList mapLocationList;
-    private List<MapLocation> mapLocationLists1 = new ArrayList<>();
 
-    private RetroFitCreate retroFitCreate = new RetroFitCreate();
-    private RequestNextLocation requestNextLocation = new RequestNextLocation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+        hintButton = (Button)findViewById(R.id.button);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -80,10 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng tei = new LatLng(41.076797, 23.553648);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
-
-
-
-        marker1 = MainActivity.game.addFirstLocationToMap(mMap);
+         marker = MainActivity.game.addFirstLocationToMap(mMap);
 
 
 
@@ -94,18 +76,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
                     if (motionMarker == null) {
-                        MarkerOptions options = new MarkerOptions().position(latLng).title(MainActivity.game.getUserLoggedIn()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1").icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_person_pin_circle_24));
                         motionMarker = mMap.addMarker(options);
                     } else {
                         motionMarker.setPosition(latLng);
-
                     }
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),16 ));
 
-                    MainActivity.game.DistanceBetween(latLng,marker1);
-
+                    MainActivity.game.DistanceBetween(latLng,marker);
 
 
                 } catch (SecurityException e) {
@@ -122,25 +101,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setOnMarkerClickListener(marker -> {
-            if (marker.getTitle().equals(MainActivity.game.getUserLoggedIn())) {
-                Toast.makeText(MapsActivity.this, "It's You", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            else {
-                startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
-                requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getLocation().getNextLocation());
-                new Handler().postDelayed(() -> {
-                    MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
-                    marker1 = MainActivity.game.addFirstLocationToMap(mMap);
+            startActivity(new Intent(MapsActivity.this,RiddleActivity.class));
+            return false;
+        });
 
-                },1000);
-
-                return false;
+        hintButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            openDialog();
             }
         });
 
 
 
     }
+    void openDialog(){
+        HintDialog hintDialog = new HintDialog();
+        hintDialog.show(getSupportFragmentManager(),"Hint dialog");
+    }
 
 }
+
