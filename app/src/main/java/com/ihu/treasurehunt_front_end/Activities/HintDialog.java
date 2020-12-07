@@ -3,7 +3,6 @@ package com.ihu.treasurehunt_front_end.Activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,7 +17,7 @@ public class HintDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Hint")
-                .setMessage("The quest is close to: " + MainActivity.game.getLocationDescription())
+                .setMessage("The quest is close to: " + MainActivity.game.getLocation().getTitle())
                 .setPositiveButton("ok", (dialog, which) -> {
 
                 });

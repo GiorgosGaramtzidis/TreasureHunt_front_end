@@ -1,41 +1,35 @@
 package com.ihu.treasurehunt_front_end.Model;
 
+import android.location.Location;
+
 import com.google.gson.annotations.SerializedName;
 
 public class MapLocation {
-    @SerializedName("Id")
-    private final int Id;
 
     @SerializedName("v")
-    private final double v;
+    private double v;
 
     @SerializedName("v1")
-    private final double v1;
+    private double v1;
 
     @SerializedName("title")
-    private final String title;
+    private String title;
 
-    @SerializedName("color")
-    private final String color;
+    @SerializedName("questions")
+    private Question question;
 
-    @SerializedName("question")
-    private final Riddle question;
+    @SerializedName("nextLocation")
+    private String nextLocation;
 
 
-    public MapLocation(int id, double v, double v1, String title, String color, Riddle question) {
-        Id = id;
+    public MapLocation(double v, double v1, String title, Question question, String nextLocation) {
         this.v = v;
         this.v1 = v1;
         this.title = title;
-        this.color = color;
         this.question = question;
-       
-
+        this.nextLocation = nextLocation;
     }
 
-    public int getId() {
-        return Id;
-    }
 
     public double getV() {
         return v;
@@ -49,11 +43,22 @@ public class MapLocation {
         return title;
     }
 
-    public String getColor() {
-        return color;
+    public Question getQuestion() {
+        return question;
     }
 
-    public Riddle getQuestion() {
-        return question;
+    public String getNextLocation() {
+        return nextLocation;
+    }
+
+    @Override
+    public String toString() {
+        return "MapLocation{" +
+                "v=" + v +
+                ", v1=" + v1 +
+                ", title='" + title + '\'' +
+                ", question=" + question +
+                ", nextLocation=" + nextLocation +
+                '}';
     }
 }
