@@ -7,7 +7,7 @@ public class User {
     @SerializedName("userId")
     private final int userId;
 
-    @SerializedName("name")
+    @SerializedName("userName")
     private final String name;
 
     @SerializedName("score")
@@ -35,8 +35,20 @@ public class User {
         return score;
     }
 
+    public String getToStringScore(){return  String.valueOf(score);}
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", score=" + score +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     /*

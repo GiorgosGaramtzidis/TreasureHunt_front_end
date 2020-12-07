@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.ihu.treasurehunt_front_end.Activities.MainActivity;
 import com.ihu.treasurehunt_front_end.Model.UsersQuest;
 import com.ihu.treasurehunt_front_end.Requests.RequestGetUsers;
 
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Intent intentMain;
-        intentMain = new Intent(this,MainActivity.class);
+        intentMain = new Intent(this, MainActivity.class);
         Intent intentSignUp;
         intentSignUp = new Intent(this,RegisterActivity.class);
 

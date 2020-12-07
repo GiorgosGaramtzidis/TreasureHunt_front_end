@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
         android:textColor="@color/black"
-        android:text="LeaderBoard"
+        android:text="LeaderBoard Top 10"
         android:textAlignment="center"
         android:background="@drawable/paper"/>
 
@@ -21,9 +21,12 @@
         android:id="@+id/Result"
         android:layout_width="match_parent"
         android:layout_height="555dp"
+        android:textSize="30dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="106dp"
         android:textColor="@color/black" />
+
+
 
 
 </RelativeLayout>

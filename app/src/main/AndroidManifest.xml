@@ -18,6 +18,7 @@
         android:theme="@style/Theme.TreasureHunt_front_end"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activities.GameWinActivity"></activity>
+        <activity android:name=".Activities.LeaderBoardActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

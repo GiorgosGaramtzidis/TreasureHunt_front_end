@@ -23,6 +23,9 @@ public interface JsonPlaceHolderAPI {
     @GET("Users/all")
     Call<List<User>> getUsers();
 
+    @GET("LeaderBoard/topTen")
+    Call<List<User>> getLeaderBoard();
+
     @POST("Questions/addQuestion")
     Call<Riddle> createQuestion(@Body Riddle questions);
 

@@ -38,6 +38,7 @@ public class LeaderBoardList {
                         ,user.getScore()
                         ,user.getPassword()));
             }
+
         }
             @Override
             public void onFailure(Call<List<User>> call, @NotNull Throwable t) {
