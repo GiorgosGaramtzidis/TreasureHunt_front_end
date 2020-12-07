@@ -24,10 +24,10 @@ public class RequestFirstLocation {
 
                 MapLocation location =response.body();
                 mapLocation = new MapLocation(location.getV(),
-                location.getV1(),
-                location.getTitle(),
-                location.getQuestion(),
-                location.getNextLocation());
+                        location.getV1(),
+                        location.getTitle(),
+                        location.getQuestion(),
+                        location.getNextLocation());
 
                 System.out.println(mapLocation);
 

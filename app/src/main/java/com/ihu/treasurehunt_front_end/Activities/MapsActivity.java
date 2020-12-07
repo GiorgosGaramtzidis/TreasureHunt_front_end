@@ -20,13 +20,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.JsonPlaceHolderAPI;
 import com.ihu.treasurehunt_front_end.Requests.MapLocationList;
+import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 import java.util.ArrayList;
@@ -54,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<MapLocation> mapLocationLists1 = new ArrayList<>();
 
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
-
+    private RequestNextLocation requestNextLocation = new RequestNextLocation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-       marker1 = MainActivity.game.addFirstLocationToMap(mMap);
+        marker1 = MainActivity.game.addFirstLocationToMap(mMap);
 
 
 
@@ -125,6 +128,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             else {
                 startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
+                requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getLocation().getNextLocation());
+                new Handler().postDelayed(() -> {
+                    MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
+                    marker1 = MainActivity.game.addFirstLocationToMap(mMap);
+
+                },1000);
+
                 return false;
             }
         });
@@ -134,4 +144,3 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 }
-
