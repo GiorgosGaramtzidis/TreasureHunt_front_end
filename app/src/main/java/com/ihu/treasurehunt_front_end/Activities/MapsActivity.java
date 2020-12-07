@@ -7,8 +7,10 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -18,16 +20,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.R;
-import com.ihu.treasurehunt_front_end.Requests.JsonPlaceHolderAPI;
 import com.ihu.treasurehunt_front_end.Requests.MapLocationList;
-import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<MapLocation> mapLocationLists1 = new ArrayList<>();
 
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
-    private RequestNextLocation requestNextLocation = new RequestNextLocation();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,11 +119,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setOnMarkerClickListener(marker -> {
-            startActivity(new Intent(MapsActivity.this,RiddleActivity.class));
-            requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.requestFirstLocation.getLocation());
-            MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
-            marker1 = MainActivity.game.addFirstLocationToMap(mMap);
-            return false;
+            if (marker.getTitle().equals("Player 1")) {
+                Toast.makeText(MapsActivity.this, "It's You", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            else {
+                startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
+                return false;
+            }
         });
 
 

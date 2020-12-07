@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
-import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
-    private RequestNextLocation requestNextLocation = new RequestNextLocation();
+
 
 
 
