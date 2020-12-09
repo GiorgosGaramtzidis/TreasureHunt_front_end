@@ -2,6 +2,7 @@ package com.ihu.treasurehunt_front_end.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
 
+        Button btnSettings = (Button) findViewById(R.id.btnSettings);
+
+        //btnSettings.setOnClickListener(v->
+        //            startActivity(new Intent(this, SettingsActivity.class))
+       //         );
         btnPlayGame.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
             game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());

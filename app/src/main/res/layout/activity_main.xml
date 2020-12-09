@@ -34,4 +34,18 @@
         android:textColor="@color/black"
         android:textSize="37sp" />
 
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="166dp"
+        android:layout_height="58dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="sans-serif"
+        android:text="Settings"
+
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:icon="@android:drawable/ic_menu_preferences"
+        app:iconTint="@color/black" />
+
 </RelativeLayout>
