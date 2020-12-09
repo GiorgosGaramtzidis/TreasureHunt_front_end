@@ -33,7 +33,7 @@ public class MapLocationList {
 
                 for (MapLocation mapLocation:mapLocations){
                     mapLocationList.add(new MapLocation(
-                            mapLocation.getV()
+                             mapLocation.getV()
                             ,mapLocation.getV1()
                             ,mapLocation.getTitle()
                             ,mapLocation.getQuestion()

@@ -14,12 +14,9 @@ import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 public class MainActivity extends AppCompatActivity {
 
 
-    protected static Game game;
+    public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
-
-
-
 
 
     @Override

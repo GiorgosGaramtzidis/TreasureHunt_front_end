@@ -38,12 +38,10 @@ public class SignInActivity extends AppCompatActivity {
 
             loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI(),txtLoginUserName.getText().toString(),txtLoginPassword.getText().toString());
             new Handler().postDelayed(() -> {
-
                 if (loginPost.getUserState())
                 {
                     startActivity(intent);
                     Toast.makeText(this, "You logged in", Toast.LENGTH_SHORT).show();
-
                 }
                 else
                     Toast.makeText(this, "Failed to log in", Toast.LENGTH_SHORT).show();

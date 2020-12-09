@@ -41,7 +41,6 @@ public interface JsonPlaceHolderAPI {
             @Field("score") int score
     );
 
-
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
 
@@ -57,12 +56,11 @@ public interface JsonPlaceHolderAPI {
     @GET("AnswerCheck/AnswerCheck")
     Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("locationTitle") String locationTitle);
 
-
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);
 
     @POST("Users/registerUser")
-    Call<User> RegisterUser(@Body User user);
+    Call<String> RegisterUser(@Query("username")String userName,@Query("password") String passWord);
 
     @GET("Users/loginUser")
     Call<Boolean> LoginUser(@Query("username") String username,@Query("password") String password);

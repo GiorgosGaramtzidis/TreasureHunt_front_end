@@ -23,6 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ihu.treasurehunt_front_end.Dialogs.HintDialog;
 import com.ihu.treasurehunt_front_end.R;
 
 

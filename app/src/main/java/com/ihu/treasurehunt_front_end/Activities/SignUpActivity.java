@@ -1,19 +1,15 @@
 package com.ihu.treasurehunt_front_end.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.snackbar.Snackbar;
 import com.ihu.treasurehunt_front_end.Dialogs.RegistrationPatternDialog;
-import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.RegisterPost;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
-import com.ihu.treasurehunt_front_end.Service.UserRegistrationService;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -22,6 +18,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView passwordText2;
     private TextView userNameText;
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private final RegistrationPatternDialog registrationPatternDialog = new RegistrationPatternDialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,41 +29,41 @@ public class SignUpActivity extends AppCompatActivity {
         passwordText = findViewById(R.id.txtPassword);
         passwordText2 = findViewById(R.id.txtPassword2);
         TextView btnRegister = findViewById(R.id.btnRegister);
-        Intent intent = new Intent(this,SignInActivity.class);
         TextView registrationPattern = findViewById(R.id.btnRegistrationPattern);
 
+        RegisterPost registerPost = new RegisterPost();
+
+        Intent intent = new Intent(this,SignInActivity.class);
+
         btnRegister.setOnClickListener(v ->{
-            UserRegistrationService userRegistrationService = new UserRegistrationService(
-                    userNameText.getText().toString(),
-                    passwordText.getText().toString()
-                    ,passwordText2.getText().toString());
-            if (userRegistrationService.isPasswordsMatch()
-                    && userRegistrationService.passWordValidator()
-                    && userRegistrationService.userNameValidator())
+            if (ConfirmTextViews())
             {
-                User user = new User(userNameText.getText().toString(), passwordText.getText().toString());
-                RegisterPost registerPost = new RegisterPost();
-                registerPost.RegisterUserPost(retroFitCreate.getJsonPlaceHolderAPI(),user);
-                new Handler().postDelayed(() -> {
-                    String string = registerPost.getString();
-                    if (string.equals("Success register"))
-                    {
-                        startActivity(intent);
-                        Toast.makeText(SignUpActivity.this, string, Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                        Toast.makeText(SignUpActivity.this, string, Toast.LENGTH_SHORT).show();
+                registerPost.RegisterUserPost(retroFitCreate
+                        .getJsonPlaceHolderAPI()
+                        ,userNameText.getText().toString()
+                        ,passwordText.getText().toString());
 
-                }, 1000);
-
-
-            }else
-                Toast.makeText(this, "Invalid inputs", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(() -> Snackbar.make(v,
+                        registerPost.getResponseInfo()
+                        ,Snackbar.LENGTH_LONG).setAction("Go back", v1 ->
+                        startActivity(intent)).show(),1000);
+            }
+            else
+                Snackbar.make(v,"Check your password fields",Snackbar.LENGTH_SHORT).show();
         });
+
         registrationPattern.setOnClickListener(v ->
+                registrationPatternDialog.show(getSupportFragmentManager(),"Registration Rules"));
+    }
+
+    public Boolean ConfirmTextViews()
+    {
+        if (userNameText.getText().length() >= 5
+                && userNameText.getText().length()<=20
+                && passwordText.getText().length() >= 8)
         {
-            RegistrationPatternDialog registrationPatternDialog = new RegistrationPatternDialog();
-            registrationPatternDialog.show(getSupportFragmentManager(),"Registration Rules");
-        });
+            return passwordText.getText().length() == passwordText2.getText().length();
+        }
+        return false;
     }
 }
