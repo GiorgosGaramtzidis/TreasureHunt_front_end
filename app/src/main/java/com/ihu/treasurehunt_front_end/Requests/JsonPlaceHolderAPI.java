@@ -57,6 +57,11 @@ public interface JsonPlaceHolderAPI {
     @GET("AnswerCheck/AnswerCheck")
     Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("locationTitle") String locationTitle);
 
+    @PATCH("Users/setUserState")
+    Call<Boolean> setUserState(@Query("userName") String userName);
+
+    @GET("Users/checkUserState")
+    Call<String> checkUserState();
 
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);

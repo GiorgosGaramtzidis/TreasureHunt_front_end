@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +25,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.CheckUserState;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
+
+import java.util.Objects;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
@@ -31,13 +36,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private MapMarkerOptions mapMarkerOptions = new MapMarkerOptions();
 
     private Button hintButton;
-
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private CheckUserState checkUserState = new CheckUserState();
     private LocationListener locationListener;
     private LocationManager locationManager;
     public static TextView textView;
     private GoogleMap mMap;
     Marker motionMarker = null;
-    private double distance;
     private LatLng latLng;
     protected static Marker marker;
 
@@ -66,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng tei = new LatLng(41.076797, 23.553648);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
-         marker = MainActivity.game.addFirstLocationToMap(mMap);
+        marker = MainActivity.game.addFirstLocationToMap(mMap);
 
 
 
@@ -88,6 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     marker = MainActivity.game.addFirstLocationToMap(mMap);
 
                     MainActivity.game.DistanceBetween(latLng,marker);
+
 
 
                 } catch (SecurityException e) {
@@ -131,4 +137,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 }
+
 

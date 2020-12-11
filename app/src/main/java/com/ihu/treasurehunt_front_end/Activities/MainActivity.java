@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
-
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
 
         btnPlayGame.setOnClickListener(v -> {
@@ -37,6 +36,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this,MapsActivity.class));
         });
     }
-
 
 }

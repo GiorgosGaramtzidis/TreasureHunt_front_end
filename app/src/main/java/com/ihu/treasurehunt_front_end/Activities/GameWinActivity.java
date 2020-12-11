@@ -17,12 +17,15 @@ public class GameWinActivity extends AppCompatActivity {
     private static final int SPLASH_SCREEN= 5000;
     Animation topAnimation,botAnimation;
     ImageView imageView;
-    TextView treasure,slogan;
+    TextView treasure,slogan,winner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_win);
+
+        String value = getIntent().getStringExtra("WINNER");
 
         //Animations
         topAnimation = AnimationUtils.loadAnimation(this,R.anim.top_anim);
@@ -33,14 +36,17 @@ public class GameWinActivity extends AppCompatActivity {
         treasure = findViewById(R.id.txtTreasure);
         slogan = findViewById(R.id.txtSlogan);
 
+        slogan.setText(value);
+
         imageView.setAnimation(topAnimation);
         treasure.setAnimation(botAnimation);
         slogan.setAnimation(botAnimation);
 
+/*
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(GameWinActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
-        },SPLASH_SCREEN);
+        },SPLASH_SCREEN);*/
     }
 }

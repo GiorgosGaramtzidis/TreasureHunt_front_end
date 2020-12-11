@@ -15,6 +15,7 @@ import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
 import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
+import com.ihu.treasurehunt_front_end.Requests.SetUserStateRequest;
 
 public class RiddleActivity extends AppCompatActivity {
     TextView textQuestion;
@@ -25,6 +26,7 @@ public class RiddleActivity extends AppCompatActivity {
     private AddPointsRequest addPointsRequest = new AddPointsRequest();
     private LoseCondition loseCondition = new LoseCondition();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private SetUserStateRequest setUserStateRequest = new SetUserStateRequest();
 
     private RequestNextLocation requestNextLocation = new RequestNextLocation();
 
@@ -59,9 +61,8 @@ public class RiddleActivity extends AppCompatActivity {
                     loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
                     Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
                 }
-
-
             },1000);
+            setUserStateRequest.setUserState(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
             finish();
         });
 

@@ -17,7 +17,7 @@ public class AddPointsRequest {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SUCCESS====================Code: " + response.code());
+                    System.out.println( response.code());
                     return;
                 }
                 succeeded = response.body();
