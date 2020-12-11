@@ -17,8 +17,6 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView passwordText;
     private TextView passwordText2;
     private TextView userNameText;
-    private final RetroFitCreate retroFitCreate = new RetroFitCreate();
-    private final RegistrationPatternDialog registrationPatternDialog = new RegistrationPatternDialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +29,10 @@ public class SignUpActivity extends AppCompatActivity {
         TextView btnRegister = findViewById(R.id.btnRegister);
         TextView registrationPattern = findViewById(R.id.btnRegistrationPattern);
 
-        RegisterPost registerPost = new RegisterPost();
 
+        RetroFitCreate retroFitCreate = new RetroFitCreate();
+        RegisterPost registerPost = new RegisterPost();
+        RegistrationPatternDialog registrationPatternDialog = new RegistrationPatternDialog();
         Intent intent = new Intent(this,SignInActivity.class);
 
         btnRegister.setOnClickListener(v ->{
@@ -43,10 +43,13 @@ public class SignUpActivity extends AppCompatActivity {
                         ,userNameText.getText().toString()
                         ,passwordText.getText().toString());
 
+
                 new Handler().postDelayed(() -> Snackbar.make(v,
                         registerPost.getResponseInfo()
                         ,Snackbar.LENGTH_LONG).setAction("Go back", v1 ->
-                        startActivity(intent)).show(),1000);
+                        startActivity(intent)).show(),2000);
+
+
             }
             else
                 Snackbar.make(v,"Check your password fields",Snackbar.LENGTH_SHORT).show();

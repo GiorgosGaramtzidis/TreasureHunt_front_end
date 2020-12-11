@@ -1,16 +1,16 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
-import com.ihu.treasurehunt_front_end.Model.User;
-
 import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class    LoginPost {
+public class LoginPost {
+
     private Boolean userState;
     private String userLoggedIn;
+
     public void LoginUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI, String username, String password)
     {
 

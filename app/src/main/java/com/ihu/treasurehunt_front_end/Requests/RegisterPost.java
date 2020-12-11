@@ -1,4 +1,5 @@
 package com.ihu.treasurehunt_front_end.Requests;
+import com.ihu.treasurehunt_front_end.Model.RegistrationAnswer;
 import com.ihu.treasurehunt_front_end.ResponseHandlers.IResponseHandler;
 import com.ihu.treasurehunt_front_end.ResponseHandlers.RegisterResponseHandler;
 
@@ -16,17 +17,17 @@ public class RegisterPost
     public void RegisterUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI, String userName , String passWord)
     {
 
-        Call<String> call = jsonPlaceHolderAPI.RegisterUser(userName,passWord);
+        Call<RegistrationAnswer> call = jsonPlaceHolderAPI.RegisterUser(userName,passWord);
 
-        call.enqueue(new Callback<String>() {
+        call.enqueue(new Callback<RegistrationAnswer>() {
             @Override
-            public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response)
+            public void onResponse(@NotNull Call<RegistrationAnswer> call, @NotNull Response<RegistrationAnswer> response)
             {
                 iResponseHandler = new RegisterResponseHandler();
                 responseInfo =iResponseHandler.handleResponse(response);
             }
             @Override
-            public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<RegistrationAnswer> call, @NotNull Throwable t) {
                 t.printStackTrace();
             }
         });

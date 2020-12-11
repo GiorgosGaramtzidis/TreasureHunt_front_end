@@ -43,9 +43,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected static Marker marker;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +55,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 
-
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -68,7 +64,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
          marker = MainActivity.game.addFirstLocationToMap(mMap);
-
 
 
         locationListener = new LocationListener() {
@@ -122,8 +117,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             openDialog();
             }
         });
-
-
 
     }
     void openDialog(){

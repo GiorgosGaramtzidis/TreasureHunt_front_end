@@ -74,14 +74,10 @@ public class Game
         return marker;
     }
 
-
-
     public void DistanceBetween(LatLng latLng,Marker marker){
         double distance;
         distance = computeDistanceBetween(latLng,marker.getPosition());
         marker.setVisible(distance <= 50);
-
-
     }
 
     @Override
