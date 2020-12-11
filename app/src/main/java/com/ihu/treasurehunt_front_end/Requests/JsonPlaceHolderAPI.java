@@ -67,6 +67,9 @@ public interface JsonPlaceHolderAPI {
     @GET("Users/loginUser")
     Call<Boolean> LoginUser(@Query("username") String username,@Query("password") String password);
 
+    @PATCH("Users/restart")
+    Call<Boolean> restartScoreAndLives();
+
 
 
 }
