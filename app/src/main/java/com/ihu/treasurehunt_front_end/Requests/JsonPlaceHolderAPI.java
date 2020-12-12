@@ -73,7 +73,7 @@ public interface JsonPlaceHolderAPI {
     Call<Boolean> LoginUser(@Query("username") String username,@Query("password") String password);
 
     @PATCH("Users/restart")
-    Call<Boolean> restartScoreAndLives();
+    Call<Boolean> restartScoreAndLives(@Query("userName") String userName);
 
 
 

@@ -6,8 +6,8 @@ import retrofit2.Response;
 
 public class RestartScoreAndLives {
 
-    public void restartScoreAndLives(JsonPlaceHolderAPI jsonPlaceHolderAPI) {
-        Call<Boolean> call = jsonPlaceHolderAPI.restartScoreAndLives();
+    public void restartScoreAndLives(JsonPlaceHolderAPI jsonPlaceHolderAPI,String userName) {
+        Call<Boolean> call = jsonPlaceHolderAPI.restartScoreAndLives(userName);
 
         call.enqueue(new Callback<Boolean>() {
             @Override

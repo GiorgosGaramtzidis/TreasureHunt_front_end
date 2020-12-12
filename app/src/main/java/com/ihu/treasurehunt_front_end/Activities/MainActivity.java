@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI());
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
