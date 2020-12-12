@@ -6,22 +6,25 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
+import com.ihu.treasurehunt_front_end.Activities.SettingsActivity.SettingsActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
+import org.jetbrains.annotations.NotNull;
+
 public class MainActivity extends AppCompatActivity {
 
 
-    protected static Game game;
+
+    public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
-
-
-
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +37,18 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnSettings = (Button) findViewById(R.id.btnSettings);
 
-        //btnSettings.setOnClickListener(v->
-        //            startActivity(new Intent(this, SettingsActivity.class))
-       //         );
+        btnSettings.setOnClickListener(v -> {
+            game = new Game(requestFirstLocation.getLocation());
+            game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());
+            startActivity(new Intent(this, SettingsActivity.class));
+        });
+
         btnPlayGame.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
             game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());
-            startActivity(new Intent(this,MapsActivity.class));
+            startActivity(new Intent(this, MapsActivity.class));
         });
+
+
     }
-
-
 }

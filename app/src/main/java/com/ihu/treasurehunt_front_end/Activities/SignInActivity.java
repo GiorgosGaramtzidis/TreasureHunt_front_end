@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ihu.treasurehunt_front_end.R;
-import com.ihu.treasurehunt_front_end.Requests.JsonPlaceHolderAPI;
 import com.ihu.treasurehunt_front_end.Requests.LoginPost;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
@@ -20,7 +19,7 @@ public class SignInActivity extends AppCompatActivity {
     private TextView txtLoginUserName;
     private TextView txtLoginPassword;
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
-    protected static LoginPost loginPost = new LoginPost();
+    public static LoginPost loginPost = new LoginPost();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class SignInActivity extends AppCompatActivity {
         txtLoginUserName = findViewById(R.id.txtLoginUserName);
         txtLoginPassword = findViewById(R.id.txtLoginPassword);
         TextView btnRegisterIfNotSignedUp = findViewById(R.id.btnRegisterIfNotSignedUp);
-        TextView btnLogin = findViewById(R.id.btnLogin);
+        TextView btnLogin = findViewById(R.id.btnChangeName);
         Intent intent = new Intent(this,MainActivity.class);
         Intent intentToRegister = new Intent(this,SignUpActivity.class);
 

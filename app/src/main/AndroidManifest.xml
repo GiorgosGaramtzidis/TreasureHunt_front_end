@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TreasureHunt_front_end"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.SettingsActivity"></activity>
+        <activity android:name=".Activities.SettingsActivity.NameChange"></activity>
+        <activity android:name=".Activities.SettingsActivity.PasswordChange" />
+        <activity android:name=".Activities.SettingsActivity.SettingsActivity" />
         <activity android:name=".Activities.GameWinActivity" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.MainActivity" />
