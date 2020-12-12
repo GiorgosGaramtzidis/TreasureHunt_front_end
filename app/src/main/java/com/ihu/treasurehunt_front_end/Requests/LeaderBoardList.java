@@ -1,6 +1,7 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
 
+import com.ihu.treasurehunt_front_end.Model.LeaderBoardUsers;
 import com.ihu.treasurehunt_front_end.Model.User;
 
 import org.jetbrains.annotations.NotNull;
@@ -14,34 +15,33 @@ import retrofit2.Response;
 
 public class LeaderBoardList {
 
-    private final List<User> leaderBoardList = new ArrayList<>();
+    private final List<LeaderBoardUsers> leaderBoardList = new ArrayList<>();
 
 
-    public List<User> getLeaderBoardList() {
+    public List<LeaderBoardUsers> getLeaderBoardList() {
         return leaderBoardList;
     }
 
     public void getLeaderBoard(JsonPlaceHolderAPI jsonPlaceHolderAPI){
-        Call<List<User>> call = jsonPlaceHolderAPI.getLeaderBoard();
+        Call<List<LeaderBoardUsers>> call = jsonPlaceHolderAPI.getLeaderBoard();
 
-        call.enqueue(new Callback<List<User>>() {
+        call.enqueue(new Callback<List<LeaderBoardUsers>>() {
             @Override
-            public void onResponse(@NotNull Call<List<User>> call, @NotNull Response<List<User>> response) {
+            public void onResponse(@NotNull Call<List<LeaderBoardUsers>> call, @NotNull Response<List<LeaderBoardUsers>> response) {
                 if(!response.isSuccessful()){
                     System.out.println("Code: "+ response.code());
                     return;
                 }
-            List<User> userList =response.body();
-            for (User user:userList){
-                leaderBoardList.add(new User(user.getUserId()
-                        ,user.getName()
-                        ,user.getScore()
-                        ,user.getPassword()));
-            }
+                List<LeaderBoardUsers> leaderBoard =response.body();
+                for (LeaderBoardUsers leaderBoardUsers:leaderBoard){
+                    leaderBoardList.add(new LeaderBoardUsers(leaderBoardUsers.getUserId()
+                            ,leaderBoardUsers.getName()
+                            ,leaderBoardUsers.getGames()));
+                }
 
-        }
+            }
             @Override
-            public void onFailure(Call<List<User>> call, @NotNull Throwable t) {
+            public void onFailure(Call<List<LeaderBoardUsers>> call, @NotNull Throwable t) {
                 System.out.println(t.getMessage());            }
         });
     }

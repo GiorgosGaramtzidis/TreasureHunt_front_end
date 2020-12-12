@@ -1,6 +1,7 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
 
+import com.ihu.treasurehunt_front_end.Model.LeaderBoardUsers;
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
 import com.ihu.treasurehunt_front_end.Model.User;
@@ -27,8 +28,8 @@ public interface JsonPlaceHolderAPI {
     @GET("Users/all")
     Call<List<User>> getUsers();
 
-    @GET("LeaderBoard/topTen")
-    Call<List<User>> getLeaderBoard();
+    @GET("LeaderBoard/all")
+    Call<List<LeaderBoardUsers>> getLeaderBoard();
 
     @POST("Questions/addQuestion")
     Call<Question> createQuestion(@Body Question questions);
