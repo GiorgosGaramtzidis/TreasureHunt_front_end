@@ -117,20 +117,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             else if (marker.getTitle().equals("end")){
                 Toast.makeText(MapsActivity.this, "YOU WON!!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MapsActivity.this, GameWinActivity.class));
+                Intent intent = new Intent (MapsActivity.this, GameWinActivity.class);
+                intent.putExtra("WINNER",MainActivity.game.getUserLoggedIn());
+                startActivity(intent);
                 return false;
             }
             else {
                 new Handler().postDelayed(() -> {
-                    String test = checkUserState.getUserToWIN();
-                    if (test.equals("PLAYING")) {
+                    String stateUserToWIN = checkUserState.getUserToWIN();
+                    if (stateUserToWIN.equals("PLAYING")) {
                         startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
                     } else {
                         Intent intent = new Intent (MapsActivity.this, GameWinActivity.class);
-                        intent.putExtra("WINNER", test);
+                        intent.putExtra("WINNER", stateUserToWIN);
                         startActivity(intent);
                     }
-               }, 500);
+               }, 750);
                 return false;
             }
         });
