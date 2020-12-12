@@ -44,7 +44,6 @@ public class SignInActivity extends AppCompatActivity {
                         loginUser = loginPost.getUser();
                         startActivity(intent);
                     }
-
                 }, 1000);
             }else
                 Snackbar.make(v,"Check your fields",Snackbar.LENGTH_SHORT);
