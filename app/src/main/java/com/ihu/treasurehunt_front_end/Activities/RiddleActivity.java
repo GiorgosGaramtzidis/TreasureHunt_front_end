@@ -50,19 +50,20 @@ public class RiddleActivity extends AppCompatActivity {
                     addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),
                             MainActivity.game.getLocation().getQuestion().getPoints());
                     requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getLocation().getNextLocation());
-
+                    setUserStateRequest.setUserState(retroFitCreate.getJsonPlaceHolderAPI(),
+                            MainActivity.game.getUserLoggedIn(),
+                            MainActivity.game.getLocation().getNextLocation());
                     new Handler().postDelayed(() -> {
                         MapsActivity.marker.setVisible(false);
                         MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
-                    },1000);
+                    },500);
                     Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
                     Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
                 }
-            },1000);
-            setUserStateRequest.setUserState(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
+            },500);
             finish();
         });
 

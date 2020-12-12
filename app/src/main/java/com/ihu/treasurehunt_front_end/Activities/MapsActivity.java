@@ -58,7 +58,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 
@@ -96,6 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+
                 } catch (SecurityException e) {
                     e.printStackTrace();
                 }
@@ -110,13 +110,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setOnMarkerClickListener(marker -> {
+            checkUserState.checkUserState(retroFitCreate.getJsonPlaceHolderAPI());
             if (marker.getTitle().equals(MainActivity.game.getUserLoggedIn())) {
                 Toast.makeText(MapsActivity.this, "It's You", Toast.LENGTH_SHORT).show();
                 return false;
             }
+            if (marker.getTitle().equals("end")){
+                Toast.makeText(MapsActivity.this, "YOU WON!!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MapsActivity.this, GameWinActivity.class));
+                return false;
+            }
             else {
-                startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
-
+                new Handler().postDelayed(() -> {
+                    String test = checkUserState.getUserToWIN();
+                    if (test.equals("PLAYING")) {
+                        startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
+                    } else {
+                        Intent intent = new Intent (MapsActivity.this, GameWinActivity.class);
+                        intent.putExtra("WINNER", test);
+                        startActivity(intent);
+                    }
+               }, 1000);
                 return false;
             }
         });

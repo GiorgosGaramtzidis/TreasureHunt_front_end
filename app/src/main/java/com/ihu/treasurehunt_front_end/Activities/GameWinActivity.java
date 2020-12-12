@@ -35,18 +35,17 @@ public class GameWinActivity extends AppCompatActivity {
         imageView = findViewById(R.id.TreasurePic);
         treasure = findViewById(R.id.txtTreasure);
         slogan = findViewById(R.id.txtSlogan);
-
-        slogan.setText(value);
+        slogan.setText("CONGRATULATIONS " + value + " WON");
 
         imageView.setAnimation(topAnimation);
         treasure.setAnimation(botAnimation);
         slogan.setAnimation(botAnimation);
 
-/*
+
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(GameWinActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
-        },SPLASH_SCREEN);*/
+        },SPLASH_SCREEN);
     }
 }

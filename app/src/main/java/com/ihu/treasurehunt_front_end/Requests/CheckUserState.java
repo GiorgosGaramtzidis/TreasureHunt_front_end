@@ -8,29 +8,29 @@ public class CheckUserState {
 
     private String userToWIN;
 
-    public void checkUserState(JsonPlaceHolderAPI jsonPlaceHolderAPI) {
+    public String getUserToWIN() {
+        return userToWIN;
+    }
 
+    public void checkUserState(JsonPlaceHolderAPI jsonPlaceHolderAPI) {
         Call<String> call = jsonPlaceHolderAPI.checkUserState();
 
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SUCCESS====================Code: " + response.code());
-                    return;
+                    System.out.println( "======================================================================================"+response.code());
                 }
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SUCCESS====================Code: " + response.body());
+                System.out.println( "======================================================================================"+response.body());
+
                 userToWIN = response.body();
+
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                System.out.println(t.getMessage());
+                System.out.println("==============================================================MARKOS==================="+t.getMessage());
             }
         });
-    }
-
-    public String getUserToWIN() {
-        return userToWIN;
     }
 }
