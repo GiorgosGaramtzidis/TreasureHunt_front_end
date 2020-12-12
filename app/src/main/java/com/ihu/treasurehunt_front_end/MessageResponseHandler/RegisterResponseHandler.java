@@ -1,4 +1,4 @@
-package com.ihu.treasurehunt_front_end.ResponseHandlers;
+package com.ihu.treasurehunt_front_end.MessageResponseHandler;
 
 
 import com.ihu.treasurehunt_front_end.Model.RegistrationAnswer;
@@ -18,4 +18,6 @@ public class RegisterResponseHandler implements IResponseHandler<String>
             return response.message();
         return "Error with connection";
     }
+
+
 }

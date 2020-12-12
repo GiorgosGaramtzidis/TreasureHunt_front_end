@@ -20,8 +20,6 @@ public class Question {
         this.points = points;
     }
 
-
-
     public String getQuestion() {
         return question;
     }

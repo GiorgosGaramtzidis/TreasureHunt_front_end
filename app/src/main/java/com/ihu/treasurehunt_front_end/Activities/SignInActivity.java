@@ -6,22 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
-import com.ihu.treasurehunt_front_end.Requests.JsonPlaceHolderAPI;
 import com.ihu.treasurehunt_front_end.Requests.LoginPost;
-import com.ihu.treasurehunt_front_end.Requests.RegisterPost;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 
 public class SignInActivity extends AppCompatActivity {
 
-
     private TextView txtLoginUserName;
     private TextView txtLoginPassword;
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
-    protected static LoginPost loginPost = new LoginPost();
+    private final LoginPost loginPost = new LoginPost();
+    public static User loginUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +35,26 @@ public class SignInActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> {
 
-            loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI(),txtLoginUserName.getText().toString(),txtLoginPassword.getText().toString());
-            new Handler().postDelayed(() -> {
-                if (loginPost.getUserState())
-                {
-                    startActivity(intent);
-                    Toast.makeText(this, "You logged in", Toast.LENGTH_SHORT).show();
-                }
-                else
-                    Toast.makeText(this, "Failed to log in", Toast.LENGTH_SHORT).show();
-            }, 2000);
-    });
-        btnRegisterIfNotSignedUp.setOnClickListener(v -> {
-            startActivity(intentToRegister);
+            if (confirmTextViews()) {
+                loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI(), txtLoginUserName.getText().toString(), txtLoginPassword.getText().toString());
+                new Handler().postDelayed(() -> {
+
+                    Snackbar.make(v, loginPost.getMessage(), Snackbar.LENGTH_SHORT);
+                    if (!loginPost.getUser().equals(null)) {
+                        loginUser = loginPost.getUser();
+                        startActivity(intent);
+                    }
+
+                }, 1000);
+            }else
+                Snackbar.make(v,"Check your fields",Snackbar.LENGTH_SHORT);
         });
+        btnRegisterIfNotSignedUp.setOnClickListener(v -> startActivity(intentToRegister));
+    }
+    public Boolean confirmTextViews()
+    {
+        return txtLoginUserName.getText().length() >= 5
+                && txtLoginUserName.getText().length() <= 20
+                && txtLoginPassword.getText().length() >= 8;
     }
 }

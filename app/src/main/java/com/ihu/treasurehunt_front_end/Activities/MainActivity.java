@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.Model.Game;
+import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
-    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private final RetroFitCreate retroFitCreate = new RetroFitCreate();
 
 
     @Override
@@ -30,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnPlayGame.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
-            game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());
+            User usr = SignInActivity.loginUser;
+            //game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());
             startActivity(new Intent(this,MapsActivity.class));
         });
     }

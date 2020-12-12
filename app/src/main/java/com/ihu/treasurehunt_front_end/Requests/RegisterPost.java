@@ -1,7 +1,7 @@
 package com.ihu.treasurehunt_front_end.Requests;
 import com.ihu.treasurehunt_front_end.Model.RegistrationAnswer;
-import com.ihu.treasurehunt_front_end.ResponseHandlers.IResponseHandler;
-import com.ihu.treasurehunt_front_end.ResponseHandlers.RegisterResponseHandler;
+import com.ihu.treasurehunt_front_end.MessageResponseHandler.IResponseHandler;
+import com.ihu.treasurehunt_front_end.MessageResponseHandler.RegisterResponseHandler;
 
 import org.jetbrains.annotations.NotNull;
 

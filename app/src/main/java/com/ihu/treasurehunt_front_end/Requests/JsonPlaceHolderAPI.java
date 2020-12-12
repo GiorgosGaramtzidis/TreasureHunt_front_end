@@ -63,9 +63,11 @@ public interface JsonPlaceHolderAPI {
     @POST("UserRegistration/registerUser")
     Call<RegistrationAnswer>RegisterUser(@Query("username")String userName, @Query("password") String passWord);
 
-    @GET("Users/loginUser")
-    Call<Boolean> LoginUser(@Query("username") String username,@Query("password") String password);
+    @GET("UserLogin/login")
+    Call<User> loginUser(@Query("username") String username, @Query("password") String password);
 
+    @PATCH
+    Call<Void> logoutUser(@Query("username")String username);
 
 
 }

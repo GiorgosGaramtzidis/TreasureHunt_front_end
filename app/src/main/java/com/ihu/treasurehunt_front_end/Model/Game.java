@@ -18,8 +18,6 @@ public class Game
     private String userLoggedIn;
 
 
-
-
     public Game(MapLocation mapLocation) {
 
         this.location = mapLocation;
