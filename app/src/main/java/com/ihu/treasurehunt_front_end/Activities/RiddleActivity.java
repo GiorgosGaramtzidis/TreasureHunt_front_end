@@ -1,21 +1,33 @@
 package com.ihu.treasurehunt_front_end.Activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ihu.treasurehunt_front_end.Model.AppContainer;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
+import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
+import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
+import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class RiddleActivity extends AppCompatActivity {
     TextView textQuestion;
     EditText textAnswer;
     TextView btnCheck;
+
+    private CheckAnswerRequest checkAnswerRequest = new CheckAnswerRequest();
+    private AddPointsRequest addPointsRequest = new AddPointsRequest();
+    private LoseCondition loseCondition = new LoseCondition();
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+
+    private RequestNextLocation requestNextLocation = new RequestNextLocation();
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -27,29 +39,33 @@ public class RiddleActivity extends AppCompatActivity {
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer= (EditText) findViewById(R.id.textAnswer);
 
-        textQuestion.setText(MainActivity.game.getMapLocation().getQuestion().getQuestion());
+        textQuestion.setText(MainActivity.game.getLocation().getQuestion().getQuestion());
 
         btnCheck.setOnClickListener(v ->{
-           if (MainActivity.game.isQuestionCorrectAnswered(textAnswer.getText().toString())) {
-                Toast.makeText(RiddleActivity.this, "You Win", Toast.LENGTH_SHORT).show();
-                AppendProgressBar();
-                MainActivity.game.increaseLocationPosition();
-           }
-            else {
-               Toast.makeText(RiddleActivity.this, "You lost", Toast.LENGTH_SHORT).show();
-           }
+            checkAnswerRequest.answerCheck(retroFitCreate.getJsonPlaceHolderAPI(),textAnswer.getText().toString(),MainActivity.game.getLocation().getTitle());
+            new Handler().postDelayed(() -> {
+                if (checkAnswerRequest.isResult()) {
+                    addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),
+                            MainActivity.game.getLocation().getQuestion().getPoints());
+                    requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getLocation().getNextLocation());
 
-            if(MainActivity.game.endOfGame())
-                startActivity(new Intent(RiddleActivity.this,GameWinActivity.class));
+                    new Handler().postDelayed(() -> {
+                        MapsActivity.marker.setVisible(false);
+                        MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
+                    },1000);
+                    Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
+                    Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
+                }
+
+
+            },1000);
             finish();
         });
 
     }
-    @SuppressLint("SetTextI18n")
-    public void AppendProgressBar()
-    {
-        AppContainer.progressBar.setProgress(MainActivity.game.getProgress());
-        MainActivity.game.appendScore(MainActivity.game.getMapLocation().getQuestion().getPoints());
-        MapsActivity.textView.setText("Score : " + MainActivity.game.getScore());
-    }
+
+
 }

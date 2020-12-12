@@ -2,10 +2,8 @@ package com.ihu.treasurehunt_front_end.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Riddle {
-    @SerializedName("questionId")
-    private int id;
-
+public class Question {
+    
     @SerializedName("question")
     private String question;
 
@@ -16,16 +14,13 @@ public class Riddle {
     private int points;
 
 
-    public Riddle(int id, String question, String answer, int points) {
-        this.id = id;
+    public Question( String question, String answer, int points) {
         this.question = question;
         this.answer = answer;
         this.points = points;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     public String getQuestion() {
         return question;
@@ -37,5 +32,14 @@ public class Riddle {
 
     public int getPoints() {
         return points;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", points=" + points +
+                '}';
     }
 }

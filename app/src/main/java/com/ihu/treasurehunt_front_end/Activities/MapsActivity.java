@@ -9,8 +9,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -25,16 +25,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ihu.treasurehunt_front_end.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
-
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
     private MapMarkerOptions mapMarkerOptions = new MapMarkerOptions();
+
     private Button hintButton;
+
     private LocationListener locationListener;
     private LocationManager locationManager;
     public static TextView textView;
@@ -42,22 +39,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker motionMarker = null;
     private double distance;
     private LatLng latLng;
-    List<Marker> markerList = new ArrayList<Marker>();
+    protected static Marker marker;
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        MainActivity.appContainer.progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        hintButton = (Button) findViewById(R.id.button);
-        textView = (TextView) findViewById(R.id.textView2);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        hintButton = (Button)findViewById(R.id.button);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+
 
     }
     @Override
@@ -65,9 +64,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(2);
         final LatLng tei = new LatLng(41.076797, 23.553648);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 17));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
-        MarkerOnMap();
+         marker = MainActivity.game.addFirstLocationToMap(mMap);
+
+
 
         locationListener = new LocationListener() {
 
@@ -77,14 +78,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     if (motionMarker == null) {
-                        MarkerOptions options = new MarkerOptions().position(latLng).title("Player 1").icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_person_pin_circle_24));
+                        MarkerOptions options = new MarkerOptions().position(latLng).title(MainActivity.game.getUserLoggedIn()).icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_person_pin_circle_24));
                         motionMarker = mMap.addMarker(options);
                     } else {
                         motionMarker.setPosition(latLng);
                     }
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),16 ));
 
-                    DistanceBetween(MainActivity.game.getPositionOfLocation());
+                    marker = MainActivity.game.addFirstLocationToMap(mMap);
+
+                    MainActivity.game.DistanceBetween(latLng,marker);
 
 
                 } catch (SecurityException e) {
@@ -101,50 +104,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setOnMarkerClickListener(marker -> {
-            startActivity(new Intent (MapsActivity.this,RiddleActivity.class));
-            return false;
+            if (marker.getTitle().equals(MainActivity.game.getUserLoggedIn())) {
+                Toast.makeText(MapsActivity.this, "It's You", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            else {
+                startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
+
+                return false;
+            }
         });
 
         hintButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog();
+            openDialog();
             }
         });
 
-    }
 
+
+    }
     void openDialog(){
         HintDialog hintDialog = new HintDialog();
         hintDialog.show(getSupportFragmentManager(),"Hint dialog");
     }
 
-    void MarkerOnMap() {
-        for (int i = 0; i < MainActivity.appContainer.mapLocationList.getMapLocationList().size(); i++) {
-            LatLng latLng = new LatLng(MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV()
-                    ,MainActivity.appContainer.mapLocationList.getMapLocationList().get(i).getV1());
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .position(latLng)
-                    .title(MainActivity.appContainer.mapLocationList
-                            .getMapLocationList()
-                            .get(i)
-                            .getTitle()).icon(mapMarkerOptions.bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_check_24));
-            Marker marker = mMap.addMarker(markerOptions);
-            markerList.add(marker);
-            marker.setVisible(false);
-        }
-    }
-
-    void DistanceBetween(int markerToMakeVisible){
-        if(MainActivity.game.getPositionOfLocation()==0) {
-            distance = computeDistanceBetween(latLng, markerList.get(markerToMakeVisible).getPosition());
-            markerList.get(markerToMakeVisible).setVisible(distance <= 50);
-        }
-        else {
-            distance = computeDistanceBetween(latLng, markerList.get(markerToMakeVisible).getPosition());
-            markerList.get(markerToMakeVisible-1).setVisible(false);
-            markerList.get(markerToMakeVisible).setVisible(distance <= 50);
-        }
-        }
-    }
+}
 
