@@ -11,6 +11,7 @@ import retrofit2.Response;
 public class    LoginPost {
     private Boolean userState;
     private String userLoggedIn;
+
     public void LoginUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI, String username, String password)
     {
 

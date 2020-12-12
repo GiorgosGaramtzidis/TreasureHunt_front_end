@@ -39,15 +39,20 @@ public class SignInActivity extends AppCompatActivity {
             loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI(),txtLoginUserName.getText().toString(),txtLoginPassword.getText().toString());
             new Handler().postDelayed(() -> {
 
-                if (loginPost.getUserState())
-                {
-                    startActivity(intent);
-                    Toast.makeText(this, "You logged in", Toast.LENGTH_SHORT).show();
+                if (loginPost.getUserState()==null) {
+                    Toast.makeText(this, "User does not exist!!", Toast.LENGTH_SHORT).show();
 
                 }
-                else
-                    Toast.makeText(this, "Failed to log in", Toast.LENGTH_SHORT).show();
-            }, 2000);
+                else if(!loginPost.getUserState()) {
+                    Toast.makeText(this, "Wrong Password!!", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    startActivity(intent);
+                    Toast.makeText(this, "You logged in", Toast.LENGTH_SHORT).show();
+                }
+
+            }, 500);
     });
         btnRegisterIfNotSignedUp.setOnClickListener(v -> {
             startActivity(intentToRegister);

@@ -56,14 +56,14 @@ public class RiddleActivity extends AppCompatActivity {
                     new Handler().postDelayed(() -> {
                         MapsActivity.marker.setVisible(false);
                         MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
-                    },500);
+                    },750);
                     Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
                     Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
                 }
-            },500);
+            },750);
             finish();
         });
 

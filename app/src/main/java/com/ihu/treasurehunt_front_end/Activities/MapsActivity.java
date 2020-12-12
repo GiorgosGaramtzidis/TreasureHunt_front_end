@@ -115,7 +115,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Toast.makeText(MapsActivity.this, "It's You", Toast.LENGTH_SHORT).show();
                 return false;
             }
-            if (marker.getTitle().equals("end")){
+            else if (marker.getTitle().equals("end")){
                 Toast.makeText(MapsActivity.this, "YOU WON!!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MapsActivity.this, GameWinActivity.class));
                 return false;
@@ -130,7 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         intent.putExtra("WINNER", test);
                         startActivity(intent);
                     }
-               }, 1000);
+               }, 500);
                 return false;
             }
         });
