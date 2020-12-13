@@ -49,7 +49,7 @@ public interface JsonPlaceHolderAPI {
     Call<MapLocation> getNextLocation(@Query("nextLocation") String nextLocation);
 
     @PATCH("LoseCondition/updateUserLives")
-    Call<Integer> updateUserLives(@Query("userName") String userName);
+    Call<Boolean> updateUserLives(@Query("userName") String userName);
 
     @PATCH("Users/addScore")
     Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);

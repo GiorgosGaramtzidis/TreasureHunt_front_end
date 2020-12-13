@@ -6,26 +6,29 @@ import retrofit2.Response;
 
 public class LoseCondition {
 
-    private int lives;
+    private Boolean hasLost;
 
+    public Boolean getHasLost() {
+        return hasLost;
+    }
 
-    public void get(JsonPlaceHolderAPI jsonPlaceHolderAPI,String userName){
-        Call<Integer> call = jsonPlaceHolderAPI.updateUserLives(userName);
+    public void get(JsonPlaceHolderAPI jsonPlaceHolderAPI, String userName){
+        Call<Boolean> call = jsonPlaceHolderAPI.updateUserLives(userName);
 
-        call.enqueue(new Callback<Integer>() {
+        call.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SUCCESS====================Code: "+ response.code());
                     return;
                 }
-                lives =response.body();
-                System.out.println(lives);
+                hasLost =response.body();
+                System.out.println(hasLost);
 
             }
 
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
