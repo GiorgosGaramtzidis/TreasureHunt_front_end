@@ -58,9 +58,17 @@ public interface JsonPlaceHolderAPI {
     @PATCH("Users/addScore")
     Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);
 
+    @GET("Users/getUserScore")
+    Call<Integer> getUserScore(@Query("userName") String userName);
+
     @GET("AnswerCheck/AnswerCheck")
     Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("locationTitle") String locationTitle);
 
+    @PATCH("Users/setUserState")
+    Call<Boolean> setUserState(@Query("userName") String userName,@Query("locationTitle") String locationTitle);
+
+    @GET("Users/checkUserState")
+    Call<String> checkUserState();
 
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);
@@ -70,6 +78,9 @@ public interface JsonPlaceHolderAPI {
 
     @GET("Users/loginUser")
     Call<Boolean> LoginUser(@Query("username") String username,@Query("password") String password);
+
+    @PATCH("Users/restart")
+    Call<Boolean> restartScoreAndLives(@Query("userName") String userName);
 
 
 
