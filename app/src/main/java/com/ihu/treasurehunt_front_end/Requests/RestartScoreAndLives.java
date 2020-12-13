@@ -4,26 +4,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CheckAnswerRequest {
+public class RestartScoreAndLives {
 
-    private boolean result;
-
-    public boolean isResult() {
-        return result;
-    }
-
-    public void answerCheck(JsonPlaceHolderAPI jsonPlaceHolderAPI, String usersAnswer, String locationTitle) {
-        Call<Boolean> call = jsonPlaceHolderAPI.checkAnswer(usersAnswer, locationTitle);
+    public void restartScoreAndLives(JsonPlaceHolderAPI jsonPlaceHolderAPI,String userName) {
+        Call<Boolean> call = jsonPlaceHolderAPI.restartScoreAndLives(userName);
 
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println( response.code());
-
+                    System.out.println(response.code());
+                    return;
                 }
-                result=response.body();
-
             }
 
             @Override

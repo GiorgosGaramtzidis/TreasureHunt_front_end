@@ -36,7 +36,6 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/atomic_age"
-        android:text="@string/you_found_the_treasure"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="40sp"

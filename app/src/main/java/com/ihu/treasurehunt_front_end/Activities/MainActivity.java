@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
+import com.ihu.treasurehunt_front_end.Requests.RestartScoreAndLives;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
     protected static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
+    private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
+
 
 
 
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
@@ -38,5 +43,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
+    }
 }

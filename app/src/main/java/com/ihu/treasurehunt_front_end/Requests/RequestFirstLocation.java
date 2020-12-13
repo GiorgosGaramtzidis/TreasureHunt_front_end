@@ -20,7 +20,6 @@ public class RequestFirstLocation {
         call.enqueue(new Callback<MapLocation>() {
             @Override
             public void onResponse(Call<MapLocation> call, Response<MapLocation> response) {
-                System.out.println("======================================SUCCESS====================");
 
                 MapLocation location =response.body();
                 mapLocation = new MapLocation(location.getV(),
@@ -28,8 +27,6 @@ public class RequestFirstLocation {
                         location.getTitle(),
                         location.getQuestion(),
                         location.getNextLocation());
-
-                System.out.println(mapLocation);
 
             }
 
