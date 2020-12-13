@@ -54,6 +54,9 @@ public interface JsonPlaceHolderAPI {
     @PATCH("Users/addScore")
     Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);
 
+    @GET("Users/getUserScore")
+    Call<Integer> getUserScore(@Query("userName") String userName);
+
     @GET("AnswerCheck/AnswerCheck")
     Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("locationTitle") String locationTitle);
 

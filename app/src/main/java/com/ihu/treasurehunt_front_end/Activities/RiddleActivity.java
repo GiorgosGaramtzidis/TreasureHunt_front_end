@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
 import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
+import com.ihu.treasurehunt_front_end.Requests.GetUserScoreRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
 import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
@@ -27,7 +28,6 @@ public class RiddleActivity extends AppCompatActivity {
     private LoseCondition loseCondition = new LoseCondition();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
     private SetUserStateRequest setUserStateRequest = new SetUserStateRequest();
-
     private RequestNextLocation requestNextLocation = new RequestNextLocation();
 
 
@@ -44,6 +44,7 @@ public class RiddleActivity extends AppCompatActivity {
         textQuestion.setText(MainActivity.game.getLocation().getQuestion().getQuestion());
 
         btnCheck.setOnClickListener(v ->{
+
             checkAnswerRequest.answerCheck(retroFitCreate.getJsonPlaceHolderAPI(),textAnswer.getText().toString(),MainActivity.game.getLocation().getTitle());
             new Handler().postDelayed(() -> {
                 if (checkAnswerRequest.isResult()) {
@@ -56,18 +57,17 @@ public class RiddleActivity extends AppCompatActivity {
                     new Handler().postDelayed(() -> {
                         MapsActivity.marker.setVisible(false);
                         MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
-                    },750);
+                    },500);
                     Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
                     Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
                 }
-            },750);
             finish();
+            },750);
         });
 
     }
-
 
 }

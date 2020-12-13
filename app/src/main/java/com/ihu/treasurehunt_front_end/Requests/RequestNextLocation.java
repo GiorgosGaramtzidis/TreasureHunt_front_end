@@ -38,7 +38,6 @@ public class RequestNextLocation {
                         location.getQuestion(),
                         location.getNextLocation());
 
-                System.out.println(mapLocationNext);
 
             }
 

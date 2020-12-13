@@ -19,9 +19,9 @@ public class CheckUserState {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println( "======================================================================================"+response.code());
+                    System.out.println(response.code());
                 }
-                System.out.println( "======================================================================================"+response.body());
+
 
                 userToWIN = response.body();
 
@@ -29,7 +29,7 @@ public class CheckUserState {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                System.out.println("==============================================================MARKOS==================="+t.getMessage());
+                System.out.println(t.getMessage());
             }
         });
     }

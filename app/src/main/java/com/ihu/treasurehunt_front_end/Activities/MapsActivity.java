@@ -1,6 +1,7 @@
 package com.ihu.treasurehunt_front_end.Activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.CheckUserState;
+import com.ihu.treasurehunt_front_end.Requests.GetUserScoreRequest;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 import java.util.Objects;
@@ -38,9 +40,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button hintButton;
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
     private CheckUserState checkUserState = new CheckUserState();
+    private GetUserScoreRequest getUserScoreRequest = new GetUserScoreRequest();
     private LocationListener locationListener;
     private LocationManager locationManager;
-    public static TextView textView;
+    protected static TextView textView;
     private GoogleMap mMap;
     Marker motionMarker = null;
     private LatLng latLng;
@@ -57,12 +60,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         hintButton = (Button)findViewById(R.id.button);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        textView = (TextView) findViewById(R.id.textView2);
         mapFragment.getMapAsync(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserScoreRequest.getUserScore(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
+        new Handler().postDelayed(() -> {
+            MainActivity.game.setGameScore(getUserScoreRequest.getScore());
+            textView.setText("Score : " + MainActivity.game.getGameScore());
+        }, 500);
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -76,9 +91,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         locationListener = new LocationListener() {
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onLocationChanged(@NonNull Location location) {
-
+                textView.setText("Score : " + MainActivity.game.getGameScore());
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     if (motionMarker == null) {
