@@ -1,8 +1,6 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
 import com.ihu.treasurehunt_front_end.Model.User;
-import com.ihu.treasurehunt_front_end.MessageResponseHandler.IResponseHandler;
-import com.ihu.treasurehunt_front_end.MessageResponseHandler.LoginResponseHandler;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,24 +10,35 @@ import retrofit2.Response;
 
 public class LoginPost {
 
-    private IResponseHandler<String> responseHandler;
     private String message;
     private User user;
 
 
     public void LoginUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI, String username, String password)
     {
-
         Call<User> call = jsonPlaceHolderAPI.loginUser(username,password);
 
         call.enqueue(new Callback<User>() {
 
             @Override
             public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-                    responseHandler = new LoginResponseHandler();
-                    message = responseHandler.handleResponse(response);
-                    if (message.equals("Successful log in"))
+
+                if (response.code() == 200) {
                         user = response.body();
+                        message = "login successful";
+                    }
+                    if (response.code() == 500)
+                    {
+                        message ="invalid inputs";
+                        user = null;
+                    }
+                    if (response.code() == 404)
+                    {
+                        message="Problem with connection";
+                        user = null;
+                    }
+
+
             }
             @Override
             public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
@@ -39,7 +48,7 @@ public class LoginPost {
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
     public User getUser() {

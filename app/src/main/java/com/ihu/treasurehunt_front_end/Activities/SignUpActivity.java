@@ -45,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
                         ,passwordText.getText().toString());
 
                 new Handler().postDelayed(() -> Snackbar.make(v,
-                        registerPost.getResponseInfo()
+                        registerPost.getRegistrationAnswer().getAnswer()
                         ,Snackbar.LENGTH_LONG).setAction("Go back", v1 ->
                         startActivity(intent)).show(),1000);
             }

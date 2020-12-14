@@ -38,15 +38,14 @@ public class SignInActivity extends AppCompatActivity {
             if (confirmTextViews()) {
                 loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI(), txtLoginUserName.getText().toString(), txtLoginPassword.getText().toString());
                 new Handler().postDelayed(() -> {
-
-                    Snackbar.make(v, loginPost.getMessage(), Snackbar.LENGTH_SHORT);
-                    if (!loginPost.getUser().equals(null)) {
+                    Snackbar.make(v, loginPost.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    if (loginPost.getUser() != null) {
                         loginUser = loginPost.getUser();
                         startActivity(intent);
                     }
                 }, 1000);
             }else
-                Snackbar.make(v,"Check your fields",Snackbar.LENGTH_SHORT);
+                Snackbar.make(v,"Check your fields",Snackbar.LENGTH_SHORT).show();
         });
         btnRegisterIfNotSignedUp.setOnClickListener(v -> startActivity(intentToRegister));
     }

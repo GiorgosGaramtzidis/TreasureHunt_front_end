@@ -54,4 +54,8 @@ public class User {
     public Integer getUserLives() {
         return userLives;
     }
+
+    public Status getStatus() {
+        return status;
+    }
 }

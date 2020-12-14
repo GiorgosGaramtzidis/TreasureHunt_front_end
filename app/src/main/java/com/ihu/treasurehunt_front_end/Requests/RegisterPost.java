@@ -1,7 +1,5 @@
 package com.ihu.treasurehunt_front_end.Requests;
 import com.ihu.treasurehunt_front_end.Model.RegistrationAnswer;
-import com.ihu.treasurehunt_front_end.MessageResponseHandler.IResponseHandler;
-import com.ihu.treasurehunt_front_end.MessageResponseHandler.RegisterResponseHandler;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -11,8 +9,7 @@ import retrofit2.Response;
 
 public class RegisterPost
 {
-    private IResponseHandler<String> iResponseHandler;
-    String responseInfo;
+    private  RegistrationAnswer registrationAnswer;
 
     public void RegisterUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI, String userName , String passWord)
     {
@@ -23,8 +20,12 @@ public class RegisterPost
             @Override
             public void onResponse(@NotNull Call<RegistrationAnswer> call, @NotNull Response<RegistrationAnswer> response)
             {
-                iResponseHandler = new RegisterResponseHandler();
-                responseInfo =iResponseHandler.handleResponse(response);
+               if(response.code() == 200)
+                   registrationAnswer = response.body();
+               if (response.code() == 500)
+                   registrationAnswer = new RegistrationAnswer(response.message());
+               if (response.code()== 404)
+                   registrationAnswer = new RegistrationAnswer("Problem with network");
             }
             @Override
             public void onFailure(@NotNull Call<RegistrationAnswer> call, @NotNull Throwable t) {
@@ -32,10 +33,10 @@ public class RegisterPost
             }
         });
     }
-    public String getResponseInfo()
-    {
-        return this.responseInfo;
-    }
 
+    public RegistrationAnswer  getRegistrationAnswer()
+    {
+        return this.registrationAnswer;
+    }
 
 }

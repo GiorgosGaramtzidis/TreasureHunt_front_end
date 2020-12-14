@@ -66,7 +66,7 @@ public interface JsonPlaceHolderAPI {
     @GET("UserLogin/login")
     Call<User> loginUser(@Query("username") String username, @Query("password") String password);
 
-    @PATCH
+    @PATCH("UserLogin/logout")
     Call<Void> logoutUser(@Query("username")String username);
 
 
