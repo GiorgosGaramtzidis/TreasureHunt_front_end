@@ -22,23 +22,17 @@ import retrofit2.Call;
 public class MainActivity extends AppCompatActivity {
 
 
-    public static Game game;
+    protected static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
-    private RetroFitCreate retroFitCreate = new RetroFitCreate();
-
-
-
-
-
-
+    private LoginPost loginPost = new LoginPost();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
@@ -74,6 +68,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
     }
 }

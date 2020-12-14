@@ -22,8 +22,8 @@ public class SignInActivity extends AppCompatActivity {
     private TextView txtLoginUserName;
     private TextView txtLoginPassword;
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
-    private final LoginPost loginPost = new LoginPost();
-    public static User loginUser;
+    protected final LoginPost loginPost = new LoginPost();
+    protected static User loginUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
