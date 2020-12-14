@@ -9,16 +9,22 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.Model.Game;
+import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
+import com.ihu.treasurehunt_front_end.Requests.LoginPost;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
 import com.ihu.treasurehunt_front_end.Requests.RestartScoreAndLives;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
+import retrofit2.Call;
+
 public class MainActivity extends AppCompatActivity {
 
 
-    protected static Game game;
+    public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
+    private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
@@ -28,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private LoginPost loginPost = new LoginPost();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
@@ -46,9 +53,29 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this,LeaderBoardActivity.class));
         });
 
+        TextView username = findViewById(R.id.userName);
+        TextView status = findViewById(R.id.userStatus);
+        TextView id = findViewById(R.id.userId);
+
+        username.append(SignInActivity.loginUser.getName());
+        id.append(SignInActivity.loginUser.getUserId());
+        status.append(SignInActivity.loginUser.getStatus().toString());
+
+        Button exitApp = findViewById(R.id.logOut);
+
+
+        exitApp.setOnClickListener(v ->{
+            LogOutRequest logOutRequest = new LogOutRequest();
+            logOutRequest.logOutUser(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
+            new Handler().postDelayed(() ->{
+                System.exit(0);
+            },1000);
+
+        });
+
         btnPlayGame.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
-            game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());
+            game.setUserLoggedIn(SignInActivity.loginUser.getName());
             startActivity(new Intent(this,MapsActivity.class));
         });
     }
@@ -56,6 +83,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
     }
 }

@@ -25,6 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ihu.treasurehunt_front_end.Dialogs.HintDialog;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.CheckUserState;
 import com.ihu.treasurehunt_front_end.Requests.GetUserScoreRequest;
@@ -50,9 +51,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected static Marker marker;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +62,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
-
 
     }
 
@@ -86,7 +83,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
         marker = MainActivity.game.addFirstLocationToMap(mMap);
-
 
 
         locationListener = new LocationListener() {
@@ -159,8 +155,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             openDialog();
             }
         });
-
-
 
     }
     void openDialog(){

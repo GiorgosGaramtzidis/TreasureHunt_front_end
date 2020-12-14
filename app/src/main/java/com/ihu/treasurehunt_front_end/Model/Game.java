@@ -16,8 +16,6 @@ public class Game
     private String userLoggedIn;
 
 
-
-
     public Game(MapLocation mapLocation) {
 
         this.location = mapLocation;
@@ -63,14 +61,10 @@ public class Game
         return marker;
     }
 
-
-
     public void DistanceBetween(LatLng latLng,Marker marker){
         double distance;
         distance = computeDistanceBetween(latLng,marker.getPosition());
         marker.setVisible(distance <= 50);
-
-
     }
 
     @Override

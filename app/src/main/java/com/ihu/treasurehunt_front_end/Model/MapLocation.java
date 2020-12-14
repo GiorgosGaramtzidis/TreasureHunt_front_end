@@ -30,7 +30,6 @@ public class MapLocation {
         this.nextLocation = nextLocation;
     }
 
-
     public double getV() {
         return v;
     }

@@ -4,6 +4,7 @@ package com.ihu.treasurehunt_front_end.Requests;
 import com.ihu.treasurehunt_front_end.Model.LeaderBoardUsers;
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
+import com.ihu.treasurehunt_front_end.Model.RegistrationAnswer;
 import com.ihu.treasurehunt_front_end.Model.User;
 
 import java.util.List;
@@ -45,7 +46,6 @@ public interface JsonPlaceHolderAPI {
             @Field("score") int score
     );
 
-
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
 
@@ -73,12 +73,14 @@ public interface JsonPlaceHolderAPI {
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);
 
-    @POST("Users/registerUser")
-    Call<User> RegisterUser(@Body User user);
+    @POST("UserRegistration/registerUser")
+    Call<RegistrationAnswer>RegisterUser(@Query("username")String userName, @Query("password") String passWord);
 
-    @GET("Users/loginUser")
-    Call<Boolean> LoginUser(@Query("username") String username,@Query("password") String password);
+    @GET("UserLogin/login")
+    Call<User> loginUser(@Query("username") String username, @Query("password") String password);
 
+    @PATCH("UserLogin/logout")
+    Call<Void> logoutUser(@Query("username")String username);
     @PATCH("Users/restart")
     Call<Boolean> restartScoreAndLives(@Query("userName") String userName);
 

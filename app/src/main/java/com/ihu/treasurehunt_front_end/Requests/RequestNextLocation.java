@@ -20,10 +20,6 @@ public class RequestNextLocation {
         this.mapLocationNext = mapLocationNext;
     }
 
-
-
-
-
     public void getNextLocation(JsonPlaceHolderAPI jsonPlaceHolderAPI, String nextLocation){
         Call<MapLocation> call = jsonPlaceHolderAPI.getNextLocation(nextLocation);
 

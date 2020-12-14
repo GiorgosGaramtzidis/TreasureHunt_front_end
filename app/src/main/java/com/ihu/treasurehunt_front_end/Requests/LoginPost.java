@@ -8,33 +8,50 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class    LoginPost {
-    private Boolean userState;
-    private String userLoggedIn;
+public class LoginPost {
+
+    private String message;
+    private User user;
+
 
     public void LoginUserPost(JsonPlaceHolderAPI jsonPlaceHolderAPI, String username, String password)
     {
+        Call<User> call = jsonPlaceHolderAPI.loginUser(username,password);
 
-        Call<Boolean> call = jsonPlaceHolderAPI.LoginUser(username,password);
-
-        call.enqueue(new Callback<Boolean>() {
+        call.enqueue(new Callback<User>() {
 
             @Override
-            public void onResponse(@NotNull Call<Boolean> call, @NotNull Response<Boolean> response) {
-                userState=response.body();
-                userLoggedIn=username;
+            public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
+
+                if (response.code() == 200) {
+                        user = response.body();
+                        message = "login successful";
+                    }
+                    if (response.code() == 500)
+                    {
+                        message ="invalid inputs";
+                        user = null;
+                    }
+                    if (response.code() == 404)
+                    {
+                        message="Problem with connection";
+                        user = null;
+                    }
+
+
             }
             @Override
-            public void onFailure(@NotNull Call<Boolean> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
                 t.printStackTrace();
             }
         });
     }
 
-    public Boolean getUserState() {
-        return userState;
+    public String getMessage() {
+        return this.message;
     }
-    public String getUserLoggedIn(){
-        return userLoggedIn;}
 
+    public User getUser() {
+        return user;
+    }
 }
