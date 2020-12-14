@@ -16,7 +16,7 @@
         android:fontFamily="@font/atomic_age"
         android:text="Login Here"
         android:textColor="@color/black"
-        android:textSize="50sp"
+        android:textSize="40sp"
         android:layout_marginTop="50sp"
         tools:ignore="HardcodedText"
         android:textAlignment="center"/>

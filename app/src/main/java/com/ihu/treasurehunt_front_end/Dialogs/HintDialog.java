@@ -1,4 +1,4 @@
-package com.ihu.treasurehunt_front_end.Activities;
+package com.ihu.treasurehunt_front_end.Dialogs;
 
 
 import android.app.AlertDialog;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.ihu.treasurehunt_front_end.Activities.MainActivity;
 
 public class HintDialog extends AppCompatDialogFragment {
 

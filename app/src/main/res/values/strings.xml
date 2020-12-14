@@ -11,4 +11,7 @@
     <string name="password">Password</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="login_here">Login</string>
+    <string name="id">id</string>
+    <string name="play">Play</string>
+    <string name="treasure_hunt">Treasure Hunt</string>
 </resources>

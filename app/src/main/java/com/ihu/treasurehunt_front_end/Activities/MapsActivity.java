@@ -1,12 +1,14 @@
 package com.ihu.treasurehunt_front_end.Activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,7 +25,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ihu.treasurehunt_front_end.Dialogs.HintDialog;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.CheckUserState;
+import com.ihu.treasurehunt_front_end.Requests.GetUserScoreRequest;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
+
+import java.util.Objects;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
@@ -31,18 +39,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private MapMarkerOptions mapMarkerOptions = new MapMarkerOptions();
 
     private Button hintButton;
-
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private CheckUserState checkUserState = new CheckUserState();
+    private GetUserScoreRequest getUserScoreRequest = new GetUserScoreRequest();
     private LocationListener locationListener;
     private LocationManager locationManager;
-    public static TextView textView;
+    protected static TextView textView;
     private GoogleMap mMap;
     Marker motionMarker = null;
-    private double distance;
     private LatLng latLng;
     protected static Marker marker;
-
-
-
 
 
     @Override
@@ -52,13 +58,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         hintButton = (Button)findViewById(R.id.button);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        textView = (TextView) findViewById(R.id.textView2);
         mapFragment.getMapAsync(this);
-
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserScoreRequest.getUserScore(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
+        new Handler().postDelayed(() -> {
+            MainActivity.game.setGameScore(getUserScoreRequest.getScore());
+            textView.setText("Score : " + MainActivity.game.getGameScore());
+        }, 500);
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -66,15 +82,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng tei = new LatLng(41.076797, 23.553648);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
-         marker = MainActivity.game.addFirstLocationToMap(mMap);
-
+        marker = MainActivity.game.addFirstLocationToMap(mMap);
 
 
         locationListener = new LocationListener() {
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onLocationChanged(@NonNull Location location) {
-
+                textView.setText("Score : " + MainActivity.game.getGameScore());
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     if (motionMarker == null) {
@@ -88,6 +104,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     marker = MainActivity.game.addFirstLocationToMap(mMap);
 
                     MainActivity.game.DistanceBetween(latLng,marker);
+
+
 
 
                 } catch (SecurityException e) {
@@ -104,13 +122,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setOnMarkerClickListener(marker -> {
+            checkUserState.checkUserState(retroFitCreate.getJsonPlaceHolderAPI());
             if (marker.getTitle().equals(MainActivity.game.getUserLoggedIn())) {
                 Toast.makeText(MapsActivity.this, "It's You", Toast.LENGTH_SHORT).show();
                 return false;
             }
+            else if (marker.getTitle().equals("end")){
+                Toast.makeText(MapsActivity.this, "YOU WON!!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent (MapsActivity.this, GameWinActivity.class);
+                intent.putExtra("WINNER",MainActivity.game.getUserLoggedIn());
+                startActivity(intent);
+                return false;
+            }
             else {
-                startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
-
+                new Handler().postDelayed(() -> {
+                    String stateUserToWIN = checkUserState.getUserToWIN();
+                    if (stateUserToWIN.equals("PLAYING")) {
+                        startActivity(new Intent(MapsActivity.this, RiddleActivity.class));
+                    } else {
+                        Intent intent = new Intent (MapsActivity.this, GameWinActivity.class);
+                        intent.putExtra("WINNER", stateUserToWIN);
+                        startActivity(intent);
+                    }
+               }, 750);
                 return false;
             }
         });
@@ -122,8 +156,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
-
     }
     void openDialog(){
         HintDialog hintDialog = new HintDialog();
@@ -131,4 +163,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 }
+
 
