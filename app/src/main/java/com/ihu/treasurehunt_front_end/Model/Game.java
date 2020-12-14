@@ -31,6 +31,8 @@ public class Game
         return userLoggedIn;
     }
 
+
+
     public void setUserLoggedIn(String userLoggedIn) {
         this.userLoggedIn = userLoggedIn;
     }

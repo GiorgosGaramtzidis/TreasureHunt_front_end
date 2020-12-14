@@ -33,6 +33,13 @@ public class User {
         this.score = 0;
         this.userLives = 5;
     }
+    public User(){
+        this.userId = userId;
+        this.name = name;
+        this.score = score;
+        this.password = password;
+        this.userLives = userLives;
+    }
 
     public String getUserId() {
         return userId;
