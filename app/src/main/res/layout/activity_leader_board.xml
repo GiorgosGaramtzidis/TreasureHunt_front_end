@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
         android:textColor="@color/black"
-        android:text="LeaderBoard Top 10"
+        android:text="LeaderBoard"
         android:textAlignment="center"
         android:background="@drawable/paper"/>
 

@@ -37,9 +37,9 @@ public class LeaderBoardUsers {
     @Override
     public String toString() {
         return "Question{" +
-                "question='" + userId + '\'' +
-                ", answer='" + name + '\'' +
-                ", points=" + games +
+                "id='" + userId + '\'' +
+                ", Name ='" + name + '\'' +
+                ", Games =" + games +
                 '}';
     }
 }
