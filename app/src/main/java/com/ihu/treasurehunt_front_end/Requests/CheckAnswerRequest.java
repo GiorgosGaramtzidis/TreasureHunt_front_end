@@ -19,11 +19,9 @@ public class CheckAnswerRequest {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SUCCESS====================Code: " + response.code());
+                    System.out.println( response.code());
 
                 }
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SUCCESS====================Code: " + response.body());
-
                 result=response.body();
 
             }

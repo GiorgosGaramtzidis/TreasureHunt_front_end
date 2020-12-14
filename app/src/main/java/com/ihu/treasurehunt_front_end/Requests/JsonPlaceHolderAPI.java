@@ -3,6 +3,7 @@ package com.ihu.treasurehunt_front_end.Requests;
 
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
+import com.ihu.treasurehunt_front_end.Model.RegistrationAnswer;
 import com.ihu.treasurehunt_front_end.Model.User;
 
 import java.util.List;
@@ -41,7 +42,6 @@ public interface JsonPlaceHolderAPI {
             @Field("score") int score
     );
 
-
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
 
@@ -49,10 +49,13 @@ public interface JsonPlaceHolderAPI {
     Call<MapLocation> getNextLocation(@Query("nextLocation") String nextLocation);
 
     @PATCH("LoseCondition/updateUserLives")
-    Call<Integer> updateUserLives(@Query("userName") String userName);
+    Call<Boolean> updateUserLives(@Query("userName") String userName);
 
     @PATCH("Users/addScore")
     Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);
+
+    @GET("Users/getUserScore")
+    Call<Integer> getUserScore(@Query("userName") String userName);
 
     @PATCH("Users/changeName")
     Call<String> changeName(@Query("userName") String userName,@Query("newName") String newName);
@@ -63,15 +66,27 @@ public interface JsonPlaceHolderAPI {
     @GET("AnswerCheck/AnswerCheck")
     Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("locationTitle") String locationTitle);
 
+    @PATCH("Users/setUserState")
+    Call<Boolean> setUserState(@Query("userName") String userName,@Query("locationTitle") String locationTitle);
+
+    @GET("Users/checkUserState")
+    Call<String> checkUserState();
 
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);
 
     @GET("Users/registerUser")
     Call<User> RegisterUser(@Body User user);
+    @POST("UserRegistration/registerUser")
+    Call<RegistrationAnswer>RegisterUser(@Query("username")String userName, @Query("password") String passWord);
 
-    @GET("Users/loginUser")
-    Call<Boolean> LoginUser(@Query("username") String username,@Query("password") String password);
+    @GET("UserLogin/login")
+    Call<User> loginUser(@Query("username") String username, @Query("password") String password);
+
+    @PATCH("UserLogin/logout")
+    Call<Void> logoutUser(@Query("username")String username);
+    @PATCH("Users/restart")
+    Call<Boolean> restartScoreAndLives(@Query("userName") String userName);
 
 
 

@@ -19,13 +19,9 @@ public class User {
     @SerializedName("userLives")
     private Integer userLives;
 
-    public User(String userId, String name, int score, String password, Integer userLives) {
-        this.userId = userId;
-        this.name = name;
-        this.score = score;
-        this.password = password;
-        this.userLives = userLives;
-    }
+    @SerializedName("status")
+    private Status status;
+
     public User(String name , String password)
     {
         this.name = name;
@@ -64,5 +60,9 @@ public class User {
 
     public Integer getUserLives() {
         return userLives;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 }

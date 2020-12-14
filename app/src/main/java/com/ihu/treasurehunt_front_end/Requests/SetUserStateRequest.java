@@ -1,30 +1,26 @@
-    package com.ihu.treasurehunt_front_end.Requests;
+package com.ihu.treasurehunt_front_end.Requests;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
-public class LoseCondition {
+public class SetUserStateRequest {
 
-    private Boolean hasLost;
+    private boolean succeeded;
 
-    public Boolean getHasLost() {
-        return hasLost;
-    }
+    public void setUserState(JsonPlaceHolderAPI jsonPlaceHolderAPI, String userName , String locationTitle) {
 
-    public void get(JsonPlaceHolderAPI jsonPlaceHolderAPI, String userName){
-        Call<Boolean> call = jsonPlaceHolderAPI.updateUserLives(userName);
+        Call<Boolean> call = jsonPlaceHolderAPI.setUserState(userName,locationTitle);
 
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     System.out.println(response.code());
                     return;
                 }
-                hasLost =response.body();
-                System.out.println(hasLost);
-
+                succeeded = response.body();
             }
 
             @Override
@@ -33,10 +29,4 @@ public class LoseCondition {
             }
         });
     }
-
-
-
-
-        }
-
-
+}
