@@ -22,7 +22,7 @@ import retrofit2.Call;
 public class MainActivity extends AppCompatActivity {
 
 
-    protected static Game game;
+    public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
