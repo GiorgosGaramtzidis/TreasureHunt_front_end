@@ -22,7 +22,7 @@ public class SignInActivity extends AppCompatActivity {
     private TextView txtLoginPassword;
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     public static LoginPost loginPost = new LoginPost();
-    protected final LoginPost loginPost = new LoginPost();
+
     protected static User loginUser;
 
     @Override

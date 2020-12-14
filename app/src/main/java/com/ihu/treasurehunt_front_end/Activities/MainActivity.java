@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static Game game;
-    public static Game game;
+
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
 
     private ViewPager mViewPager;
 
-    private final RetroFitCreate retroFitCreate = new RetroFitCreate();
+
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
     private LoginPost loginPost = new LoginPost();
     @Override
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnSettings.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
-            game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());
+            game.setUserLoggedIn(SignInActivity.loginPost.getUser().getName());
             startActivity(new Intent(this, SettingsActivity.class));
         });
 
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnPlayGame.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
-            game.setUserLoggedIn(SignInActivity.loginPost.getUserLoggedIn());
+            game.setUserLoggedIn(SignInActivity.loginPost.getUser().getName());
             startActivity(new Intent(this, MapsActivity.class));
             game.setUserLoggedIn(SignInActivity.loginUser.getName());
             startActivity(new Intent(this,MapsActivity.class));

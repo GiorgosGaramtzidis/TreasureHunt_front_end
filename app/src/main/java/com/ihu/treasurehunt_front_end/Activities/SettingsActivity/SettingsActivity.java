@@ -54,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         btnChangePass.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
-            game.setUserLoggedIn(SignInActivity.loginPost.getUserPass());
+            game.setUserLoggedIn(SignInActivity.loginPost.getUser().getPassword());
             startActivity(new Intent(this, PasswordChange.class));
         });
 
