@@ -5,14 +5,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.ihu.treasurehunt_front_end.Activities.MainActivity;
 
 import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
 
 
 public class Game
 {
-    private int progress;
     private int gameScore;
     private MapLocation location;
     private String userLoggedIn;
@@ -21,7 +19,6 @@ public class Game
     public Game(MapLocation mapLocation) {
 
         this.location = mapLocation;
-        this.progress = 0;
         this.gameScore = 0;
     }
 
@@ -31,14 +28,6 @@ public class Game
 
     public void setUserLoggedIn(String userLoggedIn) {
         this.userLoggedIn = userLoggedIn;
-    }
-
-    public int getProgress() {
-        return progress;
-    }
-
-    public void setProgress(int progress) {
-        this.progress = progress;
     }
 
     public int getGameScore() {

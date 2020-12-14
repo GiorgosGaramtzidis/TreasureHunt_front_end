@@ -14,6 +14,7 @@ import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoginPost;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
+import com.ihu.treasurehunt_front_end.Requests.RestartScoreAndLives;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 import retrofit2.Call;
@@ -24,12 +25,20 @@ public class MainActivity extends AppCompatActivity {
     public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
@@ -62,5 +71,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginPost.getUserLoggedIn());
+    }
 }

@@ -4,24 +4,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddPointsRequest {
+public class GetUserScoreRequest {
 
 
-    private int succeeded;
+    private int score;
 
+    public int getScore() {
+        return score;
+    }
 
-    public void addScoreToPlayer(JsonPlaceHolderAPI jsonPlaceHolderAPI,String userName,int score) {
-        Call<Integer> call = jsonPlaceHolderAPI.addScore(userName, score);
+    public void getUserScore(JsonPlaceHolderAPI jsonPlaceHolderAPI, String userName) {
+        Call<Integer> call = jsonPlaceHolderAPI.getUserScore(userName);
 
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println( response.code());
+                    System.out.println( "============================OXI==================="+ response.code());
                     return;
                 }
-                succeeded = response.body();
-
+                GetUserScoreRequest.this.score = response.body();
+                System.out.println( "============================NAI==================="+ response.body());
             }
 
             @Override

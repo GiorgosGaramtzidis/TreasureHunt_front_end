@@ -6,15 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.JsonPlaceHolderAPI;
 import com.ihu.treasurehunt_front_end.Requests.LoginPost;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 
 public class SignInActivity extends AppCompatActivity {
+
 
     private TextView txtLoginUserName;
     private TextView txtLoginPassword;
@@ -32,6 +35,7 @@ public class SignInActivity extends AppCompatActivity {
         TextView btnLogin = findViewById(R.id.btnLogin);
         Intent intent = new Intent(this,MainActivity.class);
         Intent intentToRegister = new Intent(this,SignUpActivity.class);
+
 
         btnLogin.setOnClickListener(v -> {
 
