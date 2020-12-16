@@ -13,6 +13,7 @@ public class RetroFitCreate {
     Gson gson = new GsonBuilder()
             .setLenient()
             .create();
+
     public JsonPlaceHolderAPI getJsonPlaceHolderAPI(){
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.1.4:6039/")

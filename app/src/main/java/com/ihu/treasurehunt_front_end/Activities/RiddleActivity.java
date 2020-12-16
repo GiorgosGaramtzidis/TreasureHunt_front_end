@@ -1,6 +1,7 @@
 package com.ihu.treasurehunt_front_end.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.EditText;
@@ -12,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
 import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
-import com.ihu.treasurehunt_front_end.Requests.GetUserScoreRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
 import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
@@ -61,8 +61,16 @@ public class RiddleActivity extends AppCompatActivity {
                     Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn());
-                    Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
+                    loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(), MainActivity.game.getUserLoggedIn());
+                    new Handler().postDelayed(()->{
+                        if(loseCondition.getHasLost()){
+                            startActivity(new Intent(this, MainActivity.class));
+                            Toast.makeText(RiddleActivity.this, (MainActivity.game.getUserLoggedIn() + " lost "), Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                            Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
+                    },1000);
+
                 }
             finish();
             },750);

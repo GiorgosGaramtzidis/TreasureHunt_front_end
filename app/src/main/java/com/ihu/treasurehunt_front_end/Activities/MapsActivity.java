@@ -31,8 +31,6 @@ import com.ihu.treasurehunt_front_end.Requests.CheckUserState;
 import com.ihu.treasurehunt_front_end.Requests.GetUserScoreRequest;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
-import java.util.Objects;
-
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 {
