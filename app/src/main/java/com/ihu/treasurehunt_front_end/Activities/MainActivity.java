@@ -26,11 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
-    private RetroFitCreate retroFitCreate = new RetroFitCreate();
-
-
-
-
 
 
 

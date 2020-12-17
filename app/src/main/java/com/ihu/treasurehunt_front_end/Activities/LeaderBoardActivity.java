@@ -31,5 +31,6 @@ private LeaderBoardList leaderBoardList = new LeaderBoardList();
             textView.setText(leaderBoardList.getLeaderBoardList().toString());
         },1000);
         textView = findViewById(R.id.Result);
+
     }
 }

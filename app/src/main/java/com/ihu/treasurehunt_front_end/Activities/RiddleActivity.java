@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
 import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
+import com.ihu.treasurehunt_front_end.Requests.LeaderBoardList;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
 import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
@@ -29,7 +30,7 @@ public class RiddleActivity extends AppCompatActivity {
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
     private SetUserStateRequest setUserStateRequest = new SetUserStateRequest();
     private RequestNextLocation requestNextLocation = new RequestNextLocation();
-
+private LeaderBoardList leaderBoardList = new LeaderBoardList();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -55,6 +56,10 @@ public class RiddleActivity extends AppCompatActivity {
                             MainActivity.game.getUserLoggedIn(),
                             MainActivity.game.getLocation().getNextLocation());
                     new Handler().postDelayed(() -> {
+                        leaderBoardList.updateLeaderBoard(retroFitCreate.getJsonPlaceHolderAPI(), MainActivity.game.getUserLoggedIn());
+                               if(leaderBoardList.getUpdateLeaderBoard())   {
+                                   startActivity(new Intent(this, MainActivity.class));
+                               }                                //////////////////TODO
                         MapsActivity.marker.setVisible(false);
                         MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
                     },500);

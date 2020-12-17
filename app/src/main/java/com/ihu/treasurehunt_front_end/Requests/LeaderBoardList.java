@@ -16,12 +16,44 @@ import retrofit2.Response;
 public class LeaderBoardList {
 
     private final List<LeaderBoardUsers> leaderBoardList = new ArrayList<>();
+    private  Boolean updateLeaderBoard;
+
+
+    public Boolean getUpdateLeaderBoard() {
+        return updateLeaderBoard;
+    }
+
+    public void updateLeaderBoard(JsonPlaceHolderAPI jsonPlaceHolderAPI, String leaderBoardUserName) {
+        Call<Boolean> call = jsonPlaceHolderAPI.updateUserLives(leaderBoardUserName);
+
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (!response.isSuccessful()) {
+                    System.out.println(response.code());
+                    return;
+                }
+                updateLeaderBoard = response.body();
+                System.out.println(updateLeaderBoard);
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+
+
+
+
 
 
     public List<LeaderBoardUsers> getLeaderBoardList() {
         return leaderBoardList;
     }
-
     public void getLeaderBoard(JsonPlaceHolderAPI jsonPlaceHolderAPI){
         Call<List<LeaderBoardUsers>> call = jsonPlaceHolderAPI.getLeaderBoard();
 
@@ -44,7 +76,9 @@ public class LeaderBoardList {
             public void onFailure(Call<List<LeaderBoardUsers>> call, @NotNull Throwable t) {
                 System.out.println(t.getMessage());            }
         });
+
     }
+
 
 
 }

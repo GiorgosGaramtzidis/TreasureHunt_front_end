@@ -32,6 +32,9 @@ public interface JsonPlaceHolderAPI {
     @GET("LeaderBoard/all")
     Call<List<LeaderBoardUsers>> getLeaderBoard();
 
+    @PATCH("LeaderBoard/updateLeaderBoard")
+    Call<Boolean> updateLeaderBoardUsers(@Query("leaderBoardName")String leaderBoardName,@Query("score") int score);
+
     @POST("Questions/addQuestion")
     Call<Question> createQuestion(@Body Question questions);
 

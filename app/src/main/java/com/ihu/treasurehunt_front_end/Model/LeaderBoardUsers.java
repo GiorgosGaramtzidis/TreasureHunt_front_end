@@ -13,7 +13,6 @@ public class LeaderBoardUsers {
     private int games;
 
 
-
     public LeaderBoardUsers(String userId , String name, int games)
     {
         this.userId= userId;
@@ -34,12 +33,19 @@ public class LeaderBoardUsers {
     public int getGames() {
         return games;
     }
-    @Override
+
     public String toString() {
-        return "Question{" +
-                "id='" + userId + '\'' +
-                ", Name ='" + name + '\'' +
-                ", Games =" + games +
+        return "Player{" +
+                ", Name ->" + name + '\'' +
+                ", Games ->" + games +
                 '}';
     }
+
+
+
+
+
+
+
+
 }
