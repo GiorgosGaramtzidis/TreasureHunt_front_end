@@ -22,8 +22,8 @@ public class LeaderBoardList {
         return updateLeaderBoard;
     }
 
-    public void updateLeaderBoard(JsonPlaceHolderAPI jsonPlaceHolderAPI, String leaderBoardUserName) {
-        Call<Boolean> call = jsonPlaceHolderAPI.updateUserLives(leaderBoardUserName);
+    public void updateLeaderBoard(JsonPlaceHolderAPI jsonPlaceHolderAPI, String leaderBoardUserName,int score) {
+        Call<Boolean> call = jsonPlaceHolderAPI.updateLeaderBoardUsers(leaderBoardUserName,score);
 
         call.enqueue(new Callback<Boolean>() {
             @Override
