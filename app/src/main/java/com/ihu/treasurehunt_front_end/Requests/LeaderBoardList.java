@@ -2,7 +2,6 @@ package com.ihu.treasurehunt_front_end.Requests;
 
 
 import com.ihu.treasurehunt_front_end.Model.LeaderBoardUsers;
-import com.ihu.treasurehunt_front_end.Model.User;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -68,7 +67,7 @@ public class LeaderBoardList {
                 for (LeaderBoardUsers leaderBoardUsers:leaderBoard){
                     leaderBoardList.add(new LeaderBoardUsers(leaderBoardUsers.getUserId()
                             ,leaderBoardUsers.getName()
-                            ,leaderBoardUsers.getGames()));
+                            ,leaderBoardUsers.getScore()));
                 }
 
             }

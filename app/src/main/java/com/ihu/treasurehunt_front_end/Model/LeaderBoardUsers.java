@@ -9,15 +9,15 @@ public class LeaderBoardUsers {
     @SerializedName("leaderBoardName")
     private String name;
 
-    @SerializedName("games")
-    private int games;
+    @SerializedName("score")
+    private int score;
 
 
-    public LeaderBoardUsers(String userId , String name, int games)
+    public LeaderBoardUsers(String userId , String name, int score)
     {
         this.userId= userId;
         this.name = name;
-       this.games = games;
+       this.score = score;
 
 
     }
@@ -30,14 +30,13 @@ public class LeaderBoardUsers {
         return name;
     }
 
-    public int getGames() {
-        return games;
+    public int getScore() {
+        return score;
     }
 
     public String toString() {
-        return "Player{" +
-                ", Name ->" + name + '\'' +
-                ", Games ->" + games +
+        return "Name ->" + name + '\'' +
+                ", Score ->" + score +
                 '}';
     }
 
