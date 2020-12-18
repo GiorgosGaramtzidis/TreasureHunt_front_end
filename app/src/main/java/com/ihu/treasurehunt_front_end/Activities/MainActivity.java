@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static Game game;
 
-    protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
-    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    public  RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
+    public  RetroFitCreate retroFitCreate = new RetroFitCreate();
 
-    private ViewPager mViewPager;
+    public  ViewPager mViewPager;
 
 
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
@@ -81,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
             game = new Game(requestFirstLocation.getLocation());
             game.setUserLoggedIn(SignInActivity.loginPost.getUser().getName());
             startActivity(new Intent(this, MapsActivity.class));
-            game.setUserLoggedIn(SignInActivity.loginUser.getName());
-            startActivity(new Intent(this,MapsActivity.class));
+
         });
 
 
@@ -91,5 +90,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
+
+    }
+
+    public void onCreate() {
     }
 }

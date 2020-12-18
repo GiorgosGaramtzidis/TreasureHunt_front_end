@@ -64,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
                 && passwordText.getText().length() >= 8)
         {
             return passwordText.getText().length() == passwordText2.getText().length();
+
         }
         return false;
     }

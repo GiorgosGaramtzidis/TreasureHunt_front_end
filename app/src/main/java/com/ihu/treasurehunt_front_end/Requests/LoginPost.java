@@ -22,11 +22,12 @@ public class LoginPost {
 
             @Override
             public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-
-                if (response.code() == 200) {
-                        user = response.body();
+                user = response.body();
+                //if (response.code() == 200) {
                         message = "login successful";
-                    }
+
+
+                  //  }
                     if (response.code() == 500)
                     {
                         message ="invalid inputs";

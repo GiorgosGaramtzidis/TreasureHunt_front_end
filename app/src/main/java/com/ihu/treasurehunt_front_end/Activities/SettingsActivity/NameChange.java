@@ -3,10 +3,13 @@ package com.ihu.treasurehunt_front_end.Activities.SettingsActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ihu.treasurehunt_front_end.Activities.MainActivity;
+import com.ihu.treasurehunt_front_end.Activities.MapsActivity;
+import com.ihu.treasurehunt_front_end.Activities.SignInActivity;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.ChangeNameRequest;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
@@ -39,6 +42,9 @@ public class NameChange extends AppCompatActivity {
                     if (name1.getText().toString().equals(name2.getText().toString()) ) {
                         changeNameRequest.changeNamePlayer(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),name2.getText().toString());
                         Snackbar.make(v, "The name has changed successfully!" ,Snackbar.LENGTH_SHORT).show();
+                        new Handler().postDelayed(() -> {
+                            startActivity(new Intent(this, SignInActivity.class));
+                        },2000);
                     }
                     else
                     {

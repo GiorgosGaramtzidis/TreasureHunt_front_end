@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,6 +43,9 @@ public class PasswordChange extends AppCompatActivity {
             if (Pass1.getText().toString().equals(Pass2.getText().toString())) {
                 changePasswordRequest.changePasswordPlayer(retroFitCreate.getJsonPlaceHolderAPI(), MainActivity.game.getUserLoggedIn(),Pass1.getText().toString());
                 Snackbar.make(v, "The Password has changed successfully!" ,Snackbar.LENGTH_SHORT).show();
+                new Handler().postDelayed(() -> {
+                    startActivity(new Intent(this, SignInActivity.class));
+                },2000);
             }
             else
             {
