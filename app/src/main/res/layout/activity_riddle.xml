@@ -23,6 +23,21 @@
         android:textSize="28dp" />
 
     <TextView
+        android:id="@+id/answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="76dp"
+        android:background="@drawable/button3"
+        android:padding="19dp"
+        android:text="Buy the answer"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:visibility="invisible" />
+
+    <TextView
         android:id="@+id/btnCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
