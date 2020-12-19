@@ -83,6 +83,8 @@ public interface JsonPlaceHolderAPI {
     @PATCH("Users/restart")
     Call<Boolean> restartScoreAndLives(@Query("userName") String userName);
 
+    @GET("Users/boughtAnswer")
+    Call<String> boughtAnswer(@Query("userName") String userName, @Query("question") String question);
 
     @GET("api/Question/getRandomQuestion")
     Call<Question> getRandomQuestion();

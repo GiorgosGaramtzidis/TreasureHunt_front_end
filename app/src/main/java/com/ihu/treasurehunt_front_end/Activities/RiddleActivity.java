@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
+import com.ihu.treasurehunt_front_end.Requests.BuyAnswerRequest;
 import com.ihu.treasurehunt_front_end.Requests.BuyLife;
 import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
@@ -25,6 +27,7 @@ public class RiddleActivity extends AppCompatActivity {
     TextView textQuestion;
     EditText textAnswer;
     TextView btnCheck;
+    TextView shop;
     TextView buyLf;
 
     private CheckAnswerRequest checkAnswerRequest = new CheckAnswerRequest();
@@ -34,6 +37,7 @@ public class RiddleActivity extends AppCompatActivity {
     private SetUserStateRequest setUserStateRequest = new SetUserStateRequest();
     private RequestNextLocation requestNextLocation = new RequestNextLocation();
     private RequestNewQuestion requestNewQuestion = new RequestNewQuestion();
+    private BuyAnswerRequest buyAnswerRequest = new BuyAnswerRequest();
     private BuyLife buyLife = new BuyLife();
 
 
@@ -47,9 +51,22 @@ public class RiddleActivity extends AppCompatActivity {
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         textAnswer = (EditText) findViewById(R.id.textAnswer);
         buyLf = (TextView) findViewById(R.id.buyLf);
+        shop = (TextView)findViewById(R.id.answer);
 
         textQuestion.setText(MainActivity.game.getQuestion().getQuestion());
 
+        if(MainActivity.game.getGameScore()>=10){
+            shop.setVisibility(View.VISIBLE);
+        }
+
+        shop.setOnClickListener(v -> {
+            buyAnswerRequest.buyAnswer(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),MainActivity.game.getQuestion().getQuestion());
+            new Handler().postDelayed(() -> {
+                textAnswer.setText(buyAnswerRequest.getAnswer());
+                shop.setVisibility(View.INVISIBLE);
+            },750);
+
+        });
         btnCheck.setOnClickListener(v ->{
 
             checkAnswerRequest.answerCheck(retroFitCreate.getJsonPlaceHolderAPI(),textAnswer.getText().toString(),MainActivity.game.getQuestion().getQuestion());
