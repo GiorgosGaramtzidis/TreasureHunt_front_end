@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
+import com.ihu.treasurehunt_front_end.Requests.BuyLife;
 import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
 import com.ihu.treasurehunt_front_end.Requests.RequestNewQuestion;
@@ -24,6 +25,7 @@ public class RiddleActivity extends AppCompatActivity {
     TextView textQuestion;
     EditText textAnswer;
     TextView btnCheck;
+    TextView buyLf;
 
     private CheckAnswerRequest checkAnswerRequest = new CheckAnswerRequest();
     private AddPointsRequest addPointsRequest = new AddPointsRequest();
@@ -32,6 +34,7 @@ public class RiddleActivity extends AppCompatActivity {
     private SetUserStateRequest setUserStateRequest = new SetUserStateRequest();
     private RequestNextLocation requestNextLocation = new RequestNextLocation();
     private RequestNewQuestion requestNewQuestion = new RequestNewQuestion();
+    private BuyLife buyLife = new BuyLife();
 
 
     @SuppressLint("SetTextI18n")
@@ -42,7 +45,8 @@ public class RiddleActivity extends AppCompatActivity {
 
         btnCheck = (TextView) findViewById(R.id.btnCheck);
         textQuestion = (TextView) findViewById(R.id.textQuestion);
-        textAnswer= (EditText) findViewById(R.id.textAnswer);
+        textAnswer = (EditText) findViewById(R.id.textAnswer);
+        buyLf = (TextView) findViewById(R.id.buyLf);
 
         textQuestion.setText(MainActivity.game.getQuestion().getQuestion());
 
@@ -64,21 +68,32 @@ public class RiddleActivity extends AppCompatActivity {
                         MainActivity.game.setQuestion(requestNewQuestion.getQuestion());
                     },1000);
                     Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(), MainActivity.game.getUserLoggedIn());
-                    new Handler().postDelayed(()->{
-                        if(loseCondition.getHasLost()){
+                    new Handler().postDelayed(() -> {
+                        if (loseCondition.getHasLost()) {
                             startActivity(new Intent(this, MainActivity.class));
                             Toast.makeText(RiddleActivity.this, (MainActivity.game.getUserLoggedIn() + " lost "), Toast.LENGTH_SHORT).show();
-                        }
-                        else
+                        } else
                             Toast.makeText(RiddleActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
-                    },1000);
+                    }, 1000);
 
                 }
-            finish();
-            },750);
+                finish();
+            }, 1000);
+        });
+
+        buyLf.setOnClickListener(v -> {
+            buyLife.buyALife(retroFitCreate.getJsonPlaceHolderAPI(), MainActivity.game.getUserLoggedIn());
+            new Handler().postDelayed(() -> {
+                if (buyLife.getHasBoughtLife()) {
+                    Toast.makeText(RiddleActivity.this, "You just bought a life!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RiddleActivity.this, "In order to buy a life you have to reach 20 points.", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+            }, 1000);
+
         });
 
     }
