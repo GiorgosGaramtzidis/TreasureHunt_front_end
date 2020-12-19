@@ -57,6 +57,7 @@ public class RiddleActivity extends AppCompatActivity {
 
         if(MainActivity.game.getGameScore()>=10){
             shop.setVisibility(View.VISIBLE);
+            buyLf.setVisibility(View.VISIBLE);
         }
 
         shop.setOnClickListener(v -> {
