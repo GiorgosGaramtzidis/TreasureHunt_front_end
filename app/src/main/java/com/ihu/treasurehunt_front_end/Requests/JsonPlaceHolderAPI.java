@@ -51,6 +51,9 @@ public interface JsonPlaceHolderAPI {
     @PATCH("LoseCondition/updateUserLives")
     Call<Boolean> updateUserLives(@Query("userName") String userName);
 
+    @PATCH("Users/buyLife")
+    Call<Boolean> buyLife(@Query("userName") String userName);
+
     @PATCH("Users/addScore")
     Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);
 
