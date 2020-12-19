@@ -15,7 +15,9 @@ import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
 import com.ihu.treasurehunt_front_end.Requests.BuyLife;
 import com.ihu.treasurehunt_front_end.Requests.CheckAnswerRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
+import com.ihu.treasurehunt_front_end.Requests.RequestNewQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
+import com.ihu.treasurehunt_front_end.Requests.RequestRandomQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 import com.ihu.treasurehunt_front_end.Requests.SetUserStateRequest;
 
@@ -31,6 +33,7 @@ public class RiddleActivity extends AppCompatActivity {
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
     private SetUserStateRequest setUserStateRequest = new SetUserStateRequest();
     private RequestNextLocation requestNextLocation = new RequestNextLocation();
+    private RequestNewQuestion requestNewQuestion = new RequestNewQuestion();
     private BuyLife buyLife = new BuyLife();
 
 
@@ -45,23 +48,25 @@ public class RiddleActivity extends AppCompatActivity {
         textAnswer = (EditText) findViewById(R.id.textAnswer);
         buyLf = (TextView) findViewById(R.id.buyLf);
 
-        textQuestion.setText(MainActivity.game.getLocation().getQuestion().getQuestion());
+        textQuestion.setText(MainActivity.game.getQuestion().getQuestion());
 
-        btnCheck.setOnClickListener(v -> {
+        btnCheck.setOnClickListener(v ->{
 
-            checkAnswerRequest.answerCheck(retroFitCreate.getJsonPlaceHolderAPI(), textAnswer.getText().toString(), MainActivity.game.getLocation().getTitle());
+            checkAnswerRequest.answerCheck(retroFitCreate.getJsonPlaceHolderAPI(),textAnswer.getText().toString(),MainActivity.game.getQuestion().getQuestion());
             new Handler().postDelayed(() -> {
                 if (checkAnswerRequest.isResult()) {
-                    addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI(), MainActivity.game.getUserLoggedIn(),
-                            MainActivity.game.getLocation().getQuestion().getPoints());
-                    requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(), MainActivity.game.getLocation().getNextLocation());
+                    addPointsRequest.addScoreToPlayer(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),
+                            MainActivity.game.getQuestion().getPoints());
+                    requestNextLocation.getNextLocation(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getLocation().getNextLocation());
+                    requestNewQuestion.getNewQuestion(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getQuestionList());
                     setUserStateRequest.setUserState(retroFitCreate.getJsonPlaceHolderAPI(),
                             MainActivity.game.getUserLoggedIn(),
                             MainActivity.game.getLocation().getNextLocation());
                     new Handler().postDelayed(() -> {
                         MapsActivity.marker.setVisible(false);
                         MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
-                    }, 500);
+                        MainActivity.game.setQuestion(requestNewQuestion.getQuestion());
+                    },1000);
                     Toast.makeText(RiddleActivity.this, "Correct Answer", Toast.LENGTH_SHORT).show();
                 } else {
                     loseCondition.get(retroFitCreate.getJsonPlaceHolderAPI(), MainActivity.game.getUserLoggedIn());
@@ -92,4 +97,5 @@ public class RiddleActivity extends AppCompatActivity {
         });
 
     }
+
 }

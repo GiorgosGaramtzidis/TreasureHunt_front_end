@@ -15,18 +15,15 @@ public class MapLocation {
     @SerializedName("title")
     private String title;
 
-    @SerializedName("questions")
-    private Question question;
 
     @SerializedName("nextLocation")
     private String nextLocation;
 
 
-    public MapLocation(double v, double v1, String title, Question question, String nextLocation) {
+    public MapLocation(double v, double v1, String title, String nextLocation) {
         this.v = v;
         this.v1 = v1;
         this.title = title;
-        this.question = question;
         this.nextLocation = nextLocation;
     }
 
@@ -42,9 +39,7 @@ public class MapLocation {
         return title;
     }
 
-    public Question getQuestion() {
-        return question;
-    }
+
 
     public String getNextLocation() {
         return nextLocation;
@@ -56,7 +51,6 @@ public class MapLocation {
                 "v=" + v +
                 ", v1=" + v1 +
                 ", title='" + title + '\'' +
-                ", question=" + question +
                 ", nextLocation=" + nextLocation +
                 '}';
     }
