@@ -23,13 +23,28 @@
         android:textSize="28dp" />
 
     <TextView
+        android:id="@+id/answer"
+        android:layout_width="355dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="153dp"
+        android:background="@drawable/button3"
+        android:padding="19dp"
+        android:text="Buy the answer"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:visibility="invisible" />
+
+    <TextView
         android:id="@+id/btnCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="175dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="262dp"
         android:background="@drawable/button3"
         android:padding="19dp"
         android:text="Check answer"
@@ -42,12 +57,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="299dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="355dp"
         android:ems="10"
         android:hint="Give answer"
         android:inputType="textPersonName"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
+
+    <TextView
+        android:id="@+id/buyLf"
+        android:layout_width="355dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="67dp"
+        android:background="@drawable/button3"
+        android:padding="19dp"
+        android:text="Get an extra life!"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

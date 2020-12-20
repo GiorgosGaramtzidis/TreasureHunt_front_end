@@ -3,7 +3,9 @@ package com.ihu.treasurehunt_front_end.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class Question {
-    
+
+
+
     @SerializedName("question")
     private String question;
 
@@ -14,7 +16,7 @@ public class Question {
     private int points;
 
 
-    public Question( String question, String answer, int points) {
+    public Question(String question, String answer, int points) {
         this.question = question;
         this.answer = answer;
         this.points = points;
@@ -31,6 +33,8 @@ public class Question {
     public int getPoints() {
         return points;
     }
+
+
 
     @Override
     public String toString() {

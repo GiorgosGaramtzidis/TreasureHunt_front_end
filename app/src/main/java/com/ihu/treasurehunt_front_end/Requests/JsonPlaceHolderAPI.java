@@ -61,6 +61,9 @@ public interface JsonPlaceHolderAPI {
     @PATCH("LoseCondition/updateUserLives")
     Call<Boolean> updateUserLives(@Query("userName") String userName);
 
+    @PATCH("Users/buyLife")
+    Call<Boolean> buyLife(@Query("userName") String userName);
+
     @PATCH("Users/addScore")
     Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);
 
@@ -68,7 +71,7 @@ public interface JsonPlaceHolderAPI {
     Call<Integer> getUserScore(@Query("userName") String userName);
 
     @GET("AnswerCheck/AnswerCheck")
-    Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("locationTitle") String locationTitle);
+    Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("Question") String locationTitle);
 
     @PATCH("Users/setUserState")
     Call<Boolean> setUserState(@Query("userName") String userName,@Query("locationTitle") String locationTitle);
@@ -90,6 +93,13 @@ public interface JsonPlaceHolderAPI {
     @PATCH("Users/restart")
     Call<Boolean> restartScoreAndLives(@Query("userName") String userName);
 
+    @GET("Users/boughtAnswer")
+    Call<String> boughtAnswer(@Query("userName") String userName, @Query("question") String question);
 
+    @GET("api/Question/getRandomQuestion")
+    Call<Question> getRandomQuestion();
+
+    @POST("api/Question/getNewQuestion")
+    Call<Question> getNewQuestion(@Body List<Question> questionList);
 
 }

@@ -36,7 +36,6 @@ public class MapLocationList {
                              mapLocation.getV()
                             ,mapLocation.getV1()
                             ,mapLocation.getTitle()
-                            ,mapLocation.getQuestion()
                             ,mapLocation.getNextLocation()
                             ));
                 }
