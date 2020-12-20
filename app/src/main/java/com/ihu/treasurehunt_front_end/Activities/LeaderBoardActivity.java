@@ -4,22 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LeaderBoardList;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
-
 public class LeaderBoardActivity extends AppCompatActivity {
 
-     protected static TextView textView ;
+     protected static TextView textViewName;
+     protected static TextView textViewScore;
 private RetroFitCreate retroFitCreate = new RetroFitCreate();
 private LeaderBoardList leaderBoardList = new LeaderBoardList();
     @Override
@@ -28,9 +22,13 @@ private LeaderBoardList leaderBoardList = new LeaderBoardList();
         setContentView(R.layout.activity_leader_board);
         leaderBoardList.getLeaderBoard(retroFitCreate.getJsonPlaceHolderAPI());
         new Handler().postDelayed(() -> {
-            textView.setText(leaderBoardList.getLeaderBoardList().toString());
-        },1000);
-        textView = findViewById(R.id.Result);
+            for (int i=0;i<leaderBoardList.getLeaderBoardList().size();i++){
+                textViewName.append(leaderBoardList.getLeaderBoardList().get(i).getName());
+                textViewScore.append("\t\t\t\t\t\t\t"+Integer.toString(leaderBoardList.getLeaderBoardList().get(i).getScore())+"\n");
+            }
 
+        },1000);
+        textViewName = findViewById(R.id.ResultName);
+        textViewScore = findViewById(R.id.ResultScore);
     }
 }

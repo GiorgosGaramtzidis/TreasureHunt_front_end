@@ -34,16 +34,4 @@ public class LeaderBoardUsers {
         return score;
     }
 
-    public String toString() {
-        return  name + score ;
-
-    }
-
-
-
-
-
-
-
-
 }
