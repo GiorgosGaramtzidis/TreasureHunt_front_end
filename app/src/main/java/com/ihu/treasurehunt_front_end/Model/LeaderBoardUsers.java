@@ -35,9 +35,8 @@ public class LeaderBoardUsers {
     }
 
     public String toString() {
-        return "Name ->" + name + '\'' +
-                ", Score ->" + score +
-                '}';
+        return  name + score ;
+
     }
 
 
