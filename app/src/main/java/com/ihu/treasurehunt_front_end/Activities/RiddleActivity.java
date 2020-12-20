@@ -83,7 +83,7 @@ private LeaderBoardList leaderBoardList = new LeaderBoardList();
                             MainActivity.game.getUserLoggedIn(),
                             MainActivity.game.getLocation().getNextLocation());
                     new Handler().postDelayed(() -> {
-                        leaderBoardList.updateLeaderBoard(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),MainActivity.game.getLocation().getQuestion().getPoints());
+                        leaderBoardList.updateLeaderBoard(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),MainActivity.game.getQuestion().getPoints());
                         MapsActivity.marker.setVisible(false);
                         MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
                         MainActivity.game.setQuestion(requestNewQuestion.getQuestion());
