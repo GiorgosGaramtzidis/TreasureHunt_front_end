@@ -14,6 +14,7 @@ import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoginPost;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
+import com.ihu.treasurehunt_front_end.Requests.RequestRandomQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RestartScoreAndLives;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
+    protected static RequestRandomQuestion requestRandomQuestion = new RequestRandomQuestion();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
 
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
+
+        requestRandomQuestion.getRandomQuestion(retroFitCreate.getJsonPlaceHolderAPI());
 
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
 
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnPlayGame.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
+            game.setQuestion(requestRandomQuestion.getQuestion());
             game.setUserLoggedIn(SignInActivity.loginUser.getName());
             startActivity(new Intent(this,MapsActivity.class));
         });

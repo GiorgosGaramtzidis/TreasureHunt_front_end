@@ -31,7 +31,6 @@ public class RequestNextLocation {
                 mapLocationNext = new MapLocation(location.getV(),
                         location.getV1(),
                         location.getTitle(),
-                        location.getQuestion(),
                         location.getNextLocation());
 
 
