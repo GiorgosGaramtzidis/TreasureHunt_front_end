@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity"
-    android:background="@drawable/map"
-    >
+    android:background="@drawable/map">
 
 
     <TextView
@@ -17,9 +15,9 @@
         android:layout_centerInParent="true"
         android:background="@drawable/button3"
         android:padding="10dp"
-        android:text="Play"
+        android:text="@string/play"
         android:textAlignment="center"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textColor="@color/black"/>
 
 
@@ -29,10 +27,19 @@
         android:layout_above="@+id/btnPlayGame"
         android:layout_centerInParent="true"
         android:paddingBottom="80dp"
-        android:text="Treasure Hunt"
+        android:text="@string/treasure_hunt"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="37sp" />
+
+    <Button
+        android:id="@+id/leaderBoardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="456dp"
+        android:text="LeaderBoard" />
 
     <Button
         android:id="@+id/btnSettings"

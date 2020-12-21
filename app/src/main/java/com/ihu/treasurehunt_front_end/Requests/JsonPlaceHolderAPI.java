@@ -1,6 +1,7 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
 
+import com.ihu.treasurehunt_front_end.Model.LeaderBoardUsers;
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
 import com.ihu.treasurehunt_front_end.Model.RegistrationAnswer;
@@ -28,6 +29,12 @@ public interface JsonPlaceHolderAPI {
     @GET("Users/all")
     Call<List<User>> getUsers();
 
+    @GET("LeaderBoard/all")
+    Call<List<LeaderBoardUsers>> getLeaderBoard();
+
+    @PATCH("LeaderBoard/updateLeaderBoard")
+    Call<Boolean> updateLeaderBoardUsers(@Query("leaderBoardName")String leaderBoardName,@Query("score") int score);
+
     @POST("Questions/addQuestion")
     Call<Question> createQuestion(@Body Question questions);
 
@@ -45,11 +52,17 @@ public interface JsonPlaceHolderAPI {
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
 
+    @GET("api/Locations/RiskLocation")
+    Call<MapLocation> getRiskLocation();
+
     @POST("api/Locations/Next")
     Call<MapLocation> getNextLocation(@Query("nextLocation") String nextLocation);
 
     @PATCH("LoseCondition/updateUserLives")
     Call<Boolean> updateUserLives(@Query("userName") String userName);
+
+    @PATCH("Users/buyLife")
+    Call<Boolean> buyLife(@Query("userName") String userName);
 
     @PATCH("Users/addScore")
     Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);
@@ -64,7 +77,7 @@ public interface JsonPlaceHolderAPI {
     Call<String> changePassword(@Query("userName") String userName,@Query("newPass") String newPass);
 
     @GET("AnswerCheck/AnswerCheck")
-    Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("locationTitle") String locationTitle);
+    Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("Question") String locationTitle);
 
     @PATCH("Users/setUserState")
     Call<Boolean> setUserState(@Query("userName") String userName,@Query("locationTitle") String locationTitle);
@@ -88,6 +101,13 @@ public interface JsonPlaceHolderAPI {
     @PATCH("Users/restart")
     Call<Boolean> restartScoreAndLives(@Query("userName") String userName);
 
+    @GET("Users/boughtAnswer")
+    Call<String> boughtAnswer(@Query("userName") String userName, @Query("question") String question);
 
+    @GET("api/Question/getRandomQuestion")
+    Call<Question> getRandomQuestion();
+
+    @POST("api/Question/getNewQuestion")
+    Call<Question> getNewQuestion(@Body List<Question> questionList);
 
 }

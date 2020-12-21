@@ -25,7 +25,6 @@ public class RequestFirstLocation {
                 mapLocation = new MapLocation(location.getV(),
                         location.getV1(),
                         location.getTitle(),
-                        location.getQuestion(),
                         location.getNextLocation());
 
             }

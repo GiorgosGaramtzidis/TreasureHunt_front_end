@@ -17,6 +17,7 @@ import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
 import com.ihu.treasurehunt_front_end.Requests.LoginPost;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
+import com.ihu.treasurehunt_front_end.Requests.RequestRandomQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RestartScoreAndLives;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
@@ -29,25 +30,33 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static Game game;
-
-    public  RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
-    public  RetroFitCreate retroFitCreate = new RetroFitCreate();
-
-    public  ViewPager mViewPager;
-
-
+    protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
+    protected static RequestRandomQuestion requestRandomQuestion = new RequestRandomQuestion();
+    private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
+
+
+
     private LoginPost loginPost = new LoginPost();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button button = (Button) findViewById(R.id.leaderBoardButton);
+
+
 
         restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
+        requestRandomQuestion.getRandomQuestion(retroFitCreate.getJsonPlaceHolderAPI());
+
         TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
+
+        button.setOnClickListener(v -> {
+            startActivity(new Intent(this,LeaderBoardActivity.class));
+        });
 
         Button btnSettings = (Button) findViewById(R.id.btnSettings);
 
@@ -79,20 +88,15 @@ public class MainActivity extends AppCompatActivity {
 
         btnPlayGame.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
-            game.setUserLoggedIn(SignInActivity.loginPost.getUser().getName());
-            startActivity(new Intent(this, MapsActivity.class));
-
+            game.setQuestion(requestRandomQuestion.getQuestion());
+            game.setUserLoggedIn(SignInActivity.loginUser.getName());
+            startActivity(new Intent(this,MapsActivity.class));
         });
-
-
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
-
-    }
-
-    public void onCreate() {
     }
 }

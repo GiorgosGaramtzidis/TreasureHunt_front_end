@@ -42,6 +42,10 @@ public class GameWinActivity extends AppCompatActivity {
         slogan.setAnimation(botAnimation);
 
 
+
+
+
+
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(GameWinActivity.this,MainActivity.class);
             startActivity(intent);

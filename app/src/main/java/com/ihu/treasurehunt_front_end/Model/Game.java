@@ -6,6 +6,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
 
 
@@ -14,12 +17,31 @@ public class Game
     private int gameScore;
     private MapLocation location;
     private String userLoggedIn;
+    private Question question;
+    private List<Question> questionList = new ArrayList<>();
 
 
     public Game(MapLocation mapLocation) {
 
         this.location = mapLocation;
         this.gameScore = 0;
+    }
+
+    public List<Question> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<Question> questionList) {
+        this.questionList = questionList;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+        this.questionList.add(question);
     }
 
     public String getUserLoggedIn() {
