@@ -24,10 +24,12 @@ public class RequestRandomQuestion {
         call.enqueue(new Callback<Question>() {
             @Override
             public void onResponse(Call<Question> call, Response<Question> response) {
+
                 Question responseQuestion = response.body();
-                question = new Question(responseQuestion.getQuestion()
+                question = new Question(responseQuestion.getId(),responseQuestion.getQuestion()
                     ,responseQuestion.getAnswer()
                     ,responseQuestion.getPoints());
+                System.out.println(question);
             }
 
             @Override
