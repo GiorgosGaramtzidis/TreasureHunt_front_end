@@ -31,7 +31,7 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SignInActivityTest {
+public class SignInActivityTest2 {
 
     @Rule
     public ActivityTestRule<SignInActivity> mActivityTestRule = new ActivityTestRule<>(SignInActivity.class);
@@ -99,7 +99,7 @@ public class SignInActivityTest {
         appCompatEditText6.perform(pressImeActionButton());
 
         ViewInteraction materialTextView = onView(
-                allOf(withId(R.id.btnChangeName), withText("Login"),
+                allOf(withId(R.id.btnLogIn), withText("Login"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),

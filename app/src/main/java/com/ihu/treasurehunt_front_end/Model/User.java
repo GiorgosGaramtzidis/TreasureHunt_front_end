@@ -22,6 +22,14 @@ public class User {
     @SerializedName("status")
     private Status status;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public User(String name , String password)
     {
         this.name = name;

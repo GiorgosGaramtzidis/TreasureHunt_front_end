@@ -52,7 +52,7 @@ public class SignInActivityTest4 {
         pressBack();
 
         ViewInteraction materialTextView2 = onView(
-                allOf(withId(R.id.btnChangeName), withText("Login"),
+                allOf(withId(R.id.btnLogIn), withText("Login"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -92,7 +92,7 @@ public class SignInActivityTest4 {
         appCompatEditText3.perform(pressImeActionButton());
 
         ViewInteraction materialTextView3 = onView(
-                allOf(withId(R.id.btnChangeName), withText("Login"),
+                allOf(withId(R.id.btnLogIn), withText("Login"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),

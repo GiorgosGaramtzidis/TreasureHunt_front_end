@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ihu.treasurehunt_front_end.Activities.MainActivity;
-import com.ihu.treasurehunt_front_end.Activities.MapsActivity;
 import com.ihu.treasurehunt_front_end.Activities.SignInActivity;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.ChangeNameRequest;
@@ -29,7 +28,7 @@ public class NameChange extends AppCompatActivity {
         setContentView(R.layout.activity_name_change);
         EditText OldNameTEXT = (EditText) findViewById(R.id.OldNameTEXT);
         TextView btnGoback = (TextView) findViewById(R.id.btnGoback);
-        TextView btnChangeName = (TextView) findViewById(R.id.btnChangeName);
+        TextView btnChangeName = (TextView) findViewById(R.id.btnLogIn);
         EditText name1 = (EditText) findViewById(R.id.NewName);
         EditText name2 = (EditText) findViewById(R.id.NewNameConf);
 

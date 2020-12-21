@@ -2,13 +2,10 @@ package com.ihu.treasurehunt_front_end.Activities.SettingsActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ihu.treasurehunt_front_end.Activities.MapsActivity;
 import com.ihu.treasurehunt_front_end.Activities.SignInActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
 import com.ihu.treasurehunt_front_end.R;
@@ -17,10 +14,6 @@ import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Activities.MainActivity;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
-
-import java.text.BreakIterator;
-
-import static com.ihu.treasurehunt_front_end.Activities.SignInActivity.loginPost;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -36,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         TextView btnGoback = (TextView) findViewById(R.id.goback);
         TextView btnChangePass = (TextView) findViewById(R.id.btnChangePass);
-        TextView btnChangeName = (TextView) findViewById(R.id.btnChangeName);
+        TextView btnChangeName = (TextView) findViewById(R.id.btnLogIn);
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
