@@ -23,7 +23,7 @@ private LeaderBoardList leaderBoardList = new LeaderBoardList();
         leaderBoardList.getLeaderBoard(retroFitCreate.getJsonPlaceHolderAPI());
         new Handler().postDelayed(() -> {
             for (int i=0;i<leaderBoardList.getLeaderBoardList().size();i++){
-                textViewName.append(leaderBoardList.getLeaderBoardList().get(i).getName());
+                textViewName.append(leaderBoardList.getLeaderBoardList().get(i).getName()+"\n");
                 textViewScore.append("\t\t\t\t\t\t\t"+Integer.toString(leaderBoardList.getLeaderBoardList().get(i).getScore())+"\n");
             }
 

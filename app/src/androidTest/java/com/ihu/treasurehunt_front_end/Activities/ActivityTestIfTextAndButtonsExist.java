@@ -46,7 +46,6 @@ public class ActivityTestIfTextAndButtonsExist {
         onView(withId(R.id.txtLoginPassword)).check(matches(isDisplayed()));
         onView(withId(R.id.btnRegisterIfNotSignedUp)).check(matches(isDisplayed()));
         onView(withId(btnLogIn)).check(matches(isDisplayed()));
-        onView(withId(R.id.notSignedUpText)).check(matches(isDisplayed()));
     }
 
     @Test
