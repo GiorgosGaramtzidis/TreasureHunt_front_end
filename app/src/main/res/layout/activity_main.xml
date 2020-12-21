@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,6 +40,20 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="456dp"
         android:text="LeaderBoard" />
+
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="166dp"
+        android:layout_height="58dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="sans-serif"
+        android:text="Settings"
+
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:icon="@android:drawable/ic_menu_preferences"
+        app:iconTint="@color/black" />
 
     <Button
         android:layout_width="wrap_content"

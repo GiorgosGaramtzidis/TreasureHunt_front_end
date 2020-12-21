@@ -22,12 +22,27 @@ public class User {
     @SerializedName("status")
     private Status status;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public User(String name , String password)
     {
         this.name = name;
         this.password=password;
         this.score = 0;
         this.userLives = 5;
+    }
+    public User(){
+        this.userId = userId;
+        this.name = name;
+        this.score = score;
+        this.password = password;
+        this.userLives = userLives;
     }
 
     public String getUserId() {

@@ -70,6 +70,12 @@ public interface JsonPlaceHolderAPI {
     @GET("Users/getUserScore")
     Call<Integer> getUserScore(@Query("userName") String userName);
 
+    @PATCH("Users/changeName")
+    Call<String> changeName(@Query("userName") String userName,@Query("newName") String newName);
+
+    @PATCH("Users/changePassword")
+    Call<String> changePassword(@Query("userName") String userName,@Query("newPass") String newPass);
+
     @GET("AnswerCheck/AnswerCheck")
     Call<Boolean> checkAnswer(@Query("usersAnswer") String usersAnswer,@Query("Question") String locationTitle);
 
@@ -82,6 +88,8 @@ public interface JsonPlaceHolderAPI {
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);
 
+    @GET("Users/registerUser")
+    Call<User> RegisterUser(@Body User user);
     @POST("UserRegistration/registerUser")
     Call<RegistrationAnswer>RegisterUser(@Query("username")String userName, @Query("password") String passWord);
 

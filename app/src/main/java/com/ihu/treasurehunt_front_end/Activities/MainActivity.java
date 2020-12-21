@@ -2,12 +2,15 @@ package com.ihu.treasurehunt_front_end.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
+import com.ihu.treasurehunt_front_end.Activities.SettingsActivity.SettingsActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
 import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
@@ -18,9 +21,12 @@ import com.ihu.treasurehunt_front_end.Requests.RequestRandomQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RestartScoreAndLives;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
+import org.jetbrains.annotations.NotNull;
+
 import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
+
 
 
     public static Game game;
@@ -50,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
 
         button.setOnClickListener(v -> {
             startActivity(new Intent(this,LeaderBoardActivity.class));
+        });
+
+        Button btnSettings = (Button) findViewById(R.id.btnSettings);
+
+        btnSettings.setOnClickListener(v -> {
+            game = new Game(requestFirstLocation.getLocation());
+            game.setUserLoggedIn(SignInActivity.loginPost.getUser().getName());
+            startActivity(new Intent(this, SettingsActivity.class));
         });
 
         TextView username = findViewById(R.id.userName);
