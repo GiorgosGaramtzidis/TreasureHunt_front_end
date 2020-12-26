@@ -18,7 +18,6 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView passwordText2;
     private TextView userNameText;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
                         ,userNameText.getText().toString()
                         ,passwordText.getText().toString());
 
-                new Handler().postDelayed(() -> Snackbar.make(v,
+                new Handler().postDelayed(() ->
+                        Snackbar.make(v,
                         registerPost.getRegistrationAnswer().getAnswer()
                         ,Snackbar.LENGTH_LONG).setAction("Go back", v1 ->
                         startActivity(intent)).show(),1000);

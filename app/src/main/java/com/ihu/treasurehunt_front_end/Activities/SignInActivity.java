@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
-import com.ihu.treasurehunt_front_end.Requests.LoginPost;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
+import com.ihu.treasurehunt_front_end.Service.LoginService;
 
 
 public class SignInActivity extends AppCompatActivity {
@@ -20,7 +20,7 @@ public class SignInActivity extends AppCompatActivity {
     protected TextView txtLoginUserName;
     protected TextView txtLoginPassword;
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
-    public static LoginPost loginPost = new LoginPost();
+    public static LoginService loginPost = new LoginService();
 
     protected static User loginUser;
 
@@ -33,26 +33,27 @@ public class SignInActivity extends AppCompatActivity {
         txtLoginPassword = findViewById(R.id.txtLoginPassword);
         TextView btnRegisterIfNotSignedUp = findViewById(R.id.btnRegisterIfNotSignedUp);
         TextView btnLogin = findViewById(R.id.btnLogIn);
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent playerIntent = new Intent(this,MainActivity.class);
+        //ToDo..
+        Intent adminIntent = null;
         Intent intentToRegister = new Intent(this,SignUpActivity.class);
-
 
 
         btnLogin.setOnClickListener(v -> {
 
-            if (confirmTextViews()) {
-
-                loginPost.LoginUserPost(retroFitCreate.getJsonPlaceHolderAPI(), txtLoginUserName.getText().toString(), txtLoginPassword.getText().toString());
+                loginPost.LoginUser(retroFitCreate.getJsonPlaceHolderAPI()
+                        , txtLoginUserName.getText().toString()
+                        , txtLoginPassword.getText().toString());
                 new Handler().postDelayed(() -> {
-                    Snackbar.make(v,"You are logged in" , Snackbar.LENGTH_SHORT).show();
+                    if(loginPost.getUser() != null)
+                    {
+                        Snackbar.make(v,"You are logged in" , Snackbar.LENGTH_SHORT).show();
+                        startActivity(loginPost.getRightIntent(playerIntent,adminIntent));
 
-                    if (loginPost.getUser() != null) {
-                        loginUser = loginPost.getUser();
-                        startActivity(intent);
-                    }
-                }, 300);
-            }else
-                Snackbar.make(v,"Check your fields",Snackbar.LENGTH_SHORT).show();
+                    }else
+                        Snackbar.make(v,loginPost.getMessage(),Snackbar.LENGTH_SHORT).show();
+
+                 }, 300);
         });
         btnRegisterIfNotSignedUp.setOnClickListener(v -> startActivity(intentToRegister));
     }

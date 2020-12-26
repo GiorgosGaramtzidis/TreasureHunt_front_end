@@ -12,18 +12,15 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ihu.treasurehunt_front_end.Activities.SettingsActivity.SettingsActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
-import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
-import com.ihu.treasurehunt_front_end.Requests.LoginPost;
+import com.ihu.treasurehunt_front_end.Service.LoginService;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
 import com.ihu.treasurehunt_front_end.Requests.RequestRandomQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RestartScoreAndLives;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 import org.jetbrains.annotations.NotNull;
-
-import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private LoginPost loginPost = new LoginPost();
+    private LoginService loginService = new LoginService();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

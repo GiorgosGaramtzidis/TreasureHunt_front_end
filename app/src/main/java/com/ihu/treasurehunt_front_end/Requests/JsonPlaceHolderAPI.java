@@ -1,6 +1,5 @@
 package com.ihu.treasurehunt_front_end.Requests;
 
-
 import com.ihu.treasurehunt_front_end.Model.LeaderBoardUsers;
 import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
@@ -19,6 +18,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface JsonPlaceHolderAPI {
+
+    @POST("TreasureHuntGame/createGame")
+    Call<Boolean> createGame(@Query("id")String id,@Query("gameName") String gameName,@Query("gameLocation") String gameLocation);
 
     @GET("Questions/find")
     Call<List<Question>> getQuestions();
@@ -98,6 +100,7 @@ public interface JsonPlaceHolderAPI {
 
     @PATCH("UserLogin/logout")
     Call<Void> logoutUser(@Query("username")String username);
+
     @PATCH("Users/restart")
     Call<Boolean> restartScoreAndLives(@Query("userName") String userName);
 

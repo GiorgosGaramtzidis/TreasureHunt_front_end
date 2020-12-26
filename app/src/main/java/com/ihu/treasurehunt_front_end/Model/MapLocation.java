@@ -27,6 +27,9 @@ public class MapLocation {
         this.nextLocation = nextLocation;
     }
 
+    public MapLocation() {
+    }
+
     public double getV() {
         return v;
     }
@@ -43,6 +46,23 @@ public class MapLocation {
 
     public String getNextLocation() {
         return nextLocation;
+    }
+
+    public void setV(double v) {
+        this.v = v;
+    }
+
+    public void setV1(double v1) {
+        this.v1 = v1;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
+    public void setNextLocation(String nextLocation) {
+        this.nextLocation = nextLocation;
     }
 
     @Override

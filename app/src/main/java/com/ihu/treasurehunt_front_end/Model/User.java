@@ -30,12 +30,16 @@ public class User {
         this.password = password;
     }
 
+    @SerializedName("Role")
+    private Role role;
+
     public User(String name , String password)
     {
         this.name = name;
         this.password=password;
         this.score = 0;
         this.userLives = 5;
+        this.role = Role.PLAYER;
     }
     public User(){
         this.userId = userId;
@@ -68,6 +72,10 @@ public class User {
 
     public Integer getUserLives() {
         return userLives;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public Status getStatus() {

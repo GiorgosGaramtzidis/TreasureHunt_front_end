@@ -48,7 +48,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng latLng;
     protected static Marker marker;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
-
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -102,9 +99,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     marker = MainActivity.game.addFirstLocationToMap(mMap);
 
                     MainActivity.game.DistanceBetween(latLng,marker);
-
-
-
 
                 } catch (SecurityException e) {
                     e.printStackTrace();

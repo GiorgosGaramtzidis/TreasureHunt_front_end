@@ -9,10 +9,7 @@ import retrofit2.Response;
 
 public class RequestFirstLocation {
 
-
     private MapLocation mapLocation;
-
-
 
     public void get(JsonPlaceHolderAPI jsonPlaceHolderAPI){
         Call<MapLocation> call = jsonPlaceHolderAPI.getStartLocation();
