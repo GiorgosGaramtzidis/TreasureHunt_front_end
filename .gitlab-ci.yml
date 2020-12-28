@@ -15,7 +15,7 @@ before_script:
 
 stages:
   - build
-  - test
+#  - test
   - release
 
 lintDebug:
@@ -35,12 +35,12 @@ assembleDebug:
     paths:
       - app/build/outputs/
 
-debugTests:
-  stage: test
-  only:
-    - master
-  script:
-    - ./gradlew -Pci --console=plain :app:testDebug
+#debugTests:
+#  stage: test
+#  only:
+#    - master
+#  script:
+#    - ./gradlew -Pci --console=plain :app:testDebug
 assembleRelease:
   stage: release
   only:
