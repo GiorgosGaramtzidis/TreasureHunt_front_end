@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ihu.treasurehunt_front_end">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -16,15 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TreasureHunt_front_end"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.SettingsActivity.NameChange"></activity>
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity android:name=".Activities.AdminMainActivity"></activity>
+        <activity android:name=".Activities.SettingsActivity.NameChange" />
         <activity android:name=".Activities.SettingsActivity.PasswordChange" />
         <activity android:name=".Activities.SettingsActivity.SettingsActivity" />
         <activity android:name=".Activities.GameWinActivity" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.LeaderBoardActivity"/>
-
+        <activity android:name=".Activities.LeaderBoardActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

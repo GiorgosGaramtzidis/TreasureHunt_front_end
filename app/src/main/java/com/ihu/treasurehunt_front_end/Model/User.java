@@ -17,10 +17,27 @@ public class User {
     private String password;
 
     @SerializedName("userLives")
-    private Integer userLives;
+    private int userLives;
 
     @SerializedName("status")
     private Status status;
+
+    @SerializedName("UserState")
+    private UserState userState;
+
+    @SerializedName("userRole")
+    private UserRole role;
+
+    public User(String userId, String name, int score, String password, int userLives, Status status, UserState userState, UserRole role) {
+        this.userId = userId;
+        this.name = name;
+        this.score = score;
+        this.password = password;
+        this.userLives = userLives;
+        this.status = status;
+        this.userState = userState;
+        this.role = role;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -28,25 +45,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @SerializedName("Role")
-    private Role role;
-
-    public User(String name , String password)
-    {
-        this.name = name;
-        this.password=password;
-        this.score = 0;
-        this.userLives = 5;
-        this.role = Role.PLAYER;
-    }
-    public User(){
-        this.userId = userId;
-        this.name = name;
-        this.score = score;
-        this.password = password;
-        this.userLives = userLives;
     }
 
     public String getUserId() {
@@ -74,7 +72,7 @@ public class User {
         return userLives;
     }
 
-    public Role getRole() {
+    public UserRole getRole() {
         return role;
     }
 

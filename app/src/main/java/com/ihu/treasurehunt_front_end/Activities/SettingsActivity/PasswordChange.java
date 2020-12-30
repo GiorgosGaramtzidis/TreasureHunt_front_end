@@ -37,7 +37,7 @@ public class PasswordChange extends AppCompatActivity {
         EditText Pass1 = (EditText) findViewById(R.id.newPass);
         EditText Pass2 = (EditText) findViewById(R.id.newPassConf);
 
-        OldPasswordTEXT.setText(SignInActivity.loginPost.getUser().getPassword());
+        OldPasswordTEXT.setText(SignInActivity.loginUser.getPassword());
 
         btnChangePass.setOnClickListener(v -> {
             if (Pass1.getText().toString().equals(Pass2.getText().toString())) {

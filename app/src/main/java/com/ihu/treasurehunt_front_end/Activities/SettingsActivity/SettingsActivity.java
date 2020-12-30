@@ -20,24 +20,19 @@ public class SettingsActivity extends AppCompatActivity {
 
     protected static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
-    private RetroFitCreate retroFitCreate = new RetroFitCreate();
-
+    private final RetroFitCreate retroFitCreate = new RetroFitCreate();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        TextView btnGoback = (TextView) findViewById(R.id.goback);
-        TextView btnChangePass = (TextView) findViewById(R.id.btnChangePass);
-        TextView btnChangeName = (TextView) findViewById(R.id.btnLogIn);
+        TextView btnGoback =  findViewById(R.id.goback);
+        TextView btnChangePass =  findViewById(R.id.btnChangePass);
+        TextView btnChangeName =  findViewById(R.id.btnLogIn);
 
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
 
-
-
-        btnGoback.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
-        });
+        btnGoback.setOnClickListener(v -> finish());
 
         btnChangeName.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
@@ -47,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         btnChangePass.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
-            game.setUserLoggedIn(SignInActivity.loginPost.getUser().getPassword());
+            game.setUserLoggedIn(SignInActivity.loginUser.getPassword());
             startActivity(new Intent(this, PasswordChange.class));
         });
 

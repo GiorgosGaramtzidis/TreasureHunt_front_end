@@ -2,6 +2,7 @@ package com.ihu.treasurehunt_front_end.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,7 @@ public class GameWinActivity extends AppCompatActivity {
     TextView treasure,slogan,winner;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,14 +44,6 @@ public class GameWinActivity extends AppCompatActivity {
         slogan.setAnimation(botAnimation);
 
 
-
-
-
-
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(GameWinActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        },SPLASH_SCREEN);
+        new Handler().postDelayed(this::finish,SPLASH_SCREEN);
     }
 }

@@ -2,16 +2,19 @@ package com.ihu.treasurehunt_front_end.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.widget.Button;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ihu.treasurehunt_front_end.Activities.SettingsActivity.SettingsActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
+import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
 import com.ihu.treasurehunt_front_end.Service.LoginService;
@@ -24,54 +27,45 @@ import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     protected static RequestRandomQuestion requestRandomQuestion = new RequestRandomQuestion();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
-
-
-
+    private  Bundle bundle;
     private LoginService loginService = new LoginService();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = (Button) findViewById(R.id.leaderBoardButton);
-
-
+        Button button = findViewById(R.id.leaderBoardButton);
 
         restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
-
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
-
         requestRandomQuestion.getRandomQuestion(retroFitCreate.getJsonPlaceHolderAPI());
 
-        TextView btnPlayGame = (TextView) findViewById(R.id.btnPlayGame);
+        TextView btnPlayGame =  findViewById(R.id.btnPlayGame);
+        Button exitApp = findViewById(R.id.logOut);
+        Button btnSettings =  findViewById(R.id.btnSettings);
+        TextView username = findViewById(R.id.userName);
+        TextView status = findViewById(R.id.userStatus);
+        TextView id = findViewById(R.id.userId);
+
+        bundle = getIntent().getExtras();
+        username.append(bundle.getString("username"));
+        id.append(bundle.getString("id"));
+        status.append(bundle.getString("status"));
 
         button.setOnClickListener(v -> {
             startActivity(new Intent(this,LeaderBoardActivity.class));
         });
 
-        Button btnSettings = (Button) findViewById(R.id.btnSettings);
-
         btnSettings.setOnClickListener(v -> {
             game = new Game(requestFirstLocation.getLocation());
-            game.setUserLoggedIn(SignInActivity.loginPost.getUser().getName());
+            game.setUserLoggedIn(SignInActivity.loginUser.getName());
             startActivity(new Intent(this, SettingsActivity.class));
         });
-
-        TextView username = findViewById(R.id.userName);
-        TextView status = findViewById(R.id.userStatus);
-        TextView id = findViewById(R.id.userId);
-
-        username.append(SignInActivity.loginUser.getName());
-        id.append(SignInActivity.loginUser.getUserId());
-        status.append(SignInActivity.loginUser.getStatus().toString());
-
-        Button exitApp = findViewById(R.id.logOut);
 
 
         exitApp.setOnClickListener(v ->{
@@ -96,4 +90,5 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
     }
+
 }

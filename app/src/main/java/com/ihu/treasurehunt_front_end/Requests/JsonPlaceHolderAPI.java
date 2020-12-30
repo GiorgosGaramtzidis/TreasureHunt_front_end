@@ -90,8 +90,6 @@ public interface JsonPlaceHolderAPI {
     @GET("LoseCondition/getUserLives")
     Call<Integer> getUserLives(int userLives);
 
-    @GET("Users/registerUser")
-    Call<User> RegisterUser(@Body User user);
     @POST("UserRegistration/registerUser")
     Call<RegistrationAnswer>RegisterUser(@Query("username")String userName, @Query("password") String passWord);
 

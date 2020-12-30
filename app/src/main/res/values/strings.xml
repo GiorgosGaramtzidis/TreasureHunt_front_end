@@ -26,7 +26,6 @@
     <string name="play">Play</string>
     <string name="treasure_hunt">Treasure Hunt</string>
     <string name="enter_latitude">enter latitude</string>
-    <string name="admins_hall">Admins Hall</string>
     <string name="enter_latitude1">Enter latitude</string>
     <string name="enter_longitude">Enter longitude</string>
     <string name="enter_title">Enter Title</string>
@@ -50,4 +49,12 @@
     <string name="generateid">GenerateId</string>
     <string name="generate_id">Generate ID</string>
     <string name="add_location">Add location</string>
+    <string name="admins_hall">Admins Hall</string>
+    <string name="create_game">Create game</string>
+    <string name="add_locations_to_a_game">Add locations to a Game</string>
+    <string name="add_questin_to_storage">Add questin to Storage</string>
+    <string name="store_a_question">Store a question</string>
+    <string name="username1">Username :</string>
+    <string name="role">Role :</string>
+    <string name="id1">id :</string>
 </resources>

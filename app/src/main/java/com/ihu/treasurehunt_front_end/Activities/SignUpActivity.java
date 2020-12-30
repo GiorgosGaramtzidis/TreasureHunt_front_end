@@ -1,5 +1,4 @@
 package com.ihu.treasurehunt_front_end.Activities;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.ihu.treasurehunt_front_end.Dialogs.RegistrationPatternDialog;
 import com.ihu.treasurehunt_front_end.R;
-import com.ihu.treasurehunt_front_end.Requests.RegisterPost;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
-
+import com.ihu.treasurehunt_front_end.Service.RegisterService;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -26,46 +24,32 @@ public class SignUpActivity extends AppCompatActivity {
         userNameText = findViewById(R.id.txtUserName);
         passwordText = findViewById(R.id.txtPassword);
         passwordText2 = findViewById(R.id.txtPassword2);
+
         TextView btnRegister = findViewById(R.id.btnRegister);
         TextView registrationPattern = findViewById(R.id.btnRegistrationPattern);
 
-
         RetroFitCreate retroFitCreate = new RetroFitCreate();
-        RegisterPost registerPost = new RegisterPost();
+        RegisterService registerService = new RegisterService();
         RegistrationPatternDialog registrationPatternDialog = new RegistrationPatternDialog();
+
         Intent intent = new Intent(this,SignInActivity.class);
 
         btnRegister.setOnClickListener(v ->{
-            if (ConfirmTextViews())
-            {
-                registerPost.RegisterUserPost(retroFitCreate
-                        .getJsonPlaceHolderAPI()
-                        ,userNameText.getText().toString()
-                        ,passwordText.getText().toString());
-
+                registerService.RegisterUserPost(retroFitCreate
+                                .getJsonPlaceHolderAPI()
+                                , userNameText.getText().toString()
+                                , passwordText.getText().toString(),
+                                passwordText2.getText().toString());
                 new Handler().postDelayed(() ->
                         Snackbar.make(v,
-                        registerPost.getRegistrationAnswer().getAnswer()
-                        ,Snackbar.LENGTH_LONG).setAction("Go back", v1 ->
-                        startActivity(intent)).show(),1000);
-            }
-            else
-                Snackbar.make(v,"Check your password fields",Snackbar.LENGTH_SHORT).show();
+                                registerService.getAnswer()
+                                ,Snackbar.LENGTH_LONG).setAction("Go back", v1 ->
+                                startActivity(intent)).show(),1000);
         });
 
         registrationPattern.setOnClickListener(v ->
                 registrationPatternDialog.show(getSupportFragmentManager(),"Registration Rules"));
     }
 
-    public Boolean ConfirmTextViews()
-    {
-        if (userNameText.getText().length() >= 5
-                && userNameText.getText().length()<=20
-                && passwordText.getText().length() >= 8)
-        {
-            return passwordText.getText().length() == passwordText2.getText().length();
 
-        }
-        return false;
-    }
 }
