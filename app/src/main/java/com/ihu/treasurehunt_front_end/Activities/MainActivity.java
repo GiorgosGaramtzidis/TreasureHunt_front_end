@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             logOutRequest.logOutUser(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
             new Handler().postDelayed(() ->{
                 System.exit(0);
-            },1000);
+            },100);
 
         });
 
