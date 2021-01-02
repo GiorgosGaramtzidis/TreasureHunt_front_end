@@ -29,16 +29,13 @@ public class AdminCreateGamesActivity extends AppCompatActivity {
         MaterialButton goBack = findViewById(R.id.btnGoback);
         TreasureHuntGameService treasureHuntGameService = new TreasureHuntGameService();
         RetroFitCreate retroFitCreate = new RetroFitCreate();
-        generateId.setOnClickListener( v -> {
-            textGameId.setText(treasureHuntGameService.generateID());
-        });
+        generateId.setOnClickListener( v -> textGameId.setText(treasureHuntGameService.generateID()));
 
         goBack.setOnClickListener( v ->{
-            LogOutRequest logOutRequest = new LogOutRequest();
-            logOutRequest.logOutUser(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
-            new Handler().postDelayed(() ->{
-                System.exit(0);
-            },100);
+            textGameId.setText("");
+            textGameArea.setText("");
+            textGameTitle.setText("");
+           finish();
         });
         complete.setOnClickListener(v ->{
             try {
@@ -46,14 +43,13 @@ public class AdminCreateGamesActivity extends AppCompatActivity {
                         textGameId.getText().toString(),
                         textGameTitle.getText().toString(),
                         textGameArea.getText().toString());
+                new Handler().postDelayed(() -> Snackbar.make(
+                        v,treasureHuntGameService.getMessage()
+                        ,Snackbar.LENGTH_SHORT).show()
+                        ,500);
             }catch (NullPointerException e){
-             Snackbar.make(v,"Fill all text views",Snackbar.LENGTH_SHORT).show();
+             Snackbar.make(v,"Fill all textviews",Snackbar.LENGTH_SHORT).show();
             }
-            new Handler().postDelayed(() ->{
-                    Snackbar.make(v,treasureHuntGameService.getMessage(),Snackbar.LENGTH_SHORT).show();
-            },500);
-
         });
-
     }
 }

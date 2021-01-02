@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class AdminMainActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class AdminMainActivity extends AppCompatActivity {
         TextView role = findViewById(R.id.userRole);
 
         MaterialButton createGame = findViewById(R.id.btnCreateGame);
+        Button logOut = findViewById(R.id.logOut);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -29,10 +33,19 @@ public class AdminMainActivity extends AppCompatActivity {
         username.append(bundle.getString("username"));
         role.append(bundle.getString("role"));
 
+        RetroFitCreate retroFitCreate = new RetroFitCreate();
+
         createGame.setOnClickListener(v ->
                 startActivity(new Intent(this
                         ,AdminCreateGamesActivity.class)
                 ));
+
+        logOut.setOnClickListener(v ->{
+            LogOutRequest logOutRequest = new LogOutRequest();
+            logOutRequest.logOutUser(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
+            new Handler().postDelayed(() -> System.exit(0),100);
+        });
+
 
     }
 }

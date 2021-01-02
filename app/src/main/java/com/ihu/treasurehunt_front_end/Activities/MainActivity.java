@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected static RequestRandomQuestion requestRandomQuestion = new RequestRandomQuestion();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
-    private  Bundle bundle;
     private LoginService loginService = new LoginService();
 
     @Override
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         TextView status = findViewById(R.id.userStatus);
         TextView id = findViewById(R.id.userId);
 
-        bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
         username.append(bundle.getString("username"));
         id.append(bundle.getString("id"));
         status.append(bundle.getString("status"));

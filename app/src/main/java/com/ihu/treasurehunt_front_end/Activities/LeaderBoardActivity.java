@@ -14,8 +14,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
      protected static TextView textViewName;
      protected static TextView textViewScore;
-private RetroFitCreate retroFitCreate = new RetroFitCreate();
-private LeaderBoardList leaderBoardList = new LeaderBoardList();
+    private RetroFitCreate retroFitCreate = new RetroFitCreate();
+    private LeaderBoardList leaderBoardList = new LeaderBoardList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
