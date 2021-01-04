@@ -23,7 +23,6 @@ public class CasinoRequest {
                     return;
                 }
                 hasWonRisk = response.body();
-                System.out.println(hasWonRisk);
             }
 
             @Override

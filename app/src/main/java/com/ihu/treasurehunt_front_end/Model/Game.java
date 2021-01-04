@@ -38,11 +38,11 @@ public class Game
     }
 
     public MarkerOptions casinoMarkerOptions(){
-        return new MarkerOptions().position(this.position()).title(this.casinoLocation.getTitle());
+        return new MarkerOptions().position(this.casinoPosition()).title(this.casinoLocation.getTitle());
     }
 
     public Marker addCasinoLocationToMap(GoogleMap map){
-        Marker marker = map.addMarker(this.markerOptions());
+        Marker marker = map.addMarker(this.casinoMarkerOptions());
         marker.setVisible(true);
         return marker;
     }

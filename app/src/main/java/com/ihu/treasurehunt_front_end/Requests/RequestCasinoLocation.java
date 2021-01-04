@@ -22,7 +22,6 @@ public class RequestCasinoLocation {
                 mapLocation = new MapLocation(location.getV(),
                         location.getV1(),
                         location.getTitle(),null);
-                System.out.println("========"+response.body());
             }
 
             @Override
@@ -34,13 +33,5 @@ public class RequestCasinoLocation {
 
     public MapLocation getMapLocation() {
         return this.mapLocation;
-    }
-
-
-    @Override
-    public String toString() {
-        return "RequestCasinoLocation{" +
-                "mapLocation=" + mapLocation +
-                '}';
     }
 }
