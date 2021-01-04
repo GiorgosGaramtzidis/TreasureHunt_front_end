@@ -30,7 +30,6 @@ public class RequestNewQuestion {
                 question = new Question(responseQuestion.getId(),responseQuestion.getQuestion()
                         ,responseQuestion.getAnswer()
                         ,responseQuestion.getPoints());
-                System.out.println(question);
             }
 
             @Override
