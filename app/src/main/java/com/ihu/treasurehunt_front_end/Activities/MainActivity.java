@@ -17,6 +17,7 @@ import com.ihu.treasurehunt_front_end.Model.Game;
 import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
+import com.ihu.treasurehunt_front_end.Requests.RequestCasinoLocation;
 import com.ihu.treasurehunt_front_end.Service.LoginService;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
 import com.ihu.treasurehunt_front_end.Requests.RequestRandomQuestion;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
+    protected static RequestCasinoLocation requestCasinoLocation = new RequestCasinoLocation();
     protected static RequestRandomQuestion requestRandomQuestion = new RequestRandomQuestion();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
+        requestCasinoLocation.getCasinoLocation((retroFitCreate.getJsonPlaceHolderAPI()));
         requestRandomQuestion.getRandomQuestion(retroFitCreate.getJsonPlaceHolderAPI());
 
         TextView btnPlayGame =  findViewById(R.id.btnPlayGame);
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSettings.setOnClickListener(v -> {
-            game = new Game(requestFirstLocation.getLocation());
+            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation());
             game.setUserLoggedIn(SignInActivity.loginUser.getName());
             startActivity(new Intent(this, SettingsActivity.class));
         });
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnPlayGame.setOnClickListener(v -> {
-            game = new Game(requestFirstLocation.getLocation());
+            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation());
             game.setQuestion(requestRandomQuestion.getQuestion());
             game.setUserLoggedIn(SignInActivity.loginUser.getName());
             startActivity(new Intent(this,MapsActivity.class));
