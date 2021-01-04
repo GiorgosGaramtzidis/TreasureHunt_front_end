@@ -19,7 +19,8 @@
         android:theme="@style/Theme.TreasureHunt_front_end"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activities.AdminMainActivity"></activity>
+        <activity android:name=".Activities.AdminStoreQuestionsActivity"></activity>
+        <activity android:name=".Activities.AdminMainActivity" />
         <activity android:name=".Activities.SettingsActivity.NameChange" />
         <activity android:name=".Activities.SettingsActivity.PasswordChange" />
         <activity android:name=".Activities.SettingsActivity.SettingsActivity" />

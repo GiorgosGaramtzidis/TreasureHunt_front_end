@@ -28,17 +28,14 @@ public interface JsonPlaceHolderAPI {
     @GET("Locations/find")
     Call<List<MapLocation>> getMapLocations();
 
-    @GET("Users/all")
-    Call<List<User>> getUsers();
-
     @GET("LeaderBoard/all")
     Call<List<LeaderBoardUsers>> getLeaderBoard();
 
     @PATCH("LeaderBoard/updateLeaderBoard")
     Call<Boolean> updateLeaderBoardUsers(@Query("leaderBoardName")String leaderBoardName,@Query("score") int score);
 
-    @POST("Questions/addQuestion")
-    Call<Question> createQuestion(@Body Question questions);
+    @POST("/api/Question/addQuestion")
+    Call<Boolean> createQuestion(@Body Question questions);
 
     @POST("Users/addUsers")
     Call<User> createUser(@Body User user);

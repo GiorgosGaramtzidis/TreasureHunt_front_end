@@ -40,6 +40,8 @@ public class SignInActivity extends AppCompatActivity {
                     try {
                         loginUser =loginService.getUser();
                         startActivity(loginService.chooseIntent(playerIntent,adminIntent));
+                        txtLoginPassword.setText("");
+                        txtLoginUserName.setText("");
                     } catch (NullPointerException e)
                     {
                         Snackbar.make(v,loginService.getMessage(),Snackbar.LENGTH_SHORT).show();
@@ -47,8 +49,6 @@ public class SignInActivity extends AppCompatActivity {
 
                 },500);
         });
-
-
         btnRegisterIfNotSignedUp.setOnClickListener(v -> startActivity(intentToRegister));
     }
 }

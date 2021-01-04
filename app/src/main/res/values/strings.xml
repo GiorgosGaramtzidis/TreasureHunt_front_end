@@ -57,4 +57,11 @@
     <string name="username1">Username :</string>
     <string name="role">Role :</string>
     <string name="id1">id :</string>
+    <string name="store_question">Store Question</string>
+    <string name="enter_the_question">Enter the question</string>
+    <string name="give_the_answer">Give the answer</string>
+    <string name="add_points">Add points</string>
+    <string name="store">Store</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear_texts">Clear texts</string>
 </resources>
