@@ -82,6 +82,13 @@ public class ActivityTestIfTextAndButtonsExist {
         onView(withId(R.id.btnChangePass)).check(matches(isDisplayed()));
         onView(withId(R.id.goback)).check(matches(isDisplayed()));
     }
+    @Test
+    public void OnGameWinActivityCheckIfAllTheFieldsAreVisible() {
+        ActivityScenario.launch(GameWinActivity.class);
+        onView(withId(R.id.TreasurePic)).check(matches(isDisplayed()));
+        onView(withId(R.id.txtTreasure)).check(matches(isDisplayed()));
+        onView(withId(R.id.txtSlogan)).check(matches(isDisplayed()));
+    }
 }
 
 

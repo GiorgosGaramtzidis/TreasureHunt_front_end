@@ -47,6 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker motionMarker = null;
     private LatLng latLng;
     protected static Marker marker;
+    private  Marker casinoMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tei, 5));
 
         marker = MainActivity.game.addFirstLocationToMap(mMap);
+        casinoMarker = MainActivity.game.addCasinoLocationToMap(mMap);
 
 
         locationListener = new LocationListener() {
@@ -97,6 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),16 ));
 
                     marker = MainActivity.game.addFirstLocationToMap(mMap);
+                    casinoMarker = MainActivity.game.addCasinoLocationToMap(mMap);
 
                     MainActivity.game.DistanceBetween(latLng,marker);
 
@@ -126,6 +129,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);
                 return false;
             }
+            else if (marker.getTitle().equals("Casino")){
+
+                Intent intent = new Intent (MapsActivity.this, CasinoActivity.class);
+                startActivity(intent);
+                return false;}
             else {
                 new Handler().postDelayed(() -> {
                     String stateUserToWIN = checkUserState.getUserToWIN();
