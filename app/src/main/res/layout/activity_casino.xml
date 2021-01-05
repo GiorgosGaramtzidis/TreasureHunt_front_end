@@ -5,48 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.CasinoActivity"
-    android:background="@drawable/casino">
+    android:background="@drawable/casino_layout">
 
     <TextView
         android:id="@+id/casinoTxt"
         android:layout_width="320dp"
         android:layout_height="226dp"
-        android:text="You can press this risk button if you wish to take a risk! You will either lose all of your points or double them!!"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="You can press the button if you wish to take a risk! You will either lose all of your points or double them!!"
         android:textAlignment="center"
         android:textColor="#6C1D1D"
         android:textSize="30sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261" />
+        app:layout_constraintVertical_bias="0.465" />
 
     <TextView
         android:id="@+id/casinoRisk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:text="Casino Risk"
-        android:textColor="#CC4242"
+        android:textAllCaps="true"
+        android:textColor="#101010"
         android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.212" />
 
     <ImageButton
         android:id="@+id/riskBtn"
-        android:layout_width="218dp"
-        android:layout_height="205dp"
+        android:layout_width="78dp"
+        android:layout_height="93dp"
+        android:background="#431717"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661"
-        app:srcCompat="@drawable/risk" />
+        app:layout_constraintVertical_bias="0.77"
+        app:srcCompat="@drawable/bomb1" />
 
     <ImageButton
         android:id="@+id/backBtn"
