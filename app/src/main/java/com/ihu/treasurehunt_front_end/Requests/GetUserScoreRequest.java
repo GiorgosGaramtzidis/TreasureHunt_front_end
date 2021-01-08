@@ -20,11 +20,9 @@ public class GetUserScoreRequest {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println( "============================OXI==================="+ response.code());
                     return;
                 }
                 GetUserScoreRequest.this.score = response.body();
-                System.out.println( "============================NAI==================="+ response.body());
             }
 
             @Override

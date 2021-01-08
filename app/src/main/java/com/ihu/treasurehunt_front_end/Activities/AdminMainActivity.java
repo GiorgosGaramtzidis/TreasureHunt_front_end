@@ -5,12 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.os.Handler;
+import android.widget.Button;
 import android.widget.TextView;
+import com.google.android.material.button.MaterialButton;
+
 import com.google.android.material.button.MaterialButton;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
+import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
+import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class AdminMainActivity extends AppCompatActivity {
 
@@ -20,9 +26,12 @@ public class AdminMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
 
-        id = findViewById(R.id.userId);
-        username = findViewById(R.id.username);
-        role = findViewById(R.id.userRole);
+        TextView id = findViewById(R.id.userId);
+        TextView username = findViewById(R.id.username);
+        TextView role = findViewById(R.id.userRole);
+
+        MaterialButton createGame = findViewById(R.id.btnCreateGame);
+        Button logOut = findViewById(R.id.logOut);
 
         MaterialButton storeQuestion = findViewById(R.id.btnAddQuestions);
         Button logOut = findViewById(R.id.logOut);
@@ -42,5 +51,20 @@ public class AdminMainActivity extends AppCompatActivity {
             finish();
             System.exit(0);
         });
+
+        RetroFitCreate retroFitCreate = new RetroFitCreate();
+
+        createGame.setOnClickListener(v ->
+                startActivity(new Intent(this
+                        ,AdminCreateGamesActivity.class)
+                ));
+
+        logOut.setOnClickListener(v ->{
+            LogOutRequest logOutRequest = new LogOutRequest();
+            logOutRequest.logOutUser(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
+            new Handler().postDelayed(() -> System.exit(0),100);
+        });
+
+
     }
 }

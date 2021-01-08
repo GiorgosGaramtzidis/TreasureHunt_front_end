@@ -18,7 +18,6 @@ public class ChangeNameRequest {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SUCCESS====================Code: " + response.code());
                     return;
                 }
                 ok = response.body();

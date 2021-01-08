@@ -1,7 +1,5 @@
 package com.ihu.treasurehunt_front_end.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.R;
 
@@ -43,7 +43,10 @@ public class GameWinActivity extends AppCompatActivity {
         treasure.setAnimation(botAnimation);
         slogan.setAnimation(botAnimation);
 
-
-        new Handler().postDelayed(this::finish,SPLASH_SCREEN);
+        new Handler().postDelayed(() ->{
+                    startActivity(new Intent(this,MainActivity.class));
+                }
+                ,SPLASH_SCREEN);
     }
+        //new Handler().postDelayed(this::finish,SPLASH_SCREEN);
 }

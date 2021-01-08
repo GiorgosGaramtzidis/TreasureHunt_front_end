@@ -15,7 +15,6 @@ public class MapLocation {
     @SerializedName("title")
     private String title;
 
-
     @SerializedName("nextLocation")
     private String nextLocation;
 

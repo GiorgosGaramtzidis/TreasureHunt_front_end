@@ -51,8 +51,8 @@ public interface JsonPlaceHolderAPI {
     @GET("api/Locations/Start")
     Call<MapLocation> getStartLocation();
 
-    @GET("api/Locations/RiskLocation")
-    Call<MapLocation> getRiskLocation();
+    @GET("api/Locations/Casino")
+    Call<MapLocation> getCasinoLocation();
 
     @POST("api/Locations/Next")
     Call<MapLocation> getNextLocation(@Query("nextLocation") String nextLocation);
@@ -62,6 +62,9 @@ public interface JsonPlaceHolderAPI {
 
     @PATCH("Users/buyLife")
     Call<Boolean> buyLife(@Query("userName") String userName);
+
+    @PATCH("Casino/updateScore")
+    Call<Boolean> updateScore(@Query("userName") String userName);
 
     @PATCH("Users/addScore")
     Call<Integer> addScore(@Query("userName") String userName,@Query("score") int score);

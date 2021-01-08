@@ -64,4 +64,6 @@
     <string name="store">Store</string>
     <string name="cancel">Cancel</string>
     <string name="clear_texts">Clear texts</string>
+    <string name="create_game1">Create Game</string>
+    <string name="back">Back</string>
 </resources>

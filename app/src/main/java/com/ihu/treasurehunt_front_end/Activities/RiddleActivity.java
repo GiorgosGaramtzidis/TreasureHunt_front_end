@@ -37,7 +37,7 @@ public class RiddleActivity extends AppCompatActivity {
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
     private SetUserStateRequest setUserStateRequest = new SetUserStateRequest();
     private RequestNextLocation requestNextLocation = new RequestNextLocation();
-private LeaderBoardList leaderBoardList = new LeaderBoardList();
+    private LeaderBoardList leaderBoardList = new LeaderBoardList();
     private RequestNewQuestion requestNewQuestion = new RequestNewQuestion();
     private BuyAnswerRequest buyAnswerRequest = new BuyAnswerRequest();
     private BuyLife buyLife = new BuyLife();
