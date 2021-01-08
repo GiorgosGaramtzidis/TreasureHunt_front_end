@@ -49,9 +49,9 @@ public class TreasureHuntGameService
 
     public Boolean isValidData(String id , String title ,String gameLocation)
     {
-        if (id.matches(generateID()))
-            return !title.equals("") && !gameLocation.equals("");
-        return false;
+
+            return !id.equals("") &&!title.equals("") && !gameLocation.equals("");
+
     }
     public String getMessage() {
         return this.message;
