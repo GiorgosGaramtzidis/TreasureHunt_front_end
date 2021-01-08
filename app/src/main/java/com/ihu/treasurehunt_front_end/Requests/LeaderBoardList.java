@@ -33,8 +33,6 @@ public class LeaderBoardList {
                     return;
                 }
                 updateLeaderBoard = response.body();
-                System.out.println(updateLeaderBoard);
-
             }
 
             @Override

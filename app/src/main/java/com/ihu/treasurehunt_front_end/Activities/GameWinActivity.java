@@ -42,7 +42,10 @@ public class GameWinActivity extends AppCompatActivity {
         treasure.setAnimation(botAnimation);
         slogan.setAnimation(botAnimation);
 
-
-        new Handler().postDelayed(this::finish,SPLASH_SCREEN);
+        new Handler().postDelayed(() ->{
+                    startActivity(new Intent(this,MainActivity.class));
+                }
+                ,SPLASH_SCREEN);
     }
+        //new Handler().postDelayed(this::finish,SPLASH_SCREEN);
 }

@@ -29,7 +29,6 @@ public class RequestRandomQuestion {
                 question = new Question(responseQuestion.getId(),responseQuestion.getQuestion()
                     ,responseQuestion.getAnswer()
                     ,responseQuestion.getPoints());
-                System.out.println(question);
             }
 
             @Override
