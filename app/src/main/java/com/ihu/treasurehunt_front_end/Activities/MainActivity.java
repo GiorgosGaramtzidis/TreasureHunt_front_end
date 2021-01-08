@@ -55,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
         TextView status = findViewById(R.id.userStatus);
         TextView id = findViewById(R.id.userId);
 
-        bundle = getIntent().getExtras();
-        username.append(bundle.getString("username"));
-        id.append(bundle.getString("id"));
-        status.append(bundle.getString("status"));
+        //bundle = getIntent().getExtras();
+        //username.append(bundle.getString("username"));
+        //id.append(bundle.getString("id"));
+        //status.append(bundle.getString("status"));
 
         button.setOnClickListener(v -> {
             startActivity(new Intent(this,LeaderBoardActivity.class));
