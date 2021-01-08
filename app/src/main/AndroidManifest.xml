@@ -19,7 +19,7 @@
         android:theme="@style/Theme.TreasureHunt_front_end"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activities.AdminStoreQuestionsActivity"></activity>
+        <activity android:name=".Activities.CasinoActivity"/>
         <activity android:name=".Activities.AdminMainActivity" />
         <activity android:name=".Activities.SettingsActivity.NameChange" />
         <activity android:name=".Activities.SettingsActivity.PasswordChange" />
@@ -28,14 +28,16 @@
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.LeaderBoardActivity" />
+        <activity android:name=".Activities.AdminCreateGamesActivity"/>
+        <activity android:name=".Activities.AdminStoreQuestionsActivity"/>
         <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
+                     The API key for Google Maps-based APIs is defined as a string resource.
+                     (See the file "res/values/google_maps_api.xml").
+                     Note that the API key is linked to the encryption key used to sign the APK.
+                     You need a different API key for each encryption key, including the release key that is used to
+                     sign the APK for publishing.
+                     You can define the keys for the debug and release targets in src/debug/ and src/release/.
+                -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

@@ -20,7 +20,7 @@ import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 public class AdminMainActivity extends AppCompatActivity {
 
-    TextView id,username,role;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +29,10 @@ public class AdminMainActivity extends AppCompatActivity {
         TextView id = findViewById(R.id.userId);
         TextView username = findViewById(R.id.username);
         TextView role = findViewById(R.id.userRole);
-
         MaterialButton createGame = findViewById(R.id.btnCreateGame);
         Button logOut = findViewById(R.id.logOut);
-
         MaterialButton storeQuestion = findViewById(R.id.btnAddQuestions);
-        Button logOut = findViewById(R.id.logOut);
+
 
         Bundle bundle = getIntent().getExtras();
 

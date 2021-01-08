@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     protected static RequestRandomQuestion requestRandomQuestion = new RequestRandomQuestion();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
-    private LoginService loginService = new LoginService();
     protected static RequestCasinoLocation requestCasinoLocation = new RequestCasinoLocation();
 
     @Override
@@ -55,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
         TextView id = findViewById(R.id.userId);
 
 
-        username.append(loginService.getUser().getName());
-        id.append(loginService.getUser().getUserId());
-        status.append(loginService.getUser().getStatus().toString());
+        username.append(SignInActivity.loginUser.getName());
+        id.append(SignInActivity.loginUser.getUserId());
+        status.append(SignInActivity.loginUser.getStatus().toString());
 
         button.setOnClickListener(v -> {
             startActivity(new Intent(this,LeaderBoardActivity.class));
