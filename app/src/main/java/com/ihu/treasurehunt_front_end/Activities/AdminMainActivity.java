@@ -1,20 +1,14 @@
 package com.ihu.treasurehunt_front_end.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.os.Handler;
-import android.widget.Button;
 import android.widget.TextView;
-import com.google.android.material.button.MaterialButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.ihu.treasurehunt_front_end.R;
-import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
-import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
-
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
@@ -42,6 +36,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
         storeQuestion.setOnClickListener( v ->
                 startActivity(new Intent(this,AdminStoreQuestionsActivity.class)));
+
         logOut.setOnClickListener(v ->{
             LogOutRequest logOutRequest = new LogOutRequest();
             RetroFitCreate retroFitCreate = new RetroFitCreate();
@@ -50,18 +45,11 @@ public class AdminMainActivity extends AppCompatActivity {
             System.exit(0);
         });
 
-        RetroFitCreate retroFitCreate = new RetroFitCreate();
-
         createGame.setOnClickListener(v ->
                 startActivity(new Intent(this
                         ,AdminCreateGamesActivity.class)
                 ));
 
-        logOut.setOnClickListener(v ->{
-            LogOutRequest logOutRequest = new LogOutRequest();
-            logOutRequest.logOutUser(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
-            new Handler().postDelayed(() -> System.exit(0),100);
-        });
 
 
     }
