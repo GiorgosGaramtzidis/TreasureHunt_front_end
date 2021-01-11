@@ -29,6 +29,7 @@ import com.ihu.treasurehunt_front_end.Dialogs.HintDialog;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.CheckUserState;
 import com.ihu.treasurehunt_front_end.Requests.GetUserScoreRequest;
+import com.ihu.treasurehunt_front_end.Requests.ResetWatchTowerRequest;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 
@@ -40,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private RetroFitCreate retroFitCreate = new RetroFitCreate();
     private CheckUserState checkUserState = new CheckUserState();
     private GetUserScoreRequest getUserScoreRequest = new GetUserScoreRequest();
+    private ResetWatchTowerRequest resetWatchTowerRequest = new ResetWatchTowerRequest();
     private LocationListener locationListener;
     private LocationManager locationManager;
     protected static TextView textView;
@@ -48,6 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng latLng;
     protected static Marker marker;
     private  Marker casinoMarker;
+    private  Marker watchTowerMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         marker = MainActivity.game.addFirstLocationToMap(mMap);
         casinoMarker = MainActivity.game.addCasinoLocationToMap(mMap);
+        watchTowerMarker = MainActivity.game.addWatchTowerLocationToMap(mMap);
 
 
         locationListener = new LocationListener() {
@@ -122,6 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
             else if (marker.getTitle().equals("end")){
+                resetWatchTowerRequest.resetWatchTower(retroFitCreate.getJsonPlaceHolderAPI());
                 Toast.makeText(MapsActivity.this, "YOU WON!!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent (MapsActivity.this, GameWinActivity.class);
                 intent.putExtra("WINNER",MainActivity.game.getUserLoggedIn());
@@ -131,6 +136,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             else if (marker.getTitle().equals("Casino")){
 
                 Intent intent = new Intent (MapsActivity.this, CasinoActivity.class);
+                startActivity(intent);
+                return false;}
+            else if (marker.getTitle().equals("WatchTower")){
+
+                Intent intent = new Intent (MapsActivity.this, WatchTowerActivity.class);
                 startActivity(intent);
                 return false;}
             else {
@@ -162,5 +172,3 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 }
-
-

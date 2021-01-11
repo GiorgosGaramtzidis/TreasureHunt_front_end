@@ -17,15 +17,17 @@ public class Game
     private int gameScore;
     private MapLocation location;
     private MapLocation casinoLocation;
+    private MapLocation watchTowerLocation;
     private String userLoggedIn;
     private Question question;
     private List<Question> questionList = new ArrayList<>();
 
 
-    public Game(MapLocation mapLocation, MapLocation casinoLocation) {
+    public Game(MapLocation mapLocation, MapLocation casinoLocation, MapLocation watchTowerLocation) {
 
         this.location = mapLocation;
         this.casinoLocation = casinoLocation;
+        this.watchTowerLocation = watchTowerLocation;
         this.gameScore = 0;
     }
 
@@ -37,8 +39,16 @@ public class Game
         return new LatLng(this.casinoLocation.getV(),this.casinoLocation.getV1());
     }
 
+    public LatLng watchTowerPosition(){
+        return new LatLng(this.watchTowerLocation.getV(),this.watchTowerLocation.getV1());
+    }
+
     public MarkerOptions casinoMarkerOptions(){
         return new MarkerOptions().position(this.casinoPosition()).title(this.casinoLocation.getTitle());
+    }
+
+    public MarkerOptions watchTowerMarkerOptions(){
+        return new MarkerOptions().position(this.watchTowerPosition()).title(this.watchTowerLocation.getTitle());
     }
 
     public Marker addCasinoLocationToMap(GoogleMap map){
@@ -47,6 +57,11 @@ public class Game
         return marker;
     }
 
+    public Marker addWatchTowerLocationToMap(GoogleMap map){
+        Marker marker = map.addMarker(this.watchTowerMarkerOptions());
+        marker.setVisible(true);
+        return marker;
+    }
 
     public void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;

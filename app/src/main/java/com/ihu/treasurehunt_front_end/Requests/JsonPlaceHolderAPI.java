@@ -5,6 +5,7 @@ import com.ihu.treasurehunt_front_end.Model.MapLocation;
 import com.ihu.treasurehunt_front_end.Model.Question;
 import com.ihu.treasurehunt_front_end.Model.RegistrationAnswer;
 import com.ihu.treasurehunt_front_end.Model.User;
+import com.ihu.treasurehunt_front_end.Model.WatchTower;
 
 import java.util.List;
 
@@ -53,6 +54,9 @@ public interface JsonPlaceHolderAPI {
 
     @GET("api/Locations/Casino")
     Call<MapLocation> getCasinoLocation();
+
+    @GET("api/Locations/WatchTower")
+    Call<MapLocation> getWatchTowerLocation();
 
     @POST("api/Locations/Next")
     Call<MapLocation> getNextLocation(@Query("nextLocation") String nextLocation);
@@ -110,5 +114,14 @@ public interface JsonPlaceHolderAPI {
 
     @POST("api/Question/getNewQuestion")
     Call<Question> getNewQuestion(@Body List<Question> questionList);
+
+    @GET("WatchTower/WatchTowerList")
+    Call<List<WatchTower>>  getWatchTower();
+
+    @POST("WatchTower/addInWatchTower")
+    Call<WatchTower> addInWatchTower(@Query("userName") String userName,@Query("locationTitle") String locationTitle);
+
+    @PATCH("WatchTower/resetWatchTower")
+    Call<Boolean> resetWatchTower();
 
 }
