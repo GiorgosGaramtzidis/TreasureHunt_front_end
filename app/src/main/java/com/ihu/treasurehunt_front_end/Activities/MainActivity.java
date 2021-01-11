@@ -2,29 +2,23 @@ package com.ihu.treasurehunt_front_end.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.widget.Button;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
 import com.ihu.treasurehunt_front_end.Activities.SettingsActivity.SettingsActivity;
 import com.ihu.treasurehunt_front_end.Model.Game;
-import com.ihu.treasurehunt_front_end.Model.User;
 import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Requests.LogOutRequest;
 import com.ihu.treasurehunt_front_end.Requests.RequestCasinoLocation;
-import com.ihu.treasurehunt_front_end.Service.LoginService;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
 import com.ihu.treasurehunt_front_end.Requests.RequestRandomQuestion;
+import com.ihu.treasurehunt_front_end.Requests.RequestWatchTowerLocation;
 import com.ihu.treasurehunt_front_end.Requests.RestartScoreAndLives;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
-
-import org.jetbrains.annotations.NotNull;
+import com.ihu.treasurehunt_front_end.Service.LoginService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     protected static RequestCasinoLocation requestCasinoLocation = new RequestCasinoLocation();
     protected static RequestRandomQuestion requestRandomQuestion = new RequestRandomQuestion();
+    protected static RequestWatchTowerLocation requestWatchTowerLocation = new RequestWatchTowerLocation();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
     private  Bundle bundle;
@@ -66,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSettings.setOnClickListener(v -> {
-            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation());
+            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation(),requestWatchTowerLocation.getMapLocation());
             game.setUserLoggedIn(SignInActivity.loginUser.getName());
             startActivity(new Intent(this, SettingsActivity.class));
         });
@@ -82,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnPlayGame.setOnClickListener(v -> {
-            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation());
+            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation(),requestWatchTowerLocation.getMapLocation());
             game.setQuestion(requestRandomQuestion.getQuestion());
             game.setUserLoggedIn(SignInActivity.loginUser.getName());
             startActivity(new Intent(this,MapsActivity.class));
