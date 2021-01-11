@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     protected static RequestWatchTowerLocation requestWatchTowerLocation = new RequestWatchTowerLocation();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
-    private  Bundle bundle;
     private LoginService loginService = new LoginService();
 
     @Override
@@ -51,10 +50,9 @@ public class MainActivity extends AppCompatActivity {
         TextView status = findViewById(R.id.userStatus);
         TextView id = findViewById(R.id.userId);
 
-        bundle = getIntent().getExtras();
-        username.append(bundle.getString("username"));
-        id.append(bundle.getString("id"));
-        status.append(bundle.getString("status"));
+        username.append(SignInActivity.loginUser.getName());
+        id.append(SignInActivity.loginUser.getUserId());
+        status.append(SignInActivity.loginUser.getStatus().toString());
 
         button.setOnClickListener(v -> {
             startActivity(new Intent(this,LeaderBoardActivity.class));
