@@ -14,6 +14,7 @@ import com.ihu.treasurehunt_front_end.R;
 import com.ihu.treasurehunt_front_end.Activities.MainActivity;
 import com.ihu.treasurehunt_front_end.Requests.RequestCasinoLocation;
 import com.ihu.treasurehunt_front_end.Requests.RequestFirstLocation;
+import com.ihu.treasurehunt_front_end.Requests.RequestWatchTowerLocation;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 
 
@@ -22,6 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
     protected static RequestCasinoLocation requestCasinoLocation = new RequestCasinoLocation();
+    protected static RequestWatchTowerLocation requestWatchTowerLocation = new RequestWatchTowerLocation();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
 
     @Override
@@ -37,13 +39,13 @@ public class SettingsActivity extends AppCompatActivity {
         btnGoback.setOnClickListener(v -> finish());
 
         btnChangeName.setOnClickListener(v -> {
-            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation());
+            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation(),requestWatchTowerLocation.getMapLocation());
             game.setUserLoggedIn(MainActivity.game.getUserLoggedIn());
             startActivity(new Intent(this, NameChange.class));
         });
 
         btnChangePass.setOnClickListener(v -> {
-            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation());
+            game = new Game(requestFirstLocation.getLocation(),requestCasinoLocation.getMapLocation(),requestWatchTowerLocation.getMapLocation());
             game.setUserLoggedIn(SignInActivity.loginUser.getPassword());
             startActivity(new Intent(this, PasswordChange.class));
         });
