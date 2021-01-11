@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ihu.treasurehunt_front_end.R;
+import com.ihu.treasurehunt_front_end.Requests.AddInWatchTowerRequest;
 import com.ihu.treasurehunt_front_end.Requests.AddPointsRequest;
 import com.ihu.treasurehunt_front_end.Requests.BuyAnswerRequest;
 import com.ihu.treasurehunt_front_end.Requests.BuyLife;
@@ -20,7 +21,6 @@ import com.ihu.treasurehunt_front_end.Requests.LeaderBoardList;
 import com.ihu.treasurehunt_front_end.Requests.LoseCondition;
 import com.ihu.treasurehunt_front_end.Requests.RequestNewQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RequestNextLocation;
-import com.ihu.treasurehunt_front_end.Requests.RequestRandomQuestion;
 import com.ihu.treasurehunt_front_end.Requests.RetroFitCreate;
 import com.ihu.treasurehunt_front_end.Requests.SetUserStateRequest;
 
@@ -40,8 +40,8 @@ public class RiddleActivity extends AppCompatActivity {
     private LeaderBoardList leaderBoardList = new LeaderBoardList();
     private RequestNewQuestion requestNewQuestion = new RequestNewQuestion();
     private BuyAnswerRequest buyAnswerRequest = new BuyAnswerRequest();
+    private AddInWatchTowerRequest addInWatchTowerRequest = new AddInWatchTowerRequest();
     private BuyLife buyLife = new BuyLife();
-
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -84,6 +84,7 @@ public class RiddleActivity extends AppCompatActivity {
                             MainActivity.game.getLocation().getNextLocation());
                     new Handler().postDelayed(() -> {
                         leaderBoardList.updateLeaderBoard(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),MainActivity.game.getQuestion().getPoints());
+                        addInWatchTowerRequest.addInWatchTower(retroFitCreate.getJsonPlaceHolderAPI(),MainActivity.game.getUserLoggedIn(),MainActivity.game.getLocation().getTitle());
                         MapsActivity.marker.setVisible(false);
                         MainActivity.game.setLocation(requestNextLocation.getMapLocationNext());
                         MainActivity.game.setQuestion(requestNewQuestion.getQuestion());

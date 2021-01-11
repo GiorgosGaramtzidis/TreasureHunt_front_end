@@ -30,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static Game game;
     protected static RequestFirstLocation requestFirstLocation = new RequestFirstLocation();
+    protected static RequestCasinoLocation requestCasinoLocation = new RequestCasinoLocation();
     protected static RequestRandomQuestion requestRandomQuestion = new RequestRandomQuestion();
     private final RetroFitCreate retroFitCreate = new RetroFitCreate();
     private RestartScoreAndLives restartScoreAndLives = new RestartScoreAndLives();
-    protected static RequestCasinoLocation requestCasinoLocation = new RequestCasinoLocation();
+    private  Bundle bundle;
+    private LoginService loginService = new LoginService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         restartScoreAndLives.restartScoreAndLives(retroFitCreate.getJsonPlaceHolderAPI(),SignInActivity.loginUser.getName());
         requestFirstLocation.get(retroFitCreate.getJsonPlaceHolderAPI());
-        requestRandomQuestion.getRandomQuestion(retroFitCreate.getJsonPlaceHolderAPI());
         requestCasinoLocation.getCasinoLocation((retroFitCreate.getJsonPlaceHolderAPI()));
+        requestRandomQuestion.getRandomQuestion(retroFitCreate.getJsonPlaceHolderAPI());
+        requestWatchTowerLocation.getWatchTowerLocation(retroFitCreate.getJsonPlaceHolderAPI());
 
         TextView btnPlayGame =  findViewById(R.id.btnPlayGame);
         Button exitApp = findViewById(R.id.logOut);
@@ -53,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
         TextView status = findViewById(R.id.userStatus);
         TextView id = findViewById(R.id.userId);
 
-
-        username.append(SignInActivity.loginUser.getName());
-        id.append(SignInActivity.loginUser.getUserId());
-        status.append(SignInActivity.loginUser.getStatus().toString());
+        bundle = getIntent().getExtras();
+        username.append(bundle.getString("username"));
+        id.append(bundle.getString("id"));
+        status.append(bundle.getString("status"));
 
         button.setOnClickListener(v -> {
             startActivity(new Intent(this,LeaderBoardActivity.class));
