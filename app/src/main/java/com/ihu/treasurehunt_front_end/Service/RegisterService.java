@@ -24,14 +24,12 @@ public class RegisterService
                 @Override
                 public void onResponse(@NotNull Call<RegistrationAnswer> call, @NotNull Response<RegistrationAnswer> response)
                 {
-                    if (response.code() == 200)
+                    if (response.isSuccessful())
                         registrationAnswer = response.body();
-                    if (response.code() == 500)
+                    else
                         registrationAnswer = new RegistrationAnswer(response.message());
-                    if (response.code() == 404)
-                        registrationAnswer = new RegistrationAnswer("Problem with network");
-                }
 
+                }
                 @Override
                 public void onFailure(@NotNull Call<RegistrationAnswer> call, @NotNull Throwable t) {
                     t.printStackTrace();
@@ -59,6 +57,5 @@ public class RegisterService
    public String getAnswer()
    {
        return this.registrationAnswer.getAnswer();
-
    }
 }
